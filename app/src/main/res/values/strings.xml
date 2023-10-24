@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">BengkelSampahApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="all_status">Semua Status</string>
+    <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
+    <string name="in_process_status">Diproses</string>
+    <string name="finished_status">Selesai</string>
+    <string name="canceled_status">Dibatalkan</string>
+    <string name="pick_up_date">Tanggal Penjemputan :</string>
+    <string name="pick_up_address">Alamat Penjemputan :</string>
+    <string name="date">1 Oktober 2023</string>
+    <string name="total">+ Rp 20.000</string>
 </resources>
