@@ -8,6 +8,22 @@
     <string name="canceled_status">Dibatalkan</string>
     <string name="pick_up_date">Tanggal Penjemputan :</string>
     <string name="pick_up_address">Alamat Penjemputan :</string>
-    <string name="date">1 Oktober 2023</string>
+    <string name="pick_up_detail">Detail Penjemputan : </string>
+    <string name="cancel_order">Batalkan Pesanan</string>
+    <string name="bengkel_sampah_agent">Agen Bengkel Sampah : </string>
+    <string name="agent_phone">Nomor Agen : %s</string>
+    <string name="waste_type">Jenis Sampah :</string>
+    <string name="total_detail_history">Total : %s</string>
+    <string name="description">Deskripsi :</string>
+    <string name="multiplication">x</string>
+
     <string name="total">+ Rp 20.000</string>
+    <string name="date">1 Oktober 2023</string>
+    <string name="agent_name">Nama Agen</string>
+    <string name="agent_address">Alamat Agen</string>
+    <string name="waste_name">Nama Sampah</string>
+    <string name="waste_amount">25</string>
+    <string name="waste_unit">kg</string>
+    <string name="waste_price">1000</string>
+
 </resources>
