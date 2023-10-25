@@ -21,7 +21,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.65"
             android:orientation="vertical"
             android:padding="8dp">
 
@@ -77,14 +77,27 @@
             android:layout_weight="0.29"
             android:padding="8dp">
 
-            <TextView
-                android:id="@+id/tv_status"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:gravity="center"
-                tools:text="@string/waiting_confirmation_status" />
+                android:layout_alignParentEnd="true"
+                app:cardCornerRadius="16dp"
+                tools:backgroundTint="#999797">
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    tools:text="@string/waiting_confirmation_status" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/tv_total"

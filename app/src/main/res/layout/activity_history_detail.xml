@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="8dp">
@@ -35,11 +35,24 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/tv_status"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/waiting_confirmation_status" />
+                    app:cardCornerRadius="16dp"
+                    tools:backgroundTint="#999797">
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@android:color/white"
+                        tools:text="@string/waiting_confirmation_status" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
