@@ -17,6 +17,8 @@
     <string name="description">Deskripsi :</string>
     <string name="multiplication">x</string>
     <string name="download_transaction_file">Unduh File Transaksi</string>
+    <string name="filter">Filter</string>
+    <string name="reset">Reset</string>
 
     <string name="total">+ Rp 20.000</string>
     <string name="date">1 Oktober 2023</string>
