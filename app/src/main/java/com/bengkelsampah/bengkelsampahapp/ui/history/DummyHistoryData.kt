@@ -8,13 +8,14 @@ data class DummyHistoryData(
     val agent: String,
     val agentAddress: String,
     val agentPhone: String,
-    val waste: Map<String, Number>,
+    val waste: List<DummyWaste>,
     val total: Int,
     val description: String?
 )
 
 data class DummyWaste(
     val name: String,
+    val amount: Double,
     val unit: String,
     val pricePerUnit: Int
 )
@@ -32,14 +33,49 @@ object DummyData {
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
-                waste = mapOf(
-                    "botol kecap" to 25,
-                    "alma lembek (panci)" to 2.4,
-                    "besi sam-sam" to 25,
-                    "kara hitam" to 5.8,
-                    "plastik pp (kemasan snack)" to 1.2,
-                    "himpek/printer" to 2.3,
-                    "karton" to 54.5
+                waste = listOf(
+                    DummyWaste(
+                        name = "botol kecap",
+                        amount = 25.0,
+                        unit = "pcs",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "alma lembek (panci)",
+                        amount = 2.4,
+                        unit = "kg",
+                        pricePerUnit = 10000
+                    ),
+                    DummyWaste(
+                        name = "besi sam-sam",
+                        amount = 25.0,
+                        unit = "kg",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "kara hitam",
+                        amount = 5.8,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    ),
+                    DummyWaste(
+                        name = "plastik pp (kemasan snack)",
+                        amount = 1.2,
+                        unit = "kg",
+                        pricePerUnit = 300
+                    ),
+                    DummyWaste(
+                        name = "himpek/printer",
+                        amount = 2.3,
+                        unit = "kg",
+                        pricePerUnit = 500
+                    ),
+                    DummyWaste(
+                        name = "karton",
+                        amount = 54.5,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    )
                 ),
                 total = 71460,
                 description = "Mohon telfon dulu sebelum sampai rumah"
@@ -54,14 +90,49 @@ object DummyData {
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
-                waste = mapOf(
-                    "botol kecap" to 25,
-                    "alma lembek (panci)" to 2.4,
-                    "besi sam-sam" to 25,
-                    "kara hitam" to 5.8,
-                    "plastik pp (kemasan snack)" to 1.2,
-                    "himpek/printer" to 2.3,
-                    "karton" to 54.5
+                waste = listOf(
+                    DummyWaste(
+                        name = "botol kecap",
+                        amount = 25.0,
+                        unit = "pcs",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "alma lembek (panci)",
+                        amount = 2.4,
+                        unit = "kg",
+                        pricePerUnit = 10000
+                    ),
+                    DummyWaste(
+                        name = "besi sam-sam",
+                        amount = 25.0,
+                        unit = "kg",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "kara hitam",
+                        amount = 5.8,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    ),
+                    DummyWaste(
+                        name = "plastik pp (kemasan snack)",
+                        amount = 1.2,
+                        unit = "kg",
+                        pricePerUnit = 300
+                    ),
+                    DummyWaste(
+                        name = "himpek/printer",
+                        amount = 2.3,
+                        unit = "kg",
+                        pricePerUnit = 500
+                    ),
+                    DummyWaste(
+                        name = "karton",
+                        amount = 54.5,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    )
                 ),
                 total = 71460,
                 description = "Mohon telfon dulu sebelum sampai rumah"
@@ -76,14 +147,49 @@ object DummyData {
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
-                waste = mapOf(
-                    "botol kecap" to 25,
-                    "alma lembek (panci)" to 2.4,
-                    "besi sam-sam" to 25,
-                    "kara hitam" to 5.8,
-                    "plastik pp (kemasan snack)" to 1.2,
-                    "himpek/printer" to 2.3,
-                    "karton" to 54.5
+                waste = listOf(
+                    DummyWaste(
+                        name = "botol kecap",
+                        amount = 25.0,
+                        unit = "pcs",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "alma lembek (panci)",
+                        amount = 2.4,
+                        unit = "kg",
+                        pricePerUnit = 10000
+                    ),
+                    DummyWaste(
+                        name = "besi sam-sam",
+                        amount = 25.0,
+                        unit = "kg",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "kara hitam",
+                        amount = 5.8,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    ),
+                    DummyWaste(
+                        name = "plastik pp (kemasan snack)",
+                        amount = 1.2,
+                        unit = "kg",
+                        pricePerUnit = 300
+                    ),
+                    DummyWaste(
+                        name = "himpek/printer",
+                        amount = 2.3,
+                        unit = "kg",
+                        pricePerUnit = 500
+                    ),
+                    DummyWaste(
+                        name = "karton",
+                        amount = 54.5,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    )
                 ),
                 total = 71460,
                 description = "Mohon telfon dulu sebelum sampai rumah"
@@ -98,75 +204,54 @@ object DummyData {
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
-                waste = mapOf(
-                    "botol kecap" to 25,
-                    "alma lembek (panci)" to 2.4,
-                    "besi sam-sam" to 25,
-                    "kara hitam" to 5.8,
-                    "plastik pp (kemasan snack)" to 1.2,
-                    "himpek/printer" to 2.3,
-                    "karton" to 54.5
+                waste = listOf(
+                    DummyWaste(
+                        name = "botol kecap",
+                        amount = 25.0,
+                        unit = "pcs",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "alma lembek (panci)",
+                        amount = 2.4,
+                        unit = "kg",
+                        pricePerUnit = 10000
+                    ),
+                    DummyWaste(
+                        name = "besi sam-sam",
+                        amount = 25.0,
+                        unit = "kg",
+                        pricePerUnit = 200
+                    ),
+                    DummyWaste(
+                        name = "kara hitam",
+                        amount = 5.8,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    ),
+                    DummyWaste(
+                        name = "plastik pp (kemasan snack)",
+                        amount = 1.2,
+                        unit = "kg",
+                        pricePerUnit = 300
+                    ),
+                    DummyWaste(
+                        name = "himpek/printer",
+                        amount = 2.3,
+                        unit = "kg",
+                        pricePerUnit = 500
+                    ),
+                    DummyWaste(
+                        name = "karton",
+                        amount = 54.5,
+                        unit = "kg",
+                        pricePerUnit = 1000
+                    )
                 ),
                 total = 71460,
                 description = "Mohon telfon dulu sebelum sampai rumah"
             )
         )
         return historyData
-    }
-
-    fun generateDummyWaste(): List<DummyWaste> {
-        val waste = ArrayList<DummyWaste>()
-
-        waste.add(
-            DummyWaste(
-                name = "botol kecap",
-                unit = "pcs",
-                pricePerUnit = 200
-            )
-        )
-        waste.add(
-            DummyWaste(
-                name = "alma lembek (panci)",
-                unit = "kg",
-                pricePerUnit = 10000
-            )
-        )
-        waste.add(
-            DummyWaste(
-                name = "besi sam-sam",
-                unit = "kg",
-                pricePerUnit = 200
-            )
-        )
-        waste.add(
-            DummyWaste(
-                name = "kara hitam",
-                unit = "kg",
-                pricePerUnit = 1000
-            )
-        )
-        waste.add(
-            DummyWaste(
-                name = "plastik pp (kemasan snack)",
-                unit = "kg",
-                pricePerUnit = 300
-            )
-        )
-        waste.add(
-            DummyWaste(
-                name = "himpek/printer",
-                unit = "kg",
-                pricePerUnit = 500
-            )
-        )
-        waste.add(
-            DummyWaste(
-                name = "karton",
-                unit = "kg",
-                pricePerUnit = 1000
-            )
-        )
-
-        return waste
     }
 }
