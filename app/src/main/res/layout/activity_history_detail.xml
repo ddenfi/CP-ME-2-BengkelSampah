@@ -39,7 +39,7 @@
                     android:id="@+id/card_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
+                    app:cardCornerRadius="12dp"
                     tools:backgroundTint="#999797">
 
                     <TextView
@@ -81,7 +81,7 @@
                     android:id="@+id/tv_agent_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     tools:text="@string/agent_phone" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
