@@ -19,8 +19,8 @@
     <string name="download_transaction_file">Unduh File Transaksi</string>
     <string name="filter">Filter</string>
     <string name="reset">Reset</string>
+    <string name="total">+ Rp %d</string>
 
-    <string name="total">+ Rp 20.000</string>
     <string name="date">1 Oktober 2023</string>
     <string name="agent_name">Nama Agen</string>
     <string name="agent_address">Alamat Agen</string>
