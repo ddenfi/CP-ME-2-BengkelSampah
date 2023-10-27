@@ -3,6 +3,7 @@ package com.bengkelsampah.bengkelsampahapp.ui.history
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,6 +18,7 @@ class HistoryActivity : AppCompatActivity() {
 
         historyBinding.btnStatusFilter.text = getString(R.string.all_status)
         setUpFilterBottomSheet()
+        setUpHistoryList()
     }
 
     @SuppressLint("InflateParams")
@@ -28,5 +30,17 @@ class HistoryActivity : AppCompatActivity() {
         historyBinding.btnStatusFilter.setOnClickListener {
             bottomSheetDialog.show()
         }
+    }
+
+    private fun setUpHistoryList() {
+        val historyAdapter = HistoryAdapter()
+        val dummyHistoryData = DummyData.generateDummyData()
+
+        historyBinding.rvHistory.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = historyAdapter
+        }
+
+        historyAdapter.submitList(dummyHistoryData)
     }
 }
