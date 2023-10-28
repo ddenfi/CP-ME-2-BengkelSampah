@@ -16,6 +16,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         setContentView(historyDetailBinding.root)
 
         setUpDetailPage()
+        setUpBottomNavigation()
     }
 
     private fun setUpDetailPage() {
@@ -52,5 +53,34 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
 
         wasteSoldAdapter.submitList(waste)
+    }
+
+    private fun setUpBottomNavigation() {
+        historyDetailBinding.bottomNavigation.selectedItemId = R.id.menu_cart
+        historyDetailBinding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_home -> {
+                    true
+                }
+
+                R.id.menu_history -> {
+                    true
+                }
+
+                R.id.menu_cart -> {
+                    true
+                }
+
+                R.id.menu_money_bag -> {
+                    true
+                }
+
+                R.id.menu_profile -> {
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
