@@ -15,6 +15,9 @@ class HistoryDetailActivity : AppCompatActivity() {
         historyDetailBinding = ActivityHistoryDetailBinding.inflate(layoutInflater)
         setContentView(historyDetailBinding.root)
 
+        setSupportActionBar(historyDetailBinding.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         setUpDetailPage()
         setUpBottomNavigation()
     }
@@ -56,7 +59,7 @@ class HistoryDetailActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigation() {
-        historyDetailBinding.bottomNavigation.selectedItemId = R.id.menu_cart
+        historyDetailBinding.bottomNavigation.selectedItemId = R.id.menu_history
         historyDetailBinding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_home -> {
