@@ -19,6 +19,7 @@ class HistoryActivity : AppCompatActivity() {
         historyBinding.btnStatusFilter.text = getString(R.string.all_status)
         setUpFilterBottomSheet()
         setUpHistoryList()
+        setUpBottomNavigation()
     }
 
     @SuppressLint("InflateParams")
@@ -42,5 +43,34 @@ class HistoryActivity : AppCompatActivity() {
         }
 
         historyAdapter.submitList(dummyHistoryData)
+    }
+
+    private fun setUpBottomNavigation() {
+        historyBinding.bottomNavigation.selectedItemId = R.id.menu_history
+        historyBinding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_home -> {
+                    true
+                }
+
+                R.id.menu_history -> {
+                    true
+                }
+
+                R.id.menu_cart -> {
+                    true
+                }
+
+                R.id.menu_money_bag -> {
+                    true
+                }
+
+                R.id.menu_profile -> {
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
