@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboardScreenFragment"
+        android:icon="@drawable/ic_phone"
+        android:title="Dashboard"
+        />
+
+    <item
+        android:id="@+id/historyScreenFragment"
+        android:icon="@drawable/ic_phone"
+        android:title="History"
+        />
+
+    <item
+        android:id="@+id/keranjangkuScreenFragment"
+        android:icon="@drawable/ic_phone"
+        android:title="KeranjangKu"
+        />
+
+    <item
+        android:id="@+id/moneybagScreenFragment"
+        android:icon="@drawable/ic_phone"
+        android:title="Money Bag"
+        />
+
+    <item
+        android:id="@+id/accountScreenFragment"
+        android:icon="@drawable/ic_phone"
+        android:title="Account"
+        />
+</menu>
