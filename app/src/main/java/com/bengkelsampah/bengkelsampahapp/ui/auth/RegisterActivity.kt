@@ -1,7 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bengkelsampah.bengkelsampahapp.R
 
 class RegisterActivity : AppCompatActivity() {
