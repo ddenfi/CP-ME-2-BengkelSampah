@@ -1,4 +1,4 @@
-package com.bengkelsampah.bengkelsampahapp.data.service
+package com.bengkelsampah.bengkelsampahapp.data.source.remote.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

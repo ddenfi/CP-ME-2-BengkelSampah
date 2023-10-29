@@ -1,7 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.domain.repository
 
-import com.bengkelsampah.bengkelsampahapp.data.service.ApiService
-import kotlinx.coroutines.delay
+import com.bengkelsampah.bengkelsampahapp.data.source.remote.network.ApiService
 import java.util.UUID
 
 class PartnerRepository (
