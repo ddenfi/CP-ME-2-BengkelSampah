@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">BengkelSampahApp</string>
+    <string name="name">Nama</string>
+    <string name="name_hint">Masukkan nama lengkap kamu …</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Masukkan email kamu …</string>
+    <string name="password">Kata Sandi</string>
+    <string name="password_hint">Masukkan kata sandi kamu …</string>
+
+    <!-- Login -->
+    <string name="description_login">Silahkan masuk untuk melanjutkan</string>
+    <string name="login">Masuk</string>
+    <string name="forgot_password">Lupa kata sandi</string>
+
+    <!-- Register -->
+    <string name="description_register">Silahkan daftar terlebih dahulu jika belum mempunyai akun</string>
+    <string name="register">Daftar</string>
+    <string name="dont_have_account_yet">Belum punya akun?</string>
+
+    <!-- Forgot Password -->
+    <string name="description_forgot_password">Silahkan masukkan email kamu untuk mereset kata sandi</string>
+    <string name="reset_password">Kirim link reset password</string>
 
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
