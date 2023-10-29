@@ -27,11 +27,22 @@ class HistoryDetailActivity : AppCompatActivity() {
         historyDetailBinding.apply {
             tvStatus.text = dummyHistoryData[0].status
 
-            when (dummyHistoryData[0].status.uppercase()) {
-                "MENUNGGU KONFIRMASI" -> cardStatus.setCardBackgroundColor(Color.parseColor("#999797"))
-                "SELESAI" -> cardStatus.setCardBackgroundColor(Color.parseColor("#519B37"))
-                "DIPROSES" -> cardStatus.setCardBackgroundColor(Color.parseColor("#FFAB2A"))
-                "DIBATALKAN" -> cardStatus.setCardBackgroundColor(Color.parseColor("#E62E2E"))
+            when (dummyHistoryData[0].status) {
+                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
+                )
+
+                HistoryStatus.SELESAI.statusValue -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(HistoryStatus.SELESAI.color)
+                )
+
+                HistoryStatus.DIPROSES.statusValue -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(HistoryStatus.DIPROSES.color)
+                )
+
+                HistoryStatus.DIBATALKAN.statusValue -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(HistoryStatus.DIBATALKAN.color)
+                )
             }
 
             tvAgentName.text = dummyHistoryData[0].agent
