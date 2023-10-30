@@ -1,3 +1,59 @@
 <resources>
     <string name="app_name">BengkelSampahApp</string>
+    <string name="name">Nama</string>
+    <string name="name_hint">Masukkan nama lengkap kamu …</string>
+    <string name="email">Email</string>
+    <string name="email_hint">Masukkan email kamu …</string>
+    <string name="password">Kata Sandi</string>
+    <string name="password_hint">Masukkan kata sandi kamu …</string>
+
+    <!-- Login -->
+    <string name="description_login">Silahkan masuk untuk melanjutkan</string>
+    <string name="login">Masuk</string>
+    <string name="forgot_password">Lupa kata sandi</string>
+
+    <!-- Register -->
+    <string name="description_register">Silahkan daftar terlebih dahulu jika belum mempunyai akun</string>
+    <string name="register">Daftar</string>
+    <string name="dont_have_account_yet">Belum punya akun?</string>
+
+    <!-- Forgot Password -->
+    <string name="description_forgot_password">Silahkan masukkan email kamu untuk mereset kata sandi</string>
+    <string name="reset_password">Kirim link reset password</string>
+
+    <string name="all_status">Semua Status</string>
+    <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
+    <string name="in_process_status">Diproses</string>
+    <string name="finished_status">Selesai</string>
+    <string name="canceled_status">Dibatalkan</string>
+    <string name="pick_up_date">Tanggal Penjemputan :</string>
+    <string name="pick_up_address">Alamat Penjemputan :</string>
+    <string name="pick_up_detail">Detail Penjemputan : </string>
+    <string name="cancel_order">Batalkan Pesanan</string>
+    <string name="bengkel_sampah_agent">Agen Bengkel Sampah : </string>
+    <string name="agent_phone">Nomor Agen : %s</string>
+    <string name="waste_type">Jenis Sampah :</string>
+    <string name="total_detail_history">Total : %s</string>
+    <string name="description">Deskripsi :</string>
+    <string name="multiplication">x</string>
+    <string name="download_transaction_file">Unduh File Transaksi</string>
+    <string name="filter">Filter</string>
+    <string name="reset">Reset</string>
+    <string name="total">+ Rp %d</string>
+
+    <string name="date">1 Oktober 2023</string>
+    <string name="agent_name">Nama Agen</string>
+    <string name="agent_address">Alamat Agen</string>
+    <string name="waste_name">Nama Sampah</string>
+    <string name="waste_amount">25</string>
+    <string name="waste_unit">kg</string>
+    <string name="waste_price">1000</string>
+
+    <string name="home">Home</string>
+    <string name="history">Riwayat</string>
+    <string name="history_detail">Detail Penjemputan</string>
+    <string name="cart">Keranjang</string>
+    <string name="money_bag">Money Bag</string>
+    <string name="profile">Profil</string>
+
 </resources>

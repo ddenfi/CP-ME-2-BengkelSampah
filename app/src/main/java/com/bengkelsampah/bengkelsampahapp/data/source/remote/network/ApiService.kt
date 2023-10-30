@@ -15,5 +15,4 @@ interface ApiService {
         @Path("partnerid") partnerId: UUID
     ) : GetPartnerItem
 
-
 }

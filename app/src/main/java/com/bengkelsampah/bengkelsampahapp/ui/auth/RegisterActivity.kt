@@ -1,12 +1,12 @@
-package com.bengkelsampah.bengkelsampahapp.ui.dashboard
+package com.bengkelsampah.bengkelsampahapp.ui.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bengkelsampah.bengkelsampahapp.R
 
-class DashboardActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        setContentView(R.layout.activity_register)
     }
 }
