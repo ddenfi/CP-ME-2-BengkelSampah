@@ -3,31 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_screen_navigation"
-    app:startDestination="@id/dashboardScreenFragment">
+    app:startDestination="@id/HomeScreenFragment">
 
     <fragment
-        android:id="@+id/dashboardScreenFragment"
-        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.DashboardScreenFragment"
+        android:id="@+id/HomeScreenFragment"
+        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.screen.HomeScreenFragment"
         android:label="fragment_dashboard_screen"
-        tools:layout="@layout/fragment_dashboard_screen" />
+        tools:layout="@layout/fragment_home_screen" />
     <fragment
-        android:id="@+id/accountScreenFragment"
-        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.AccountScreenFragment"
+        android:id="@+id/AccountScreenFragment"
+        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.screen.AccountScreenFragment"
         android:label="fragment_account_screen"
         tools:layout="@layout/fragment_account_screen" />
     <fragment
-        android:id="@+id/historyScreenFragment"
-        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.HistoryScreenFragment"
+        android:id="@+id/HistoryScreenFragment"
+        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.screen.HistoryScreenFragment"
         android:label="fragment_history_screen"
         tools:layout="@layout/fragment_history_screen" />
-    <fragment
-        android:id="@+id/keranjangkuScreenFragment"
-        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.KeranjangkuScreenFragment"
-        android:label="fragment_keranjangku_screen"
-        tools:layout="@layout/fragment_keranjangku_screen" />
-    <fragment
-        android:id="@+id/moneybagScreenFragment"
-        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.MoneybagScreenFragment"
-        android:label="fragment_moneybag_screen"
-        tools:layout="@layout/fragment_moneybag_screen" />
 </navigation>
