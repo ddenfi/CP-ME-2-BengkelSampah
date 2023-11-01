@@ -60,7 +60,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    kapt("androidx.lifecycle:lifecycle-common:2.6.2:$lifecycle_version")
+    kapt("androidx.lifecycle:lifecycle-common:$lifecycle_version")
 
     //room
     val room_version = "2.5.2"
