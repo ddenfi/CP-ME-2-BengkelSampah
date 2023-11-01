@@ -8,12 +8,11 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Singleton
 
 @Singleton
-class UserRepositoryImpl():UserRepository {
+class UserRepositoryImpl :UserRepository {
     /**
      * Get data from dummy due API still in development
      */
     override val userData: Flow<UserDataModel> = flow {
-        //Simulate API Call
         delay(2000)
         emit(UserDataModel.dummyData)
     }

@@ -44,7 +44,7 @@ class PartnerAdapter(private val onClickListener: (id: UUID, partner: GetPartner
                 tvPhoneNumber.text = item.phoneNumber
 
                 itemPartner.setOnClickListener {
-                    onClickListener.invoke(item.partnerId!!, item)
+                    onClickListener.invoke(item.partnerId, item)
                 }
             }
         }

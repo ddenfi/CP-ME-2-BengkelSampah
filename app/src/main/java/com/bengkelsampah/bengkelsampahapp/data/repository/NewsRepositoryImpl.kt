@@ -8,12 +8,11 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Singleton
 
 @Singleton
-class NewsRepositoryImpl() : NewsRepository {
+class NewsRepositoryImpl : NewsRepository {
     /**
      * Get news from data dummy due API still on dev
      */
     override fun getNews(): Flow<List<NewsResourceModel>> = flow {
-        //Simulate API Call
         delay(2000)
         emit(NewsResourceModel.dummyData)
     }
