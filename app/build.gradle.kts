@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.bengkelsampah.bengkelsampahapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.bengkelsampah.bengkelsampahapp"
@@ -42,9 +42,9 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
@@ -56,9 +56,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     //viewModel
-    val lifecycle_version = "2.6.2"
+    val lifecycle_version = "2.6.2"   
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    kapt("androidx.lifecycle:lifecycle-common:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    kapt("androidx.lifecycle:lifecycle-common:2.6.2:$lifecycle_version")
 
     //room
     val room_version = "2.5.2"
