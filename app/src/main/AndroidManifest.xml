@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".BengkelSampahApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -25,13 +26,10 @@
             android:name=".ui.history.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.dashboard.DashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

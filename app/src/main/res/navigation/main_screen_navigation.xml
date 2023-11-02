@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_screen_navigation"
+    app:startDestination="@id/HomeScreenFragment">
+
+    <fragment
+        android:id="@+id/HomeScreenFragment"
+        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.screen.HomeScreenFragment"
+        android:label="fragment_dashboard_screen"
+        tools:layout="@layout/fragment_home_screen" />
+    <fragment
+        android:id="@+id/AccountScreenFragment"
+        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.screen.AccountScreenFragment"
+        android:label="fragment_account_screen"
+        tools:layout="@layout/fragment_account_screen" />
+    <fragment
+        android:id="@+id/HistoryScreenFragment"
+        android:name="com.bengkelsampah.bengkelsampahapp.ui.main.screen.HistoryScreenFragment"
+        android:label="fragment_history_screen"
+        tools:layout="@layout/fragment_history_screen" />
+</navigation>
