@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">BengkelSampahApp</string>
+    <string name="profile_name">Generasi Gigih 3.0</string>
+    <string name="profile_email">generasigigih@mail.com</string>
+    <string name="Edit_Account">Edit Akun</string>
+    <string name="Log_Out">Keluar</string>
+    <string name="profile_phonenumber">+62 123 456 789</string>
+    <string name="privacy_policy">Ketentuan dan Privasi</string>
+    <string name="help_center">Pusat Bantuan</string>
+    <string name="name_edit">Nama</string>
+    <string name="phonenumber_edit">Nomor HP</string>
+    <string name="title_name_edit">Nama*</string>
+    <string name="title_email_edit">Email*</string>
+    <string name="title_phonenumber_edit">Nomor HP*</string>
+    <string name="title_helpcenter">Pusat Bantuan</string>
+    <string name="body_helpcenter">Kami ingin memberitahukan bahwa saat ini kami lebih memilih menerima dan menangani pertanyaan serta permintaan melalui layanan WhatsApp kami. Kami percaya bahwa ini akan membantu kami memberikan dukungan yang lebih efisien dan responsif kepada pelanggan kami.</string>
+    <string name="whatsapp_button">Hubungi Kami Melalui WhatsApp</string>
+    <string name="save_edited_button_profile">Simpan</string>
 </resources>
