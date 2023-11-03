@@ -50,7 +50,7 @@ class HomeScreenFragment : Fragment() {
                         when (dashboardData) {
                             is DashboardUiState.Success -> {
                                 binding.tvHomeName.text = dashboardData.user.name
-                                binding.tvHomeBalance.text = dashboardData.user.name
+                                binding.tvHomeBalance.text = dashboardData.user.balance.toString()
                                 binding.apply {
                                     homeDashboard.visibility = View.VISIBLE
                                     homeMenuShimmer.stopShimmer()
