@@ -42,12 +42,7 @@ class HomeScreenFragment : Fragment() {
             adapter = newsAdapter
         }
 
-        val binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
-        val btnJualSampah = binding.btnHomeJualSampah
-
-        btnJualSampah.setOnClickListener {
-            navigateToPartnerActivity()
-        }
+        navigateToPartnerActivity()
 
         setUpView(newsAdapter)
 
@@ -112,8 +107,13 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun navigateToPartnerActivity() {
-        val intent = Intent(activity, PartnerActivity::class.java)
-        startActivity(intent)
+        val btnJualSampah = binding.btnHomeJualSampah
+
+        btnJualSampah.setOnClickListener {
+            val intent = Intent(activity, PartnerActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 
