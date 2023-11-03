@@ -29,6 +29,9 @@
             android:name=".ui.history.HistoryActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.jualsampah.PartnerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity

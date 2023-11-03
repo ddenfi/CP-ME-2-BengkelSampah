@@ -1,10 +1,13 @@
 package com.bengkelsampah.bengkelsampahapp.ui.main.screen
 
+import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -13,11 +16,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeScreenBinding
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.NewsAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.PartnerActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class HomeScreenFragment : Fragment() {
@@ -35,6 +40,13 @@ class HomeScreenFragment : Fragment() {
         binding.rvHomeNews.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsAdapter
+        }
+
+        val binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
+        val btnJualSampah = binding.btnHomeJualSampah
+
+        btnJualSampah.setOnClickListener {
+            navigateToPartnerActivity()
         }
 
         setUpView(newsAdapter)
@@ -99,9 +111,17 @@ class HomeScreenFragment : Fragment() {
         }
     }
 
+    private fun navigateToPartnerActivity() {
+        val intent = Intent(activity, PartnerActivity::class.java)
+        startActivity(intent)
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
 }
