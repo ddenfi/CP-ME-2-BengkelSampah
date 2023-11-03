@@ -22,6 +22,8 @@ class PartnerAdapter(private val onClickListener: (id: UUID, partner: GetPartner
 
     private val listDiffer = AsyncListDiffer(this, diffCallback)
 
+    fun submitData(value: List<GetPartnerItem>?) = listDiffer.submitList(value)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartnerViewHolder {
         val binding =
             ItemPartnerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
