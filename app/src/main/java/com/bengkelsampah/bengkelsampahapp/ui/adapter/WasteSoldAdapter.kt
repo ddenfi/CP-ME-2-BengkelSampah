@@ -1,4 +1,4 @@
-package com.bengkelsampah.bengkelsampahapp.ui.history
+package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteSoldBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyWaste
 
 class WasteSoldAdapter : ListAdapter<DummyWaste, WasteSoldAdapter.WasteSoldViewHolder>(
     object : DiffUtil.ItemCallback<DummyWaste>() {

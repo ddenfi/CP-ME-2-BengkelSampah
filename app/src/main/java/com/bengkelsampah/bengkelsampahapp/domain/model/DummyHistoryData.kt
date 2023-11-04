@@ -1,4 +1,4 @@
-package com.bengkelsampah.bengkelsampahapp.ui.history
+package com.bengkelsampah.bengkelsampahapp.domain.model
 
 data class DummyHistoryData(
     val date: String,

@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyData
+import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HistoryActivity : AppCompatActivity() {

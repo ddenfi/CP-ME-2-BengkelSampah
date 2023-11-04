@@ -1,6 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.domain.repository
 
-import com.bengkelsampah.bengkelsampahapp.ui.history.DummyHistoryData
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
 import kotlinx.coroutines.flow.Flow
 
 interface HistoryRepository {
