@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyData
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyWaste
+import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 
 class HistoryDetailActivity : AppCompatActivity() {
     private lateinit var historyDetailBinding: ActivityHistoryDetailBinding
