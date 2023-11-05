@@ -1,4 +1,4 @@
-package com.bengkelsampah.bengkelsampahapp.ui.history
+package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
+import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
 
 class HistoryAdapter : ListAdapter<DummyHistoryData, HistoryAdapter.HistoryViewHolder>(
     object : DiffUtil.ItemCallback<DummyHistoryData>() {

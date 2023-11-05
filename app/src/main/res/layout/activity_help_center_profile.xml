@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="35dp"
+    tools:context=".ui.profile.HelpCenterProfileActivity">
+
+    <TextView
+        android:id="@+id/titleHelpCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="30dp"
+        android:text="@string/title_helpcenter"
+        android:fontFamily="@font/inter_bold" />
+
+    <TextView
+        android:id="@+id/bodyHelpCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="30dp"
+        android:justificationMode="inter_word"
+        android:fontFamily="@font/inter"
+        app:layout_constraintTop_toBottomOf="@id/titleHelpCenter"
+        android:text="@string/body_helpcenter"
+        />
+
+    <Button
+        android:id="@+id/whatsappButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:drawableLeft="@drawable/whatsapp"
+        android:fontFamily="@font/inter"
+        android:paddingLeft="30dp"
+        android:text="@string/whatsapp_button"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:iconPadding="-8dp"
+        app:layout_constraintTop_toBottomOf="@id/bodyHelpCenter"
+        tools:layout_editor_absoluteX="30dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

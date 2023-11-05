@@ -31,7 +31,7 @@ data class UserDataModel(
             updatedAt = "volumus",
             lastLogin = "volumus",
             emailVerified = false,
-            balance = 9167
+            balance = 10000
         )
     }
 }

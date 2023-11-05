@@ -1,3 +1,27 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
-class PartnerActivity
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerDummyData
+
+class PartnerActivity : AppCompatActivity() {
+
+    private val partnerAdapter = PartnerAdapter { _, _ ->
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_partner)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.rv_mitra)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = partnerAdapter
+
+        val dummyData = PartnerDummyData.getDummyPartnerList()
+        partnerAdapter.submitData(dummyData)
+    }
+}
