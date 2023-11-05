@@ -65,7 +65,6 @@ class HomeScreenFragment : Fragment() {
                                     homeNameShimmer.visibility = View.GONE
                                     homeDashboardShimmer.visibility = View.GONE
                                 }
-
                             }
 
                             is DashboardUiState.Loading -> {

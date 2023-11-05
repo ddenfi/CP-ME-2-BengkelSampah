@@ -8,7 +8,7 @@
     tools:context=".ui.profile.ProfileActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_account_profile"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:clipToOutline="true"
@@ -20,7 +20,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/tv_account_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -31,10 +31,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_account_profile" />
 
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/tv_account_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -44,10 +44,10 @@
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_name" />
 
     <TextView
-        android:id="@+id/textViewPhoneNumber"
+        android:id="@+id/tv_account_phoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -57,11 +57,11 @@
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_email" />
 
 
     <Button
-        android:id="@+id/buttonEditProfile"
+        android:id="@+id/btn_account_edit"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,10 +70,10 @@
         android:text="@string/Edit_Account"
         app:icon="@drawable/edit_account"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/textViewPhoneNumber" />
+        app:layout_constraintTop_toBottomOf="@id/tv_account_phoneNumber" />
 
     <Button
-        android:id="@+id/buttonLogOut"
+        android:id="@+id/btn_account_logout"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
         android:text="@string/Log_Out"
         app:icon="@drawable/logout"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/textViewPhoneNumber" />
+        app:layout_constraintTop_toBottomOf="@id/tv_account_phoneNumber" />
 
     <View
         android:id="@+id/horizontalLine"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/privacy_policy"
+        android:id="@+id/tv_account_privacyPolicy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -109,7 +109,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/help_center"
+        android:id="@+id/tv_account_helpCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -120,7 +120,7 @@
         android:textColor="@color/md_theme_light_onSecondaryContainer"
         app:drawableStartCompat="@drawable/help_center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/privacy_policy" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_privacyPolicy" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
