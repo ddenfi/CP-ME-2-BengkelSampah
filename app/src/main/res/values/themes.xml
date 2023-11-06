@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BengkelSampahApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="android:fontFamily">@font/inter_font_family</item>
     </style>
 
     <style name="Theme.BengkelSampahApp" parent="Base.Theme.BengkelSampahApp">
