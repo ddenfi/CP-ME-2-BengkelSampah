@@ -1,6 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.ui.main.screen
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryScreenBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.DummyData
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HistoryScreenFragment : Fragment() {
@@ -47,7 +50,7 @@ class HistoryScreenFragment : Fragment() {
     }
 
     private fun setUpHistoryList() {
-        val historyAdapter = HistoryAdapter()
+        val historyAdapter = HistoryAdapter { history -> adapterOnClick(history) }
         val dummyHistoryData = DummyData.generateDummyData()
 
         binding.rvHistory.apply {
@@ -56,5 +59,11 @@ class HistoryScreenFragment : Fragment() {
         }
 
         historyAdapter.submitList(dummyHistoryData)
+    }
+
+    private fun adapterOnClick(history: DummyHistoryData) {
+        val intent = Intent(this.requireContext(), HistoryDetailActivity::class.java)
+        intent.putExtra(HistoryDetailActivity.HISTORY_ID, history.id)
+        startActivity(intent)
     }
 }

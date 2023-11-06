@@ -21,16 +21,17 @@ class HistoryDetailActivity : AppCompatActivity() {
         setSupportActionBar(historyDetailBinding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setUpDetailPage()
+        val historyId = intent.getIntExtra(HISTORY_ID, 0)
+        setUpDetailPage(historyId)
         setUpBottomNavigation()
     }
 
-    private fun setUpDetailPage() {
+    private fun setUpDetailPage(historyId: Int) {
         val dummyHistoryData = DummyData.generateDummyData()
         historyDetailBinding.apply {
-            tvStatus.text = dummyHistoryData[0].status
+            tvStatus.text = dummyHistoryData[historyId].status
 
-            when (dummyHistoryData[0].status) {
+            when (dummyHistoryData[historyId].status) {
                 HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
                 )
@@ -48,16 +49,20 @@ class HistoryDetailActivity : AppCompatActivity() {
                 )
             }
 
-            tvAgentName.text = dummyHistoryData[0].agent
-            tvAgentAddress.text = dummyHistoryData[0].agentAddress
-            tvAgentPhone.text = getString(R.string.agent_phone, dummyHistoryData[0].agentPhone)
+            tvAgentName.text = dummyHistoryData[historyId].agent
+            tvAgentAddress.text = dummyHistoryData[historyId].agentAddress
+            tvAgentPhone.text =
+                getString(R.string.agent_phone, dummyHistoryData[historyId].agentPhone)
 
-            setUpWasteSold(dummyHistoryData[0].waste)
+            setUpWasteSold(dummyHistoryData[historyId].waste)
 
             tvTotalAll.text =
-                getString(R.string.total_detail_history, dummyHistoryData[0].total.toString())
-            tvPickUpAddress.text = dummyHistoryData[0].address
-            tvPickUpDescription.text = dummyHistoryData[0].description
+                getString(
+                    R.string.total_detail_history,
+                    dummyHistoryData[historyId].total.toString()
+                )
+            tvPickUpAddress.text = dummyHistoryData[historyId].address
+            tvPickUpDescription.text = dummyHistoryData[historyId].description
         }
     }
 
@@ -99,5 +104,9 @@ class HistoryDetailActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    companion object {
+        const val HISTORY_ID = "history_id"
     }
 }
