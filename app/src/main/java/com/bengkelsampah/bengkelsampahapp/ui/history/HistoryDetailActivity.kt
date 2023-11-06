@@ -23,7 +23,6 @@ class HistoryDetailActivity : AppCompatActivity() {
 
         val historyId = intent.getIntExtra(HISTORY_ID, 0)
         setUpDetailPage(historyId)
-        setUpBottomNavigation()
     }
 
     private fun setUpDetailPage(historyId: Int) {
@@ -75,35 +74,6 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
 
         wasteSoldAdapter.submitList(waste)
-    }
-
-    private fun setUpBottomNavigation() {
-        historyDetailBinding.bottomNavigation.selectedItemId = R.id.menu_history
-        historyDetailBinding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.menu_home -> {
-                    true
-                }
-
-                R.id.menu_history -> {
-                    true
-                }
-
-                R.id.menu_cart -> {
-                    true
-                }
-
-                R.id.menu_money_bag -> {
-                    true
-                }
-
-                R.id.menu_profile -> {
-                    true
-                }
-
-                else -> false
-            }
-        }
     }
 
     companion object {
