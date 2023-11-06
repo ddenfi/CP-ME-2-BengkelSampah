@@ -6,19 +6,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryScreenBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyData
 import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
+import com.bengkelsampah.bengkelsampahapp.ui.main.HistoryUiState
+import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.launch
 
 class HistoryScreenFragment : Fragment() {
     private var _binding: FragmentHistoryScreenBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,14 +57,28 @@ class HistoryScreenFragment : Fragment() {
 
     private fun setUpHistoryList() {
         val historyAdapter = HistoryAdapter { history -> adapterOnClick(history) }
-        val dummyHistoryData = DummyData.generateDummyData()
 
-        binding.rvHistory.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = historyAdapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.historyUiState.collect { historyUiState ->
+                when (historyUiState) {
+                    is HistoryUiState.Success -> {
+                        binding.rvHistory.apply {
+                            layoutManager = LinearLayoutManager(context)
+                            adapter = historyAdapter
+                        }
+                        historyAdapter.submitList(historyUiState.history)
+                    }
+
+                    is HistoryUiState.Loading -> {
+
+                    }
+
+                    is HistoryUiState.Error -> {
+                        Toast.makeText(context, historyUiState.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
-
-        historyAdapter.submitList(dummyHistoryData)
     }
 
     private fun adapterOnClick(history: DummyHistoryData) {

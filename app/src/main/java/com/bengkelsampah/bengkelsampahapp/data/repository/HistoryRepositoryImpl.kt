@@ -12,4 +12,9 @@ class HistoryRepositoryImpl : HistoryRepository {
         delay(5000)
         emit(DummyData.generateDummyData())
     }
+
+    override fun getHistoryById(id: Int): Flow<DummyHistoryData> = flow {
+        delay(5000)
+        emit(DummyData.generateDummyData()[id])
+    }
 }

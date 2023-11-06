@@ -4,15 +4,22 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyData
+import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
 import com.bengkelsampah.bengkelsampahapp.domain.model.DummyWaste
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HistoryDetailActivity : AppCompatActivity() {
     private lateinit var historyDetailBinding: ActivityHistoryDetailBinding
+    private val viewModel: HistoryDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +30,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val historyId = intent.getIntExtra(HISTORY_ID, 0)
-        setUpDetailPage(historyId)
+        gettingDetailData(historyId)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -33,12 +40,35 @@ class HistoryDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setUpDetailPage(historyId: Int) {
-        val dummyHistoryData = DummyData.generateDummyData()
-        historyDetailBinding.apply {
-            tvStatus.text = dummyHistoryData[historyId].status
+    private fun gettingDetailData(historyId: Int) {
+        lifecycleScope.launch {
+            viewModel.getHistoryDetail(historyId).collect { historyDetailUiState ->
+                when (historyDetailUiState) {
+                    is HistoryDetailUiState.Success -> {
+                        setUpDetailPage(historyDetailUiState.history)
+                    }
 
-            when (dummyHistoryData[historyId].status) {
+                    is HistoryDetailUiState.Loading -> {
+
+                    }
+
+                    is HistoryDetailUiState.Error -> {
+                        Toast.makeText(
+                            this@HistoryDetailActivity,
+                            historyDetailUiState.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setUpDetailPage(history: DummyHistoryData) {
+        historyDetailBinding.apply {
+            tvStatus.text = history.status
+
+            when (history.status) {
                 HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
                 )
@@ -56,20 +86,20 @@ class HistoryDetailActivity : AppCompatActivity() {
                 )
             }
 
-            tvAgentName.text = dummyHistoryData[historyId].agent
-            tvAgentAddress.text = dummyHistoryData[historyId].agentAddress
+            tvAgentName.text = history.agent
+            tvAgentAddress.text = history.agentAddress
             tvAgentPhone.text =
-                getString(R.string.agent_phone, dummyHistoryData[historyId].agentPhone)
+                getString(R.string.agent_phone, history.agentPhone)
 
-            setUpWasteSold(dummyHistoryData[historyId].waste)
+            setUpWasteSold(history.waste)
 
             tvTotalAll.text =
                 getString(
                     R.string.total_detail_history,
-                    dummyHistoryData[historyId].total.toString()
+                    history.total.toString()
                 )
-            tvPickUpAddress.text = dummyHistoryData[historyId].address
-            tvPickUpDescription.text = dummyHistoryData[historyId].description
+            tvPickUpAddress.text = history.address
+            tvPickUpDescription.text = history.description
         }
     }
 
