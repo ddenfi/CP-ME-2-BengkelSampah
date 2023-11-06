@@ -3,6 +3,7 @@ package com.bengkelsampah.bengkelsampahapp.ui.history
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
@@ -23,6 +24,13 @@ class HistoryDetailActivity : AppCompatActivity() {
 
         val historyId = intent.getIntExtra(HISTORY_ID, 0)
         setUpDetailPage(historyId)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressedDispatcher.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setUpDetailPage(historyId: Int) {
