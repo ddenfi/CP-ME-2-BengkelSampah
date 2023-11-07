@@ -37,6 +37,7 @@
     <string name="description_forgot_password">Silahkan masukkan email kamu untuk mereset kata sandi</string>
     <string name="reset_password">Kirim link reset password</string>
 
+    <string name="history_detail">Detail Penjemputan</string>
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
     <string name="in_process_status">Diproses</string>
@@ -56,6 +57,8 @@
     <string name="filter">Filter</string>
     <string name="reset">Reset</string>
     <string name="total">+ Rp %d</string>
+    <string name="cancel_order_confirmation">Apakah anda yakin untuk membatalkan pesanan ini?</string>
+    <string name="order_cancelled">Pesanan anda telah berhasil dibatalkan</string>
 
     <string name="date">1 Oktober 2023</string>
     <string name="agent_name">Nama Agen</string>
@@ -67,9 +70,8 @@
 
     <string name="home">Home</string>
     <string name="history">Riwayat</string>
-    <string name="history_detail">Detail Penjemputan</string>
-    <string name="cart">Keranjang</string>
-    <string name="money_bag">Money Bag</string>
-    <string name="profile">Profil</string>
+    <string name="account">Akun</string>
 
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
 </resources>
