@@ -71,8 +71,38 @@ class HistoryDetailActivity : AppCompatActivity() {
     private fun setUpDetailPage(history: DummyHistoryData) {
         historyDetailBinding.apply {
             tvStatus.text = history.status
+            tvAgentName.text = history.agent
+            tvAgentAddress.text = history.agentAddress
+            tvAgentPhone.text =
+                getString(R.string.agent_phone, history.agentPhone)
+            tvTotalAll.text =
+                getString(
+                    R.string.total_detail_history,
+                    history.total.toString()
+                )
+            tvPickUpAddress.text = history.address
+            tvPickUpDescription.text = history.description
 
-            when (history.status) {
+            setUpWasteSold(history.waste)
+            setHistoryStatusColor(history.status)
+            setCancelButtonVisibility(history.status)
+        }
+    }
+
+    private fun setCancelButtonVisibility(historyStatus: String) {
+        historyDetailBinding.apply {
+            when (historyStatus) {
+                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> btnCancelOrder.visibility =
+                    View.VISIBLE
+
+                else -> btnCancelOrder.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setHistoryStatusColor(historyStatus: String) {
+        historyDetailBinding.apply {
+            when (historyStatus) {
                 HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
                 )
@@ -89,21 +119,6 @@ class HistoryDetailActivity : AppCompatActivity() {
                     Color.parseColor(HistoryStatus.DIBATALKAN.color)
                 )
             }
-
-            tvAgentName.text = history.agent
-            tvAgentAddress.text = history.agentAddress
-            tvAgentPhone.text =
-                getString(R.string.agent_phone, history.agentPhone)
-
-            setUpWasteSold(history.waste)
-
-            tvTotalAll.text =
-                getString(
-                    R.string.total_detail_history,
-                    history.total.toString()
-                )
-            tvPickUpAddress.text = history.address
-            tvPickUpDescription.text = history.description
         }
     }
 
