@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -45,11 +46,14 @@ class HistoryDetailActivity : AppCompatActivity() {
             viewModel.getHistoryDetail(historyId).collect { historyDetailUiState ->
                 when (historyDetailUiState) {
                     is HistoryDetailUiState.Success -> {
+                        historyDetailBinding.shimmerHistoryDetail.visibility = View.GONE
+                        historyDetailBinding.historyDetail.visibility = View.VISIBLE
                         setUpDetailPage(historyDetailUiState.history)
                     }
 
                     is HistoryDetailUiState.Loading -> {
-
+                        historyDetailBinding.historyDetail.visibility = View.GONE
+                        historyDetailBinding.shimmerHistoryDetail.visibility = View.VISIBLE
                     }
 
                     is HistoryDetailUiState.Error -> {
