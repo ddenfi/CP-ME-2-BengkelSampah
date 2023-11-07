@@ -87,6 +87,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             setUpWasteSold(history.waste)
             setHistoryStatusColor(history.status)
             setCancelButtonVisibility(history.status)
+            setDownloadFileVisibility(history.status)
 
             btnCancelOrder.setOnClickListener {
                 MaterialAlertDialogBuilder(this@HistoryDetailActivity, R.style.AlertDialogTheme)
@@ -106,6 +107,14 @@ class HistoryDetailActivity : AppCompatActivity() {
     private fun cancelOrder() {
         Toast.makeText(this, getString(R.string.order_cancelled), Toast.LENGTH_LONG).show()
         this.finish()
+    }
+
+    private fun setDownloadFileVisibility(historyStatus: String) {
+        if (historyStatus == HistoryStatus.SELESAI.statusValue) {
+            historyDetailBinding.btnDownloadTransaction.visibility = View.VISIBLE
+        } else {
+            historyDetailBinding.btnDownloadTransaction.visibility = View.GONE
+        }
     }
 
     private fun setCancelButtonVisibility(historyStatus: String) {
