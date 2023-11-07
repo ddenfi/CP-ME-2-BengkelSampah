@@ -14,6 +14,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBindi
 import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
 import com.bengkelsampah.bengkelsampahapp.domain.model.DummyWaste
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -86,7 +87,25 @@ class HistoryDetailActivity : AppCompatActivity() {
             setUpWasteSold(history.waste)
             setHistoryStatusColor(history.status)
             setCancelButtonVisibility(history.status)
+
+            btnCancelOrder.setOnClickListener {
+                MaterialAlertDialogBuilder(this@HistoryDetailActivity, R.style.AlertDialogTheme)
+                    .setMessage(getString(R.string.cancel_order_confirmation))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        cancelOrder()
+                    }
+                    .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
         }
+    }
+
+    private fun cancelOrder() {
+        Toast.makeText(this, getString(R.string.order_cancelled), Toast.LENGTH_LONG).show()
+        this.finish()
     }
 
     private fun setCancelButtonVisibility(historyStatus: String) {
