@@ -62,6 +62,8 @@ class HistoryScreenFragment : Fragment() {
             viewModel.historyUiState.collect { historyUiState ->
                 when (historyUiState) {
                     is HistoryUiState.Success -> {
+                        binding.shimmerHistory.visibility = View.GONE
+                        binding.rvHistory.visibility = View.VISIBLE
                         binding.rvHistory.apply {
                             layoutManager = LinearLayoutManager(context)
                             adapter = historyAdapter
@@ -70,7 +72,8 @@ class HistoryScreenFragment : Fragment() {
                     }
 
                     is HistoryUiState.Loading -> {
-
+                        binding.rvHistory.visibility = View.GONE
+                        binding.shimmerHistory.visibility = View.VISIBLE
                     }
 
                     is HistoryUiState.Error -> {
