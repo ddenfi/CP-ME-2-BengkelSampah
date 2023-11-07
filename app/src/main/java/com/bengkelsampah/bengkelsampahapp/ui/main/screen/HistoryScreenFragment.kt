@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,6 +20,8 @@ import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.HistoryUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import kotlinx.coroutines.launch
 
 class HistoryScreenFragment : Fragment() {
@@ -50,8 +53,24 @@ class HistoryScreenFragment : Fragment() {
         val bottomSheetDialog = BottomSheetDialog(this.requireContext())
         bottomSheetDialog.setContentView(bottomSheetView)
 
+        val filterChipGroup = bottomSheetView.findViewById<ChipGroup>(R.id.chip_group_status)
+
         binding.btnStatusFilter.setOnClickListener {
             bottomSheetDialog.show()
+            filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
+                val checkedId = filterChipGroup.checkedChipId
+                if (checkedId != View.NO_ID) {
+                    val checkedText = bottomSheetView.findViewById<Chip>(checkedId).text.toString()
+                    binding.btnStatusFilter.text = checkedText
+                }
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetView.findViewById<Button>(R.id.btn_reset_filter).setOnClickListener {
+                filterChipGroup.clearCheck()
+                binding.btnStatusFilter.text = getString(R.string.all_status)
+                bottomSheetDialog.dismiss()
+            }
         }
     }
 
