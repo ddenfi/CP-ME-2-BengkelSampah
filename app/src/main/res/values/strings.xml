@@ -56,6 +56,7 @@
     <string name="filter">Filter</string>
     <string name="reset">Reset</string>
     <string name="total">+ Rp %d</string>
+    <string name="idr">Rp %d</string>
 
     <string name="date">1 Oktober 2023</string>
     <string name="agent_name">Nama Agen</string>

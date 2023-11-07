@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeScreenBinding
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.NewsAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.banksampah.BankSampahActivity
@@ -59,7 +60,7 @@ class HomeScreenFragment : Fragment() {
                         when (dashboardData) {
                             is DashboardUiState.Success -> {
                                 binding.tvHomeName.text = dashboardData.user.name
-                                binding.tvHomeBalance.text = dashboardData.user.balance.toString()
+                                binding.tvHomeBalance.text = getString(R.string.idr,dashboardData.user.balance)
                                 binding.apply {
                                     homeDashboard.visibility = View.VISIBLE
                                     homeMenuShimmer.stopShimmer()

@@ -88,6 +88,12 @@ dependencies {
     //facebook shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
 
-    //DataStore
+    //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    //viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    //viewpager indiator
+    implementation("com.tbuonomo:dotsindicator:5.0")
 }
