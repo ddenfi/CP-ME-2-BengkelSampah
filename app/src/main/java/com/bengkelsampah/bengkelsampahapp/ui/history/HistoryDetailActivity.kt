@@ -101,6 +101,24 @@ class HistoryDetailActivity : AppCompatActivity() {
                     }
                     .show()
             }
+
+            btnDownloadTransaction.setOnClickListener {
+                try {
+
+                    HistoryDetailPdfFile().generatePdfFile(this@HistoryDetailActivity, history)
+                    Toast.makeText(
+                        this@HistoryDetailActivity,
+                        getString(R.string.transaction_downloaded),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        this@HistoryDetailActivity,
+                        getString(R.string.transaction_download_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
