@@ -2,9 +2,9 @@ package com.bengkelsampah.bengkelsampahapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityForgotPasswordBinding
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -30,7 +30,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
             if (email.isNotEmpty()) {
                 viewModel.forgotPassword(email)
             } else {
-                Toast.makeText(this, "Email harus diisi!", Toast.LENGTH_SHORT).show()
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Email harus diisi!")
+                    .show()
             }
         }
     }
@@ -41,14 +43,23 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun observeForgotPasswordResult() {
         viewModel.forgotPasswordSuccess.observe(this) { forgotPasswordSuccess ->
             if (forgotPasswordSuccess) {
-                Toast.makeText(
-                    this,
-                    "Link reset password telah dikirimkan melalui email",
-                    Toast.LENGTH_SHORT
-                ).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+                val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Link reset password telah dikirimkan melalui email")
+
+                dialog.setConfirmClickListener {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    dialog.dismiss()
+                }
+
+                dialog.setOnDismissListener {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                dialog.show()
             }
         }
     }

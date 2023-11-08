@@ -2,9 +2,9 @@ package com.bengkelsampah.bengkelsampahapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -33,7 +33,8 @@ class RegisterActivity : AppCompatActivity() {
             if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.register(name, email, password)
             } else {
-                Toast.makeText(this, "Nama, email, dan password harus diisi!", Toast.LENGTH_SHORT)
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Nama, email, dan password harus diisi!")
                     .show()
             }
         }
@@ -45,10 +46,23 @@ class RegisterActivity : AppCompatActivity() {
     private fun observeRegisterResult() {
         viewModel.registerSuccess.observe(this) { registerSuccess ->
             if (registerSuccess) {
-                Toast.makeText(this, "Register berhasil", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+                val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Register Berhasil")
+
+                dialog.setConfirmClickListener {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    dialog.dismiss()
+                }
+
+                dialog.setOnDismissListener {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                dialog.show()
             }
         }
     }

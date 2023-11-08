@@ -2,9 +2,9 @@ package com.bengkelsampah.bengkelsampahapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityLoginBinding
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 
@@ -35,7 +35,9 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.login(email, password)
             } else {
-                Toast.makeText(this, "Email dan password harus diisi!", Toast.LENGTH_SHORT).show()
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Email dan password harus diisi!")
+                    .show()
             }
         }
     }
@@ -46,12 +48,27 @@ class LoginActivity : AppCompatActivity() {
     private fun observeLoginResult() {
         viewModel.loginSuccess.observe(this) { loginSuccess ->
             if (loginSuccess) {
-                Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText("Login Berhasil")
+
+                dialog.setConfirmClickListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    dialog.dismiss()
+                }
+
+                dialog.setOnDismissListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                dialog.show()
             } else {
-                Toast.makeText(this, "Email atau password salah", Toast.LENGTH_SHORT).show()
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Email atau password salah")
+                    .show()
             }
         }
     }
