@@ -34,4 +34,10 @@
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
     </style>
+
+    <style name="Theme.BengkelSampahApp.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_bengkelsampah_bnw</item>
+        <item name="windowSplashScreenBackground">@color/md_theme_light_primary</item>
+        <item name="postSplashScreenTheme">@style/Theme.BengkelSampahApp</item>
+    </style>
 </resources>

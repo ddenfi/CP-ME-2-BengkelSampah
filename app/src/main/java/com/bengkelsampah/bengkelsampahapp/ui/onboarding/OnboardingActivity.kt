@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.viewpager2.widget.ViewPager2
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityOnboadingBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.OnboardingPageModel
