@@ -56,7 +56,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     //viewModel
-    val lifecycle_version = "2.6.2"   
+    val lifecycle_version = "2.6.2"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
@@ -87,4 +87,7 @@ dependencies {
 
     //facebook shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    //sweet alert dialog
+    implementation("com.github.f0ris.sweetalert:library:1.6.2")
 }
