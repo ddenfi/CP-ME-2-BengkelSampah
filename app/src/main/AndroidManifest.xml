@@ -22,7 +22,7 @@
             android:name=".ui.profile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.ProfileActivity"
+            android:name=".ui.profile.MainProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.dashboard.DashboardActivity"
