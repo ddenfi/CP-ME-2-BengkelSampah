@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     tools:context=".ui.profile.PrivacyPolicyProfileActivity">
 
     <WebView
-        android:id="@+id/wv_PrivacyPolicy"
+        android:id="@+id/webViewPrivacyPolicy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
