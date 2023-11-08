@@ -12,22 +12,24 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
-@Module
+@Module(includes = [DataStoreModule::class])
 @InstallIn(SingletonComponent::class)
-object DataModule {
+interface DataModule {
 
     //TODO: Make this as binds
-    @Provides
-    fun bindsNewsRepository():NewsRepository{
-        return NewsRepositoryImpl()
-    }
+    @Binds
+    fun bindsNewsRepository(
+        newsRepositoryImpl: NewsRepositoryImpl = NewsRepositoryImpl()
+    ): NewsRepository
 
-    @Provides
-    fun bindsUserRepository():UserRepository{
-        return UserRepositoryImpl()
-    }
+    @Binds
+    fun bindsUserRepository(
+        userRepositoryImpl: UserRepositoryImpl
+    ): UserRepository
 
-    @Provides
-    fun bindsHistoryRepository():HistoryRepository = HistoryRepositoryImpl()
+    @Binds
+    fun bindsHistoryRepository(
+        historyRepositoryImpl: HistoryRepositoryImpl = HistoryRepositoryImpl()
+    ): HistoryRepository
 
 }

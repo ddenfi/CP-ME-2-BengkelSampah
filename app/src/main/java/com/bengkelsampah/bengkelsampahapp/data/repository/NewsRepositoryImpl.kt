@@ -5,10 +5,11 @@ import com.bengkelsampah.bengkelsampahapp.domain.repository.NewsRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NewsRepositoryImpl : NewsRepository {
+class NewsRepositoryImpl @Inject constructor() : NewsRepository {
     /**
      * Get news from data dummy due API still on dev
      */

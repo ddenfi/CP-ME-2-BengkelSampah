@@ -2,6 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BengkelSampahApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="android:fontFamily">@font/inter_font_family</item>
+
     </style>
 
     <style name="Theme.BengkelSampahApp" parent="Base.Theme.BengkelSampahApp">
@@ -31,6 +33,5 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
-
     </style>
 </resources>
