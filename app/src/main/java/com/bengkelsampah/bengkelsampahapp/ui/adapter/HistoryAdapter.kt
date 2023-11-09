@@ -11,23 +11,24 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
 
-class HistoryAdapter : ListAdapter<DummyHistoryData, HistoryAdapter.HistoryViewHolder>(
-    object : DiffUtil.ItemCallback<DummyHistoryData>() {
-        override fun areItemsTheSame(
-            oldItem: DummyHistoryData,
-            newItem: DummyHistoryData
-        ): Boolean {
-            return oldItem == newItem
-        }
+class HistoryAdapter(private val onClick: (DummyHistoryData) -> Unit) :
+    ListAdapter<DummyHistoryData, HistoryAdapter.HistoryViewHolder>(
+        object : DiffUtil.ItemCallback<DummyHistoryData>() {
+            override fun areItemsTheSame(
+                oldItem: DummyHistoryData,
+                newItem: DummyHistoryData
+            ): Boolean {
+                return oldItem == newItem
+            }
 
-        override fun areContentsTheSame(
-            oldItem: DummyHistoryData,
-            newItem: DummyHistoryData
-        ): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(
+                oldItem: DummyHistoryData,
+                newItem: DummyHistoryData
+            ): Boolean {
+                return oldItem == newItem
+            }
         }
-    }
-) {
+    ) {
 
     inner class HistoryViewHolder(private val binding: ItemHistoryBinding) :
         ViewHolder(binding.root) {
@@ -63,6 +64,10 @@ class HistoryAdapter : ListAdapter<DummyHistoryData, HistoryAdapter.HistoryViewH
             }
 
             tvTotal.text = itemView.context.getString(R.string.total, history.total)
+
+            itemView.setOnClickListener {
+                onClick(history)
+            }
         }
     }
 
