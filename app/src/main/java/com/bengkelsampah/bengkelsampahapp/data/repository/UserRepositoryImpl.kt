@@ -7,6 +7,7 @@ import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,6 +24,11 @@ class UserRepositoryImpl @Inject constructor(
 
     override val userPreferencesData: Flow<UserPreferencesDataModel> =
         preferenceDataStore.userPreferencesData
+
+    override val loginStatus: Flow<Boolean> = preferenceDataStore.userPreferencesData
+        .map { userPreferencesData ->
+            userPreferencesData.isLogin
+        }
 
     override fun updateUser(data: UserDataModel) {
         TODO("Not yet implemented")
