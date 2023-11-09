@@ -24,6 +24,7 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
         if (email == dummyEmailValue && password == dummyPasswordValue) {
             viewModelScope.launch {
                 userRepository.setLoginStatus(true)
+                userRepository.setShouldShowOnboard(false)
                 _loginSuccess.value = true
             }
         } else {

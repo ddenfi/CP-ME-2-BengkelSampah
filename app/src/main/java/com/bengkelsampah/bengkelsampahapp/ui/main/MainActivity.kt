@@ -17,9 +17,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var userRepository: UserRepository
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,14 +30,5 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavView.setupWithNavController(navController)
 
-        lifecycleScope.launch {
-            userRepository.loginStatus.collect { isLogin ->
-                run {
-                    if (!isLogin) {
-                        startActivity(Intent(this@MainActivity, OnboardingActivity::class.java))
-                    }
-                }
-            }
-        }
     }
 }
