@@ -42,7 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".ui.StartingActivity"
             android:exported="true"

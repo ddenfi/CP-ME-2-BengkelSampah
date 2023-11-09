@@ -23,6 +23,7 @@ interface UserRepository {
     /**
      * Set user login status to preferences data store
      */
+    val loginStatus: Flow<Boolean>
     suspend fun setLoginStatus(isLogin: Boolean)
 
     /**

@@ -16,6 +16,7 @@
     <string name="body_helpcenter">Kami ingin memberitahukan bahwa saat ini kami lebih memilih menerima dan menangani pertanyaan serta permintaan melalui layanan WhatsApp kami. Kami percaya bahwa ini akan membantu kami memberikan dukungan yang lebih efisien dan responsif kepada pelanggan kami.</string>
     <string name="whatsapp_button">Hubungi Kami Melalui WhatsApp</string>
     <string name="save_edited_button_profile">Simpan</string>
+    
     <string name="name">Nama</string>
     <string name="name_hint">Masukkan nama lengkap kamu …</string>
     <string name="email">Email</string>
@@ -27,15 +28,22 @@
     <string name="description_login">Silahkan masuk untuk melanjutkan</string>
     <string name="login">Masuk</string>
     <string name="forgot_password">Lupa kata sandi</string>
+    <string name="login_successful">Login Berhasil</string>
+    <string name="all_login_field_must_be_filled">Email dan password harus diisi!</string>
+    <string name="login_invalid">Email atau password salah</string>
 
     <!-- Register -->
     <string name="description_register">Silahkan daftar terlebih dahulu jika belum mempunyai akun</string>
     <string name="register">Daftar</string>
     <string name="dont_have_account_yet">Belum punya akun?</string>
+    <string name="register_successful">Register Berhasil</string>
+    <string name="all_register_field_must_be_filled">Nama, email, dan password harus diisi!</string>
 
     <!-- Forgot Password -->
     <string name="description_forgot_password">Silahkan masukkan email kamu untuk mereset kata sandi</string>
     <string name="reset_password">Kirim link reset password</string>
+    <string name="reset_password_successful">Link reset password telah dikirimkan melalui email</string>
+    <string name="all_forgot_password_field_must_be_filled">Email harus diisi!</string>
 
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>

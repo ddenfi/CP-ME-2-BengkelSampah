@@ -88,6 +88,9 @@ dependencies {
     //facebook shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
 
+    //sweet alert dialog
+    implementation("com.github.f0ris.sweetalert:library:1.6.2")
+
     //itext
     implementation("com.itextpdf:itext7-core:7.1.13")
 
