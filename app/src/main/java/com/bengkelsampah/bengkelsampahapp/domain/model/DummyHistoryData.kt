@@ -1,6 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
 data class DummyHistoryData(
+    val id: Int,
     val date: String,
     val address: String,
     val pickUpDate: String,
@@ -26,6 +27,7 @@ object DummyData {
 
         historyData.add(
             DummyHistoryData(
+                id = 0,
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
@@ -83,6 +85,7 @@ object DummyData {
         )
         historyData.add(
             DummyHistoryData(
+                id = 1,
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
@@ -140,6 +143,7 @@ object DummyData {
         )
         historyData.add(
             DummyHistoryData(
+                id = 2,
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
@@ -197,6 +201,7 @@ object DummyData {
         )
         historyData.add(
             DummyHistoryData(
+                id = 3,
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",

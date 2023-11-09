@@ -88,6 +88,9 @@ dependencies {
     //facebook shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
 
+    //itext
+    implementation("com.itextpdf:itext7-core:7.1.13")
+
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
