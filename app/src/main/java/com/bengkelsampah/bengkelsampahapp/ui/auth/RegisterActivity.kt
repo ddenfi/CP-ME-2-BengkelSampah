@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
                 viewModel.register(name, email, password)
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Nama, email, dan password harus diisi!")
+                    .setTitleText(getString(R.string.all_register_field_must_be_filled))
                     .show()
             }
         }
@@ -47,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.registerSuccess.observe(this) { registerSuccess ->
             if (registerSuccess) {
                 val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText("Register Berhasil")
+                    .setTitleText(getString(R.string.register_successful))
 
                 dialog.setConfirmClickListener {
                     val intent = Intent(this, LoginActivity::class.java)

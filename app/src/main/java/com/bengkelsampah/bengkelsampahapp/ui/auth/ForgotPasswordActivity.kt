@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityForgotPasswordBinding
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 viewModel.forgotPassword(email)
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Email harus diisi!")
+                    .setTitleText(getString(R.string.all_forgot_password_field_must_be_filled))
                     .show()
             }
         }
@@ -44,7 +45,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         viewModel.forgotPasswordSuccess.observe(this) { forgotPasswordSuccess ->
             if (forgotPasswordSuccess) {
                 val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText("Link reset password telah dikirimkan melalui email")
+                    .setTitleText(getString(R.string.reset_password_successful))
 
                 dialog.setConfirmClickListener {
                     val intent = Intent(this, LoginActivity::class.java)

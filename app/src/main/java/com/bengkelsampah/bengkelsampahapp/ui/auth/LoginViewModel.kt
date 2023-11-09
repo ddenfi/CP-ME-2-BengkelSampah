@@ -14,11 +14,14 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean> get() = _loginSuccess
 
+    private val dummyEmailValue: String = "test@gmail.com"
+    private val dummyPasswordValue: String = "1234"
+
     /**
      * Check login success value
      */
     fun login(email: String, password: String) {
-        if (email == "test@gmail.com" && password == "1234") {
+        if (email == dummyEmailValue && password == dummyPasswordValue) {
             viewModelScope.launch {
                 userRepository.setLoginStatus(true)
                 _loginSuccess.value = true

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityLoginBinding
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
                 viewModel.login(email, password)
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Email dan password harus diisi!")
+                    .setTitleText(getString(R.string.all_login_field_must_be_filled))
                     .show()
             }
         }
@@ -51,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginSuccess.observe(this) { loginSuccess ->
             if (loginSuccess) {
                 val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText("Login Berhasil")
+                    .setTitleText(getString(R.string.login_successful))
 
                 dialog.setConfirmClickListener {
                     val intent = Intent(this, MainActivity::class.java)
@@ -69,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                 dialog.show()
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Email atau password salah")
+                    .setTitleText(getString(R.string.login_invalid))
                     .show()
             }
         }
