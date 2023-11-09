@@ -48,7 +48,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
-    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -92,6 +91,9 @@ dependencies {
     //sweet alert dialog
     implementation("com.github.f0ris.sweetalert:library:1.6.2")
 
+    //itext
+    implementation("com.itextpdf:itext7-core:7.1.13")
+
     //datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
@@ -100,4 +102,7 @@ dependencies {
 
     //viewpager indiator
     implementation("com.tbuonomo:dotsindicator:5.0")
+
+    //splash screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }

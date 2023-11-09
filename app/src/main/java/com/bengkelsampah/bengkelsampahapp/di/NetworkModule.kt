@@ -1,6 +1,8 @@
 package com.bengkelsampah.bengkelsampahapp.di
 
+import android.os.Build
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.network.ApiService
+import com.facebook.shimmer.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,13 +17,17 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val BASE_URL = "https://bengkelsampah.com/"
+    private const val TIME_OUT: Long = 60
+
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .build()
+        return OkHttpClient.Builder().apply {
+            if (BuildConfig.DEBUG) {
+                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            }
+            connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+            readTimeout(TIME_OUT, TimeUnit.SECONDS)
+        }.build()
     }
 
     @Provides
