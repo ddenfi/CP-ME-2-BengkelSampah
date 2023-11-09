@@ -39,6 +39,7 @@ class HistoryScreenFragment : Fragment() {
         setUpFilterBottomSheet()
         setUpHistoryList()
 
+
         return binding.root
     }
 
