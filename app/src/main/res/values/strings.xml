@@ -16,7 +16,7 @@
     <string name="body_helpcenter">Kami ingin memberitahukan bahwa saat ini kami lebih memilih menerima dan menangani pertanyaan serta permintaan melalui layanan WhatsApp kami. Kami percaya bahwa ini akan membantu kami memberikan dukungan yang lebih efisien dan responsif kepada pelanggan kami.</string>
     <string name="whatsapp_button">Hubungi Kami Melalui WhatsApp</string>
     <string name="save_edited_button_profile">Simpan</string>
-    
+
     <string name="name">Nama</string>
     <string name="name_hint">Masukkan nama lengkap kamu …</string>
     <string name="email">Email</string>
@@ -131,4 +131,6 @@
 
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
