@@ -1,5 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -66,4 +69,10 @@ class MainViewModel @Inject constructor(
                 is Resource.Error -> HistoryUiState.Error(resourceHistory.exception?.message)
             }
         }
+
+    fun logout() {
+        viewModelScope.launch {
+            userRepository.setLoginStatus(false)
+        }
+    }
 }
