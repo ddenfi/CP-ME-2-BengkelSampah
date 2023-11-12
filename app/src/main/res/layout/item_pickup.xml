@@ -26,7 +26,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_pick_up" />
+                    android:src="@drawable/img_companylogo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -43,9 +43,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_pick_up"
+                        android:drawableStart="@drawable/ic_distance"
                         android:drawablePadding="8dp"
-                        tools:text="Km" />
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        tools:text="3 Km" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -159,9 +161,10 @@
                     <TextView
                         style="@style/TextAppearance.Material3.TitleLarge"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_pick_up"
+                        android:layout_height="match_parent"
+                        android:drawableStart="@drawable/ic_weight"
                         android:drawablePadding="8dp"
+                        android:gravity="center"
                         android:text="10 Kg"
                         android:textStyle="bold" />
 
@@ -184,7 +187,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
+                        android:drawableTint="?attr/colorPrimary"
                         android:text="PickUp"
+                        android:gravity="center"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_pick_up" />
                 </LinearLayout>

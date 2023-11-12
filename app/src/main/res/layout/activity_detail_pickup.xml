@@ -47,8 +47,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Open With"
-                    android:drawableEnd="@drawable/ic_pick_up"
+                    android:drawableEnd="@drawable/ic_map"
                     android:drawablePadding="8dp"
+                    android:drawableTint="?attr/colorPrimary"
+                    android:gravity="center"
                     style="@style/TextAppearance.Material3.LabelMedium"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -77,7 +79,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_pick_up"
+                    android:drawableStart="@drawable/ic_distance"
+                    android:textStyle="bold"
+                    android:gravity="center"
                     android:drawablePadding="8dp"
                     android:text="3 Km" />
 
@@ -250,7 +254,8 @@
                         android:layout_marginTop="4dp"
                         android:textStyle="bold"
                         android:text="8 Kg"
-                        android:drawableStart="@drawable/ic_pick_up"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/ic_weight"
                         android:drawablePadding="8dp"
                         style="@style/TextAppearance.Material3.BodyMedium"/>
                 </LinearLayout>
@@ -269,7 +274,8 @@
                         android:layout_marginTop="4dp"
                         android:text="Rp 80.000"
                         android:textStyle="bold"
-                        android:drawableStart="@drawable/ic_pick_up"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/ic_money"
                         android:drawablePadding="8dp"
                         style="@style/TextAppearance.Material3.BodyMedium"/>
                 </LinearLayout>
