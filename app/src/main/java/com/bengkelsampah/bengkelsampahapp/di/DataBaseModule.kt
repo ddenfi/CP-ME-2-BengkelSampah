@@ -18,7 +18,7 @@ object DataBaseModule {
     @Singleton
     fun providesBsDatabase(@ApplicationContext context: Context): BsDatabase = Room.databaseBuilder(
         context, BsDatabase::class.java, "bs-database"
-    ).build()
+    ).createFromAsset("database/test-db.db").build()
 
     @Provides
     fun providesKeranjangkuDao(

@@ -13,6 +13,6 @@ data class UserWasteEntity(
     @ColumnInfo("name")
     val name: String,
 
-    @ColumnInfo("amout")
+    @ColumnInfo("amount")
     val amount: Double,
 )

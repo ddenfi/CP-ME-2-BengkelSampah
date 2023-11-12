@@ -1,6 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
-enum class WasteUnit (val value:String){
-    KG("Kilogram"),
-    PCS("Pieces")
+enum class WasteUnit(val value: String, val abbreviaton: String) {
+    KG("Kilogram", "Kg"),
+    PCS("Pieces", "Pcs")
 }

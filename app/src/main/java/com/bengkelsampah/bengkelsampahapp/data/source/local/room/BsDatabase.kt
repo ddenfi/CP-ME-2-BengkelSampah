@@ -8,7 +8,7 @@ import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.UserWasteEnti
 @Database(
     entities = [UserWasteEntity::class] ,
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class BsDatabase:RoomDatabase() {
     abstract fun keranjangkuDao():KeranjangkuDao

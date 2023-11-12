@@ -27,9 +27,8 @@
             android:name=".ui.pickupwaste.PickupActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.StartingActivity"
-            android:exported="false"
-            android:theme="@style/Theme.BengkelSampahApp.Splash" />
+            android:name=".ui.driver.DriverMainActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
             android:exported="false" />
@@ -61,8 +60,9 @@
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.driver.DriverMainActivity"
-            android:exported="true">
+            android:name=".ui.StartingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.BengkelSampahApp.Splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
