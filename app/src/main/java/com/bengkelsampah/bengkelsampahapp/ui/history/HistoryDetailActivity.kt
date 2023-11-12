@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyWaste
+import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,7 +69,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpDetailPage(history: DummyHistoryData) {
+    private fun setUpDetailPage(history: HistoryModel) {
         historyDetailBinding.apply {
             tvStatus.text = history.status
             tvAgentName.text = history.agent
@@ -168,7 +168,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpWasteSold(waste: List<DummyWaste>) {
+    private fun setUpWasteSold(waste: List<WasteSoldModel>) {
         val wasteSoldAdapter = WasteSoldAdapter()
 
         historyDetailBinding.rvWasteSold.apply {
