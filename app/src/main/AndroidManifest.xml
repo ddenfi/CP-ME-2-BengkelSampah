@@ -17,9 +17,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.pickupwaste.DetailPickupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pickupwaste.PickupActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.StartingActivity"
             android:exported="false"
-            android:theme="@style/Theme.BengkelSampahApp.Splash"/>
+            android:theme="@style/Theme.BengkelSampahApp.Splash" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
             android:exported="false" />

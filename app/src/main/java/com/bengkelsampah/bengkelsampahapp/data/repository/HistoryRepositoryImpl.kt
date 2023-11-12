@@ -15,7 +15,7 @@ class HistoryRepositoryImpl @Inject constructor() : HistoryRepository {
     }
 
     override fun getHistoryById(id: Int): Flow<DummyHistoryData> = flow {
-        delay(5000)
+        delay(2000)
         emit(DummyData.generateDummyData()[id])
     }
 }

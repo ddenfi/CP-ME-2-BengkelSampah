@@ -1,8 +1,10 @@
 package com.bengkelsampah.bengkelsampahapp.di
 
+import com.bengkelsampah.bengkelsampahapp.data.repository.DriverHistoryRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.HistoryRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.NewsRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.UserRepositoryImpl
+import com.bengkelsampah.bengkelsampahapp.domain.repository.DriverHistoryRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.HistoryRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.NewsRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
@@ -31,5 +33,10 @@ interface DataModule {
     fun bindsHistoryRepository(
         historyRepositoryImpl: HistoryRepositoryImpl = HistoryRepositoryImpl()
     ): HistoryRepository
+
+    @Binds
+    fun bindsDriverHistoryRepository(
+        driverHistoryRepository: DriverHistoryRepositoryImpl = DriverHistoryRepositoryImpl()
+    ): DriverHistoryRepository
 
 }
