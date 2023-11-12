@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.main.screen
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import androidx.fragment.app.activityViewModels
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentAccountScreenBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeScreenBinding
+import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.PartnerActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
+import com.bengkelsampah.bengkelsampahapp.ui.profile.EditProfileActivity
 
 
 class AccountScreenFragment : Fragment() {
@@ -25,12 +28,21 @@ class AccountScreenFragment : Fragment() {
     ): View {
         _binding = FragmentAccountScreenBinding.inflate(layoutInflater)
 
+        navigateToEditProfile()
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun navigateToEditProfile() {
+        binding.btnAccountEdit.setOnClickListener {
+            val intent = Intent(activity, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
