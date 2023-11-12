@@ -1,14 +1,19 @@
 package com.bengkelsampah.bengkelsampahapp.data.repository
 
+import com.bengkelsampah.bengkelsampahapp.data.source.local.PreferenceDataStore
 import com.bengkelsampah.bengkelsampahapp.domain.model.UserDataModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserPreferencesDataModel
 import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class UserRepositoryImpl :UserRepository {
+class UserRepositoryImpl @Inject constructor(
+    private val preferenceDataStore: PreferenceDataStore
+) : UserRepository {
     /**
      * Get data from dummy due API still in development
      */
@@ -17,7 +22,23 @@ class UserRepositoryImpl :UserRepository {
         emit(UserDataModel.dummyData)
     }
 
+    override val userPreferencesData: Flow<UserPreferencesDataModel> =
+        preferenceDataStore.userPreferencesData
+
+    override val loginStatus: Flow<Boolean> = preferenceDataStore.userPreferencesData
+        .map { userPreferencesData ->
+            userPreferencesData.isLogin
+        }
+
     override fun updateUser(data: UserDataModel) {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun setLoginStatus(isLogin: Boolean) {
+        preferenceDataStore.setLoginStatus(isLogin)
+    }
+
+    override suspend fun setShouldShowOnboard(shouldShowOnboard: Boolean) {
+        preferenceDataStore.setShouldShowOnboard(shouldShowOnboard)
     }
 }

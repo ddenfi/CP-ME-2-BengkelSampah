@@ -2,12 +2,15 @@ package com.bengkelsampah.bengkelsampahapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import cn.pedant.SweetAlert.SweetAlertDialog
+import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityLoginBinding
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
@@ -35,7 +38,9 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 viewModel.login(email, password)
             } else {
-                Toast.makeText(this, "Email dan password harus diisi!", Toast.LENGTH_SHORT).show()
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText(getString(R.string.all_login_field_must_be_filled))
+                    .show()
             }
         }
     }
@@ -46,12 +51,27 @@ class LoginActivity : AppCompatActivity() {
     private fun observeLoginResult() {
         viewModel.loginSuccess.observe(this) { loginSuccess ->
             if (loginSuccess) {
-                Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                    .setTitleText(getString(R.string.login_successful))
+
+                dialog.setConfirmClickListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    dialog.dismiss()
+                }
+
+                dialog.setOnDismissListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                dialog.show()
             } else {
-                Toast.makeText(this, "Email atau password salah", Toast.LENGTH_SHORT).show()
+                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText(getString(R.string.login_invalid))
+                    .show()
             }
         }
     }

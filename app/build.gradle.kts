@@ -87,4 +87,22 @@ dependencies {
 
     //facebook shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    //sweet alert dialog
+    implementation("com.github.f0ris.sweetalert:library:1.6.2")
+
+    //itext
+    implementation("com.itextpdf:itext7-core:7.1.13")
+
+    //datastore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    //viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    //viewpager indiator
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
+    //splash screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }

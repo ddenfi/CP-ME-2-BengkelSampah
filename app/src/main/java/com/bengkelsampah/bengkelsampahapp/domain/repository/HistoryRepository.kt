@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface HistoryRepository {
     fun getActiveTransaction(): Flow<List<DummyHistoryData>>
 
+    fun getHistoryById(id: Int): Flow<DummyHistoryData>
 }

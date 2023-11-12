@@ -12,9 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -39,6 +37,12 @@ class MainViewModel @Inject constructor(
         initialValue = NewsUiState.Loading
     )
 
+    val historyUiState = historyUiState().stateIn(
+        viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = HistoryUiState.Loading
+    )
+
     private fun newsUiState(): Flow<NewsUiState> =
         newsRepository.getNews().asResource().map { resourceNews ->
             when (resourceNews) {
@@ -54,4 +58,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    private fun historyUiState(): Flow<HistoryUiState> =
+        historyRepository.getActiveTransaction().asResource().map { resourceHistory ->
+            when (resourceHistory) {
+                is Resource.Success -> HistoryUiState.Success(resourceHistory.data)
+                is Resource.Loading -> HistoryUiState.Loading
+                is Resource.Error -> HistoryUiState.Error(resourceHistory.exception?.message)
+            }
+        }
 }
