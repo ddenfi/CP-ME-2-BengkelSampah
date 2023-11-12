@@ -4,19 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="35dp"
     tools:context=".ui.profile.ProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/top_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_light_primary"
+            android:minHeight="?attr/actionBarSize"
+            app:title="Akun"
+            app:titleCentered="true"
+            app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
         android:id="@+id/iv_account_profile"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:clipToOutline="true"
+        android:layout_marginTop="35dp"
         android:outlineProvider="background"
         android:background="@drawable/rounded_button_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -59,31 +78,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_account_email" />
 
-
-    <Button
-        android:id="@+id/btn_account_edit"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/group_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="15dp"
-        android:text="@string/Edit_Account"
-        app:icon="@drawable/edit_account"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/tv_account_phoneNumber" />
+        android:padding="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_phoneNumber"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/btn_account_logout"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="15dp"
-        android:backgroundTint="@color/md_theme_light_tertiary"
-        android:text="@string/Log_Out"
-        app:icon="@drawable/logout"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/tv_account_phoneNumber" />
+        <Button
+            android:id="@+id/btn_account_edit"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="@string/Edit_Account"
+            app:icon="@drawable/edit_account"/>
+
+        <Button
+            android:id="@+id/btn_account_logout"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:backgroundTint="@color/md_theme_light_tertiary"
+            android:text="@string/Log_Out"
+            app:icon="@drawable/logout"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <View
         android:id="@+id/horizontalLine"
@@ -92,49 +117,40 @@
         android:background="@color/md_theme_light_outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        app:layout_constraintTop_toBottomOf="@id/group_button"/>
 
-    <TextView
-        android:id="@+id/tv_account_privacyPolicy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/privacy_policy"
-        android:textColor="@color/md_theme_light_onSecondaryContainer"
-        app:drawableStartCompat="@drawable/privacy_policy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
-
-    <TextView
-        android:id="@+id/tv_account_helpCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/help_center"
-        android:textColor="@color/md_theme_light_onSecondaryContainer"
-        app:drawableStartCompat="@drawable/help_center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_account_privacyPolicy" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/list_menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        android:padding="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontalLine">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="320dp" />
+        <TextView
+            android:id="@+id/tv_account_privacyPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/md_theme_light_onSecondaryContainer"
+            app:drawableStartCompat="@drawable/privacy_policy" />
+
+        <TextView
+            android:id="@+id/tv_account_helpCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/help_center"
+            android:textColor="@color/md_theme_light_onSecondaryContainer"
+            app:drawableStartCompat="@drawable/help_center" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
