@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentAccountScreenBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeScreenBinding
+import com.bengkelsampah.bengkelsampahapp.ui.auth.LoginActivity
 import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.PartnerActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.bengkelsampah.bengkelsampahapp.ui.profile.EditProfileActivity
@@ -29,6 +30,7 @@ class AccountScreenFragment : Fragment() {
         _binding = FragmentAccountScreenBinding.inflate(layoutInflater)
 
         navigateToEditProfile()
+        logout()
 
         return binding.root
     }
@@ -41,6 +43,15 @@ class AccountScreenFragment : Fragment() {
     private fun navigateToEditProfile() {
         binding.btnAccountEdit.setOnClickListener {
             val intent = Intent(activity, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun logout() {
+        binding.btnAccountLogout.setOnClickListener {
+            viewModel.logout()
+            val intent = Intent(activity, LoginActivity::class.java)
+            requireActivity().finish()
             startActivity(intent)
         }
     }
