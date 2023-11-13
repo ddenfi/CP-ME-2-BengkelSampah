@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.jualsampah.WasteBoxActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.onboarding.OnboardingActivity"
             android:exported="false" />
         <activity
@@ -42,7 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.StartingActivity"
             android:exported="true"
