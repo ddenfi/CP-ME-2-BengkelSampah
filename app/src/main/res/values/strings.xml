@@ -16,7 +16,7 @@
     <string name="body_helpcenter">Kami ingin memberitahukan bahwa saat ini kami lebih memilih menerima dan menangani pertanyaan serta permintaan melalui layanan WhatsApp kami. Kami percaya bahwa ini akan membantu kami memberikan dukungan yang lebih efisien dan responsif kepada pelanggan kami.</string>
     <string name="whatsapp_button">Hubungi Kami Melalui WhatsApp</string>
     <string name="save_edited_button_profile">Simpan</string>
-    
+
     <string name="name">Nama</string>
     <string name="name_hint">Masukkan nama lengkap kamu …</string>
     <string name="email">Email</string>
@@ -44,6 +44,11 @@
     <string name="reset_password">Kirim link reset password</string>
     <string name="reset_password_successful">Link reset password telah dikirimkan melalui email</string>
     <string name="all_forgot_password_field_must_be_filled">Email harus diisi!</string>
+
+    <!-- Form Order -->
+    <string name="form_order">Form Order</string>
+    <string name="pick_up_address_fo">Alamat Penjemputan</string>
+
 
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
@@ -131,4 +136,5 @@
 
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <string name="title_activity_form_order">FormOrderActivity</string>
 </resources>
