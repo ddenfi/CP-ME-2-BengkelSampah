@@ -10,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityAddWasteBinding
+import com.bengkelsampah.bengkelsampahapp.databinding.DialogAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteTypeAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -84,6 +86,40 @@ class AddWasteActivity : AppCompatActivity() {
     }
 
     private fun adapterOnClick(wasteType: WasteModel) {
-        Toast.makeText(this, wasteType.name, Toast.LENGTH_SHORT).show()
+        val dialogBinding = DialogAddWasteBinding.inflate(layoutInflater)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setCancelable(false)
+            .setView(dialogBinding.root)
+            .create()
+
+        dialogBinding.apply {
+            tvDialogWasteName.text = wasteType.name
+            tvDialogWasteWeight.text = getString(R.string.initial_weight)
+            tvDialogPricePerUnit.text = getString(
+                R.string.price_per_unit_value,
+                wasteType.pricePerUnit.toString(),
+                wasteType.unit
+            )
+
+            chipDialogAdd.setOnClickListener {
+                val newValue = tvDialogWasteWeight.text.toString().toInt() + 1
+                tvDialogWasteWeight.text = newValue.toString()
+            }
+
+            chipDialogMinus.setOnClickListener {
+                val newValue = tvDialogWasteWeight.text.toString().toInt() - 1
+                tvDialogWasteWeight.text = newValue.toString()
+            }
+
+            btnCloseDialog.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            btnDilaogAdd.setOnClickListener {
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
     }
 }
