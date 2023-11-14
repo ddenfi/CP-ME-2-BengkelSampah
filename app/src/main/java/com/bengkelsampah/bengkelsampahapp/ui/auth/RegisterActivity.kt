@@ -28,11 +28,11 @@ class RegisterActivity : AppCompatActivity() {
     private fun performRegister() {
         binding.btnRegisterRegister.setOnClickListener {
             val name = binding.tietNameRegister.text.toString()
-            val email = binding.tietEmailRegister.text.toString()
+            val phoneNumber = binding.tietPhoneNumberRegister.text.toString()
             val password = binding.tietPasswordRegister.text.toString()
 
-            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.register(name, email, password)
+            if (name.isNotEmpty() && phoneNumber.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.register(name, phoneNumber, password)
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText(getString(R.string.all_register_field_must_be_filled))

@@ -32,11 +32,11 @@ class LoginActivity : AppCompatActivity() {
      */
     private fun performLogin() {
         binding.btnLoginLogin.setOnClickListener {
-            val email = binding.tietEmailLogin.text.toString()
+            val phoneNumber = binding.tietPhoneNumberLogin.text.toString()
             val password = binding.tietPasswordLogin.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.login(email, password)
+            if (phoneNumber.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.login(phoneNumber, password)
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText(getString(R.string.all_login_field_must_be_filled))

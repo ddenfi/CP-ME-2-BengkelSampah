@@ -11,7 +11,7 @@ class RegisterViewModel : ViewModel() {
     /**
      * Check register success value
      */
-    fun register(name: String, email: String, password: String) {
+    fun register(name: String, phoneNumber: String, password: String) {
         _registerSuccess.value = true
     }
 }
