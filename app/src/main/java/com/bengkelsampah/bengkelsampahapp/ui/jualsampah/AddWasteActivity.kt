@@ -3,6 +3,7 @@ package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -43,11 +44,14 @@ class AddWasteActivity : AppCompatActivity() {
             viewModel.getWasteTypes().collect { addWasteUiState ->
                 when (addWasteUiState) {
                     is AddWasteUiState.Success -> {
+                        binding.rvWasteType.visibility = View.VISIBLE
+                        binding.shimmerWasteType.visibility = View.GONE
                         setUpWasteType(addWasteUiState.wasteType)
                     }
 
                     is AddWasteUiState.Loading -> {
-
+                        binding.shimmerWasteType.visibility = View.VISIBLE
+                        binding.rvWasteType.visibility = View.GONE
                     }
 
                     is AddWasteUiState.Error -> {
