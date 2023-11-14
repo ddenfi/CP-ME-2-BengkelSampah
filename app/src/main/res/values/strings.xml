@@ -70,6 +70,7 @@
     <string name="transaction_downloaded">Transaksi berhasil disimpan</string>
     <string name="transaction_download_failed">Trasanksi gagal disimpan</string>
     <string name="idr">Rp %d</string>
+    <string name="history_empty">Tidak Ada Riwayat Transaksi</string>
 
     <string name="date">1 Oktober 2023</string>
     <string name="agent_name">Nama Agen</string>

@@ -83,15 +83,22 @@ class HistoryScreenFragment : Fragment() {
                 when (historyUiState) {
                     is HistoryUiState.Success -> {
                         binding.shimmerHistory.visibility = View.GONE
-                        binding.rvHistory.visibility = View.VISIBLE
-                        binding.rvHistory.apply {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = historyAdapter
+
+                        if (historyUiState.history.isEmpty()) {
+                            binding.tvHistoryEmpty.visibility = View.VISIBLE
+                        } else {
+                            binding.tvHistoryEmpty.visibility = View.GONE
+                            binding.rvHistory.visibility = View.VISIBLE
+                            binding.rvHistory.apply {
+                                layoutManager = LinearLayoutManager(context)
+                                adapter = historyAdapter
+                            }
+                            historyAdapter.submitList(historyUiState.history)
                         }
-                        historyAdapter.submitList(historyUiState.history)
                     }
 
                     is HistoryUiState.Loading -> {
+                        binding.tvHistoryEmpty.visibility = View.GONE
                         binding.rvHistory.visibility = View.GONE
                         binding.shimmerHistory.visibility = View.VISIBLE
                     }
