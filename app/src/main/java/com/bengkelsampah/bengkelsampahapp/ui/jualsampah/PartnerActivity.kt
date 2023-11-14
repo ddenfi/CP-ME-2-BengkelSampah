@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.GetPartnerItem
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerDummyData
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityPartnerBinding
+import com.bengkelsampah.bengkelsampahapp.ui.adapter.PartnerAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 
 class PartnerActivity : AppCompatActivity() {
@@ -35,8 +37,10 @@ class PartnerActivity : AppCompatActivity() {
     }
 
     private fun setUpPartner(partner: List<GetPartnerItem>) {
-        val partnerAdapter = PartnerAdapter { _, _ ->
-
+        val partnerAdapter = PartnerAdapter { uuid, _ ->
+            val addWasteIntent = Intent(this, AddWasteActivity::class.java)
+            addWasteIntent.putExtra(AddWasteActivity.PARTNER_ID, uuid.toString())
+            startActivity(addWasteIntent)
         }
 
         binding.rvMitra.apply {

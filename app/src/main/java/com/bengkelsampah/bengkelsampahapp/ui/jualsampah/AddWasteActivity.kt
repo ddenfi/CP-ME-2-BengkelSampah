@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -32,6 +33,12 @@ class AddWasteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         getWasteType()
+
+        binding.fabWasteBox.setOnClickListener {
+            val wasteBoxIntent = Intent(this, WasteBoxActivity::class.java)
+            wasteBoxIntent.putExtra(WasteBoxActivity.PARTNER_ID, intent.getStringExtra(PARTNER_ID))
+            startActivity(wasteBoxIntent)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -121,5 +128,9 @@ class AddWasteActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    companion object {
+        const val PARTNER_ID = "partner_id"
     }
 }
