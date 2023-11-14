@@ -79,7 +79,7 @@
     <string name="waste_unit">kg</string>
     <string name="waste_price">1000</string>
 
-    <!-- cart -->
+    <!-- waste box -->
     <string name="waste_box_page">Keranjang Sampah</string>
     <string name="add">Tambah</string>
     <string name="minus">Kurang</string>
@@ -92,6 +92,7 @@
     <string name="price_value">Rp %d</string>
     <string name="price_per_unit_value">\@%s/%s</string>
     <string name="finish">Selesai</string>
+    <string name="add_waste_page">Tambah Sampah</string>
     <string name="search">Cari Sampah</string>
     <string name="waste_box">Kotak sampah</string>
 
