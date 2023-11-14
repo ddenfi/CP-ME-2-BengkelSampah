@@ -32,19 +32,18 @@
             android:layout_height="match_parent"
             android:focusableInTouchMode="true">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_status_filter"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_status_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:drawableEnd="@drawable/ic_arrow_down"
-                android:textColor="@color/black"
-                app:iconPadding="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/all_status" />
+                android:layout_marginEnd="16dp"
+                android:checkable="false"
+                android:layoutDirection="rtl"
+                android:text="@string/all_status"
+                app:chipIcon="@drawable/ic_arrow_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_history"
@@ -53,7 +52,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_status_filter"
+                app:layout_constraintTop_toBottomOf="@+id/chip_status_filter"
                 tools:listitem="@layout/item_history"
                 tools:visibility="gone" />
 
@@ -69,7 +68,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_status_filter" />
+                app:layout_constraintTop_toBottomOf="@+id/chip_status_filter" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer_history"
@@ -78,7 +77,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_status_filter">
+                app:layout_constraintTop_toBottomOf="@+id/chip_status_filter">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"

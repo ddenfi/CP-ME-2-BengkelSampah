@@ -35,10 +35,9 @@ class HistoryScreenFragment : Fragment() {
     ): View {
         _binding = FragmentHistoryScreenBinding.inflate(inflater, container, false)
 
-        binding.btnStatusFilter.text = getString(R.string.all_status)
+        binding.chipStatusFilter.text = getString(R.string.all_status)
         setUpFilterBottomSheet()
         setUpHistoryList()
-
 
         return binding.root
     }
@@ -56,20 +55,20 @@ class HistoryScreenFragment : Fragment() {
 
         val filterChipGroup = bottomSheetView.findViewById<ChipGroup>(R.id.chip_group_status)
 
-        binding.btnStatusFilter.setOnClickListener {
+        binding.chipStatusFilter.setOnClickListener {
             bottomSheetDialog.show()
             filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
                 val checkedId = filterChipGroup.checkedChipId
                 if (checkedId != View.NO_ID) {
                     val checkedText = bottomSheetView.findViewById<Chip>(checkedId).text.toString()
-                    binding.btnStatusFilter.text = checkedText
+                    binding.chipStatusFilter.text = checkedText
                 }
                 bottomSheetDialog.dismiss()
             }
 
             bottomSheetView.findViewById<Button>(R.id.btn_reset_filter).setOnClickListener {
                 filterChipGroup.clearCheck()
-                binding.btnStatusFilter.text = getString(R.string.all_status)
+                binding.chipStatusFilter.text = getString(R.string.all_status)
                 bottomSheetDialog.dismiss()
             }
         }
