@@ -19,6 +19,7 @@ import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.HistoryUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
+import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -91,6 +92,12 @@ class HistoryScreenFragment : Fragment() {
                             binding.rvHistory.apply {
                                 layoutManager = LinearLayoutManager(context)
                                 adapter = historyAdapter
+                                addItemDecoration(
+                                    MarginItemDecoration(
+                                        resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                                        resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
+                                    )
+                                )
                             }
                             historyAdapter.submitList(historyUiState.history)
                         }
