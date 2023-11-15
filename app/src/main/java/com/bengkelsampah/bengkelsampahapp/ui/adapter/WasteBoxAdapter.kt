@@ -32,7 +32,7 @@ class WasteBoxAdapter : ListAdapter<WasteSoldModel, WasteBoxAdapter.WasteBoxView
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                wasteSold.waste.pricePerUnit * wasteSold.amount
+                WasteSoldModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,

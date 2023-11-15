@@ -21,4 +21,13 @@ class WasteBoxViewModel @Inject constructor(
                 is Resource.Error -> WasteBoxUiState.Error(resourceWasteBox.exception?.message)
             }
         }
+
+    fun getWasteTypes(): Flow<AddWasteUiState> =
+        wasteBoxRepository.getWasteTypes().asResource().map { resourceAddWaste ->
+            when (resourceAddWaste) {
+                is Resource.Success -> AddWasteUiState.Success(resourceAddWaste.data)
+                is Resource.Loading -> AddWasteUiState.Loading
+                is Resource.Error -> AddWasteUiState.Error(resourceAddWaste.exception?.message)
+            }
+        }
 }

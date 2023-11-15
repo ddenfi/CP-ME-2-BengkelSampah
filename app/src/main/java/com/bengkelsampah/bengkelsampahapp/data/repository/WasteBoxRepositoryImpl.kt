@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.data.repository
 
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
 import com.bengkelsampah.bengkelsampahapp.domain.repository.WasteBoxRepository
 import kotlinx.coroutines.delay
@@ -11,5 +12,10 @@ class WasteBoxRepositoryImpl @Inject constructor() : WasteBoxRepository {
     override fun getWasteBoxItems(): Flow<List<WasteSoldModel>> = flow {
         delay(2000)
         emit(WasteSoldModel.cartDummyData)
+    }
+
+    override fun getWasteTypes(): Flow<List<WasteModel>> = flow {
+        delay(2000)
+        emit(WasteModel.wasteDummyData)
     }
 }

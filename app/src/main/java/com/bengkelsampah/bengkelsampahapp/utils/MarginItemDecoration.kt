@@ -2,6 +2,7 @@ package com.bengkelsampah.bengkelsampahapp.utils
 
 import android.graphics.Rect
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class MarginItemDecoration(
     private val verticalSpaceSize: Int,
-    private val horizontalSpaceSize: Int
+    private val horizontalSpaceSize: Int,
+    private val spanCount: Int = 1,
+    private val orientation: Int = GridLayoutManager.VERTICAL,
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -18,10 +21,21 @@ class MarginItemDecoration(
         state: RecyclerView.State
     ) {
         with(outRect) {
-            if (parent.getChildAdapterPosition(view) == 0) {
-                top = verticalSpaceSize
+            if (orientation == GridLayoutManager.VERTICAL) {
+                if (parent.getChildAdapterPosition(view) < spanCount) {
+                    top = verticalSpaceSize
+                }
+                if (parent.getChildAdapterPosition(view) % spanCount == 0) {
+                    left = horizontalSpaceSize
+                }
+            } else {
+                if (parent.getChildAdapterPosition(view) < spanCount) {
+                    left = horizontalSpaceSize
+                }
+                if (parent.getChildAdapterPosition(view) % spanCount == 0) {
+                    top = verticalSpaceSize
+                }
             }
-            left = horizontalSpaceSize
             right = horizontalSpaceSize
             bottom = verticalSpaceSize
         }

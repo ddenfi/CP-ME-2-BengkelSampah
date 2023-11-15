@@ -31,6 +31,14 @@ class WasteBoxActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         gettingData()
+
+        binding.btnAdd.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnFinish.setOnClickListener {
+
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -103,5 +111,9 @@ class WasteBoxActivity : AppCompatActivity() {
         }
 
         wasteBoxAdapter.submitList(wasteBoxItems)
+    }
+
+    companion object {
+        const val PARTNER_ID = "partner_id"
     }
 }
