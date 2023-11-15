@@ -6,7 +6,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityDriverMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DriverMainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityDriverMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {

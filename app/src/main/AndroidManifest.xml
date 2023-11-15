@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -21,13 +22,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.pickupwaste.PickupFromActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.pickupwaste.DetailPickupActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.pickupwaste.PickupActivity"
-            android:exported="false" />
+            android:name=".ui.StartingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BengkelSampahApp.Splash" />
         <activity
-            android:name=".ui.driver.DriverMainActivity"
+            android:name=".ui.pickupwaste.PickupActivity"
             android:exported="false" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
@@ -60,9 +65,8 @@
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.StartingActivity"
-            android:exported="true"
-            android:theme="@style/Theme.BengkelSampahApp.Splash" >
+            android:name=".ui.driver.DriverMainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

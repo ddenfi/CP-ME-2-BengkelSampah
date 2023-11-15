@@ -7,7 +7,7 @@
     tools:context=".ui.pickupwaste.DetailPickupActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/ctn_pickup_detail_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_green_color"
@@ -18,21 +18,24 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/tv_pickup_detail_status"
             style="@style/TextAppearance.Material3.LabelMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sedang Dalam Penjemputan" />
     </LinearLayout>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_pickup_detail_openWith"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,14 +47,14 @@
                 android:layout_margin="8dp">
 
                 <TextView
+                    style="@style/TextAppearance.Material3.LabelMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Open With"
                     android:drawableEnd="@drawable/ic_map"
                     android:drawablePadding="8dp"
                     android:drawableTint="?attr/colorPrimary"
                     android:gravity="center"
-                    style="@style/TextAppearance.Material3.LabelMedium"/>
+                    android:text="Open With" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -66,6 +69,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/iv_pickup_detail_customerPhoto"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
@@ -77,15 +81,17 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_pickup_detail_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_distance"
-                    android:textStyle="bold"
-                    android:gravity="center"
                     android:drawablePadding="8dp"
-                    android:text="3 Km" />
+                    android:gravity="center"
+                    android:text="3 Km"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_pickup_detail_customerName"
                     style="@style/TextAppearance.Material3.TitleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,6 +106,7 @@
                     tools:text="Jl. Kesana Kemari No. 12v3, Kec. A, Kab. B" />
 
                 <TextView
+                    android:id="@+id/tv_pickup_detail_phoneNumber"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -144,8 +151,8 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:text="Edit" />
+                    android:text="Edit"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,35 +161,41 @@
                 android:layout_marginTop="16dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="textStarpick"
                     android:text="Nama Sampah" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.4"
+                    android:textAlignment="center"
                     android:text="Satuan" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
+                    android:textAlignment="center"
                     android:text="Harga Satuan" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="center"
                     android:text="Harga" />
             </LinearLayout>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_pickup_detail_wasteList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:listitem="@layout/item_daftar_sampah" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_waste_list" />
         </LinearLayout>
 
         <LinearLayout
@@ -204,6 +217,7 @@
                 android:layout_marginTop="16dp">
 
                 <TextView
+                    android:id="@+id/tv_pickup_detail_paymentMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
@@ -225,59 +239,68 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:paddingHorizontal="24dp"
-            android:paddingVertical="16dp"
-            android:orientation="vertical">
+            android:paddingVertical="16dp">
+
             <TextView
+                style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estimasi Penjualan"
-                style="@style/TextAppearance.Material3.TitleMedium"/>
+                android:text="Estimasi Penjualan" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:orientation="vertical">
+
                     <TextView
+                        style="@style/TextAppearance.Material3.LabelSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Berat"
-                        style="@style/TextAppearance.Material3.LabelSmall"/>
+                        android:text="Total Berat" />
+
                     <TextView
+                        android:id="@+id/tv_pickup_detail_weight"
+                        style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:textStyle="bold"
-                        android:text="8 Kg"
-                        android:gravity="center"
                         android:drawableStart="@drawable/ic_weight"
                         android:drawablePadding="8dp"
-                        style="@style/TextAppearance.Material3.BodyMedium"/>
+                        android:gravity="center"
+                        android:text="8 Kg"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
+                        style="@style/TextAppearance.Material3.LabelSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Harga"
-                        style="@style/TextAppearance.Material3.LabelSmall"/>
+                        android:text="Total Harga" />
+
                     <TextView
+                        android:id="@+id/tv_pickup_detail_sum"
+                        style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Rp 80.000"
-                        android:textStyle="bold"
-                        android:gravity="center"
                         android:drawableStart="@drawable/ic_money"
                         android:drawablePadding="8dp"
-                        style="@style/TextAppearance.Material3.BodyMedium"/>
+                        android:gravity="center"
+                        android:text="Rp 80.000"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -286,7 +309,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
-                android:text="Pick Up"/>
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="Pick Up" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
