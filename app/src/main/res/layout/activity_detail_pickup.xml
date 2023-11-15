@@ -164,7 +164,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textAlignment="textStarpick"
+                    android:textAlignment="textStart"
                     android:text="Nama Sampah" />
 
                 <TextView
