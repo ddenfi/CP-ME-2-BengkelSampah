@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityLoginBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserRole
+import com.bengkelsampah.bengkelsampahapp.ui.driver.DriverMainActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,15 +51,25 @@ class LoginActivity : AppCompatActivity() {
      * Observe login result by view model
      */
     private fun observeLoginResult() {
+        val userRole = UserRole.DRIVER
         viewModel.loginSuccess.observe(this) { loginSuccess ->
             if (loginSuccess) {
                 val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText(getString(R.string.login_successful))
 
                 dialog.setConfirmClickListener {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    when (userRole){
+                        UserRole.CONSUMER -> {
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        UserRole.DRIVER -> {
+                            val intent = Intent(this, DriverMainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
                     dialog.dismiss()
                 }
 
