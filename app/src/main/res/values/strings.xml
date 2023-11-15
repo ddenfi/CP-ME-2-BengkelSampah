@@ -16,7 +16,7 @@
     <string name="body_helpcenter">Kami ingin memberitahukan bahwa saat ini kami lebih memilih menerima dan menangani pertanyaan serta permintaan melalui layanan WhatsApp kami. Kami percaya bahwa ini akan membantu kami memberikan dukungan yang lebih efisien dan responsif kepada pelanggan kami.</string>
     <string name="whatsapp_button">Hubungi Kami Melalui WhatsApp</string>
     <string name="save_edited_button_profile">Simpan</string>
-    
+
     <string name="name">Nama</string>
     <string name="name_hint">Masukkan nama lengkap kamu …</string>
     <string name="email">Email</string>
@@ -45,6 +45,7 @@
     <string name="reset_password_successful">Link reset password telah dikirimkan melalui email</string>
     <string name="all_forgot_password_field_must_be_filled">Email harus diisi!</string>
 
+    <!-- History -->
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
     <string name="in_process_status">Diproses</string>
@@ -77,6 +78,22 @@
     <string name="waste_amount">25</string>
     <string name="waste_unit">kg</string>
     <string name="waste_price">1000</string>
+
+    <!-- cart -->
+    <string name="waste_box_page">Keranjang Sampah</string>
+    <string name="add">Tambah</string>
+    <string name="minus">Kurang</string>
+    <string name="add_from_my_box">Dari Kotakku</string>
+    <string name="waste_box_empty">Kotak keranjang kosong.\nIsi kembali untuk dapat melanjutkan</string>
+    <string name="waste_sold_estimation">Estimasi Penjualan</string>
+    <string name="weight">Berat</string>
+    <string name="weight_estimation">Estimasi berat/kg</string>
+    <string name="price">Harga</string>
+    <string name="price_value">Rp %d</string>
+    <string name="price_per_unit_value">\@%s/%s</string>
+    <string name="finish">Selesai</string>
+    <string name="search">Cari Sampah</string>
+    <string name="waste_box">Kotak sampah</string>
 
     <string name="home">Home</string>
     <string name="history">Riwayat</string>

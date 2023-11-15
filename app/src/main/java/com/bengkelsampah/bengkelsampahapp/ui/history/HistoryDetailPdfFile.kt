@@ -2,7 +2,7 @@ package com.bengkelsampah.bengkelsampahapp.ui.history
 
 import android.content.Context
 import com.bengkelsampah.bengkelsampahapp.R
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
+import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
@@ -19,7 +19,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class HistoryDetailPdfFile {
-    fun generatePdfFile(context: Context, history: DummyHistoryData) {
+    fun generatePdfFile(context: Context, history: HistoryModel) {
         val fileDir = File(context.getExternalFilesDir(null), "Documents")
         if (!fileDir.exists()) fileDir.mkdirs()
 
@@ -34,7 +34,7 @@ class HistoryDetailPdfFile {
         doc.close()
     }
 
-    private fun pdfWasteSold(doc: Document, context: Context, history: DummyHistoryData) {
+    private fun pdfWasteSold(doc: Document, context: Context, history: HistoryModel) {
         doc.add(
             Paragraph(context.getString(R.string.waste_type))
                 .setTextAlignment(TextAlignment.CENTER)
@@ -46,10 +46,10 @@ class HistoryDetailPdfFile {
             .setWidth(UnitValue.createPercentValue(50f))
 
         for (waste in history.waste) {
-            val wasteName = waste.name
+            val wasteName = waste.waste.name
             val wasteAmount = waste.amount
-            val wasteUnit = waste.unit
-            val wastePricePerUnit = waste.pricePerUnit
+            val wasteUnit = waste.waste.unit
+            val wastePricePerUnit = waste.waste.pricePerUnit
 
             wasteSoldTable
                 .addCell(
@@ -60,7 +60,7 @@ class HistoryDetailPdfFile {
                 )
                 .addCell(
                     Cell()
-                        .add(Paragraph("${(wasteAmount * wastePricePerUnit).toInt()}"))
+                        .add(Paragraph("${(wasteAmount * wastePricePerUnit)}"))
                         .setTextAlignment(TextAlignment.RIGHT)
                         .setBorder(Border.NO_BORDER)
                         .setVerticalAlignment(VerticalAlignment.BOTTOM)
@@ -88,7 +88,7 @@ class HistoryDetailPdfFile {
         doc.add(wasteSoldTable)
     }
 
-    private fun pdfHeader(doc: Document, context: Context, history: DummyHistoryData) {
+    private fun pdfHeader(doc: Document, context: Context, history: HistoryModel) {
         val agentName = Paragraph(history.agent).setBold()
         val agentAddress = Paragraph(history.agentAddress)
         val agentPhone = Paragraph(context.getString(R.string.agent_phone, history.agentPhone))

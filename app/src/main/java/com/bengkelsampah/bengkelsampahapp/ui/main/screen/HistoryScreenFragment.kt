@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryScreenBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
+import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.HistoryUiState
@@ -104,7 +104,7 @@ class HistoryScreenFragment : Fragment() {
         }
     }
 
-    private fun adapterOnClick(history: DummyHistoryData) {
+    private fun adapterOnClick(history: HistoryModel) {
         val intent = Intent(this.requireContext(), HistoryDetailActivity::class.java)
         intent.putExtra(HistoryDetailActivity.HISTORY_ID, history.id)
         startActivity(intent)
