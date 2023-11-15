@@ -33,7 +33,8 @@ class WasteSoldAdapter : ListAdapter<WasteSoldModel, WasteSoldAdapter.WasteSoldV
             tvWasteAmount.text = waste.amount.toString()
             tvWasteUnit.text = waste.waste.unit
             tvWastePricePerUnit.text = waste.waste.pricePerUnit.toString()
-            tvWastePrice.text = (waste.amount * waste.waste.pricePerUnit).toString()
+            tvWastePrice.text =
+                WasteSoldModel.countSubtotal(waste.waste.pricePerUnit, waste.amount).toString()
         }
     }
 

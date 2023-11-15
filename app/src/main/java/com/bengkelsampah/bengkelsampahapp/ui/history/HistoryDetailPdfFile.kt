@@ -3,6 +3,7 @@ package com.bengkelsampah.bengkelsampahapp.ui.history
 import android.content.Context
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
@@ -60,7 +61,12 @@ class HistoryDetailPdfFile {
                 )
                 .addCell(
                     Cell()
-                        .add(Paragraph("${(wasteAmount * wastePricePerUnit)}"))
+                        .add(
+                            Paragraph(
+                                WasteSoldModel.countSubtotal(wastePricePerUnit, wasteAmount)
+                                    .toString()
+                            )
+                        )
                         .setTextAlignment(TextAlignment.RIGHT)
                         .setBorder(Border.NO_BORDER)
                         .setVerticalAlignment(VerticalAlignment.BOTTOM)

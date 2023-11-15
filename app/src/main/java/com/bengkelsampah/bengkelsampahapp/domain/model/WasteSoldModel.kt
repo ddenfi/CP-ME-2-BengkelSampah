@@ -39,5 +39,8 @@ data class WasteSoldModel(
                 amount = 2,
             )
         )
+
+        fun countSubtotal(wastePricePerUnit: Int, wasteAmount: Int) =
+            wastePricePerUnit * wasteAmount
     }
 }
