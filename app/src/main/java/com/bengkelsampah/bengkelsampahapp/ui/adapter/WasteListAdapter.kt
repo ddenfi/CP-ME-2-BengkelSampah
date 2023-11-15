@@ -31,11 +31,10 @@ class WasteListAdapter : ListAdapter<WasteModel, WasteListAdapter.OrderWasteView
         fun bind(item: WasteModel) {
             with(binding) {
                 itemListWasteName.text = item.name
-                itemListWasteAmount.text = item.amount.toString()
+                itemListWasteAmount.text = "2Kg"
                 itemListWasteSum.text = "2000"
                 itemListWastePricePerUnit.text = item.pricePerUnit.toString()
             }
-            Log.d("Adapter", "bind: Called")
         }
     }
 

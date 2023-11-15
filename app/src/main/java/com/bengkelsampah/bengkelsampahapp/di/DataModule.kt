@@ -40,12 +40,15 @@ interface DataModule {
     fun bindsWasteBoxRepository(
         wasteBoxRepositoryImpl: WasteBoxRepositoryImpl = WasteBoxRepositoryImpl()
     ): WasteBoxRepository
+
     @Binds
     fun bindsDriverHistoryRepository(
         driverHistoryRepository: DriverHistoryRepositoryImpl = DriverHistoryRepositoryImpl()
     ): DriverHistoryRepository
 
     @Binds
-    fun bindsPickupWasteRepository(pickupWasteRepository: PickupWasteRepositoryImpl = PickupWasteRepositoryImpl()): PickupWasteRepository
+    fun bindsPickupWasteRepository(
+        pickupWasteRepository: PickupWasteRepositoryImpl = PickupWasteRepositoryImpl()
+    ): PickupWasteRepository
 
 }
