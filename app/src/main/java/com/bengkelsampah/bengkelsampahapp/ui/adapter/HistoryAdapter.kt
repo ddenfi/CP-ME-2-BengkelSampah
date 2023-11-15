@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
+import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
 
-class HistoryAdapter(private val onClick: (DummyHistoryData) -> Unit) :
-    ListAdapter<DummyHistoryData, HistoryAdapter.HistoryViewHolder>(
-        object : DiffUtil.ItemCallback<DummyHistoryData>() {
+class HistoryAdapter(private val onClick: (HistoryModel) -> Unit) :
+    ListAdapter<HistoryModel, HistoryAdapter.HistoryViewHolder>(
+        object : DiffUtil.ItemCallback<HistoryModel>() {
             override fun areItemsTheSame(
-                oldItem: DummyHistoryData,
-                newItem: DummyHistoryData
+                oldItem: HistoryModel,
+                newItem: HistoryModel
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: DummyHistoryData,
-                newItem: DummyHistoryData
+                oldItem: HistoryModel,
+                newItem: HistoryModel
             ): Boolean {
                 return oldItem == newItem
             }
@@ -39,7 +39,7 @@ class HistoryAdapter(private val onClick: (DummyHistoryData) -> Unit) :
         private val tvTotal by lazy { binding.tvTotal }
         private val cardStatus by lazy { binding.cardStatus }
 
-        fun bind(history: DummyHistoryData) {
+        fun bind(history: HistoryModel) {
             tvPickUpDate.text = history.pickUpDate
             tvPickUpAddress.text = history.address
             tvOrderDate.text = history.date
