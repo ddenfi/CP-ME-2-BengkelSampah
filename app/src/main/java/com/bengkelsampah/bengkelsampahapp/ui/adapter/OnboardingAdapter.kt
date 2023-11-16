@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemOnboardingPageBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.OnboardingPageModel
+import com.bumptech.glide.Glide
 
 class OnboardingAdapter : RecyclerView.Adapter<OnboardingAdapter.OnboardingViewHolder>() {
 
@@ -14,7 +15,9 @@ class OnboardingAdapter : RecyclerView.Adapter<OnboardingAdapter.OnboardingViewH
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: OnboardingPageModel) {
             binding.apply {
-                ivItemOnboard.setImageResource(item.id)
+                Glide.with(itemView.context)
+                    .load(item.id)
+                    .into(ivItemOnboard)
                 tvItemOnboardTitle.text = item.title
                 tvItemOnboardDesc.text = item.desc
             }
