@@ -1,6 +1,5 @@
 package com.bengkelsampah.bengkelsampahapp.di
 
-import android.os.Build
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.network.ApiService
 import com.facebook.shimmer.BuildConfig
 import dagger.Module
@@ -16,7 +15,7 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "https://bengkelsampah.com/"
+    private const val BASE_URL = "https://bengkelsampahauth.cyclic.app/"
     private const val TIME_OUT: Long = 60
 
     @Provides
