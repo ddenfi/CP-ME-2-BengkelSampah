@@ -8,11 +8,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.GetPartnerItem
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityPartnerBinding
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.PartnerAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -57,7 +59,13 @@ class PartnerActivity : AppCompatActivity() {
                     }
 
                     is PartnerUiState.Error -> {
-
+                        SweetAlertDialogUtils.showSweetAlertDialog(
+                            this@PartnerActivity,
+                            partnerUiState.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
                     }
                 }
             }
