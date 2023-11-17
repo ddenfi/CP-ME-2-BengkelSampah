@@ -1,9 +1,11 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +17,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityOnboadingBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityPickupBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.PickupOrderAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -35,8 +38,17 @@ class PickupActivity : AppCompatActivity() {
 
     private fun setupView() {
         val pickupAdapter = PickupOrderAdapter()
-        binding.rvPickup.layoutManager = LinearLayoutManager(this)
-        binding.rvPickup.adapter = pickupAdapter
+
+        binding.rvPickup.apply {
+            layoutManager = LinearLayoutManager(this@PickupActivity)
+            adapter = pickupAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_16),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_24)
+                )
+            )
+        }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -44,10 +56,11 @@ class PickupActivity : AppCompatActivity() {
                     when (it) {
                         is Resource.Error -> TODO()
                         is Resource.Loading -> {
-                            Log.d("Pickup", "setupView: Loading")
+                            showLoading(true)
                         }
 
                         is Resource.Success -> {
+                            showLoading(false)
                             pickupAdapter.submitList(it.data)
                         }
                     }
@@ -62,5 +75,16 @@ class PickupActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (!isLoading) {
+            binding.rvPickup.visibility = View.VISIBLE
+            binding.ctnPickupShimmer.visibility = View.GONE
+        } else {
+            binding.rvPickup.visibility = View.GONE
+            binding.ctnPickupShimmer.visibility = View.VISIBLE
+        }
+
     }
 }

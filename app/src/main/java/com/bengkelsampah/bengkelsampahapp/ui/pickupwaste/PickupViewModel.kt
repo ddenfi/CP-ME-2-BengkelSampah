@@ -7,9 +7,11 @@ import com.bengkelsampah.bengkelsampahapp.data.source.asResource
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.domain.repository.PickupWasteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -29,5 +31,11 @@ class PickupViewModel @Inject constructor(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000), Resource.Loading()
         )
+
+    fun pickupOrder(): Flow<Resource<String>> = flow {
+        emit(Resource.Loading())
+        delay(1000)
+        emit(Resource.Success("Pickup Success"))
+    }
 
 }

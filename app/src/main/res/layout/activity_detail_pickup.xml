@@ -25,14 +25,220 @@
             android:text="Sedang Dalam Penjemputan" />
     </LinearLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/ctn_detailPickup_detailOrder_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/bg_shimmer_placeholder"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_shimmer_placeholder"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder"/>
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="24dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder"/>
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder"/>
+
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="16dp"
+                android:background="?attr/colorOutlineVariant"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/view">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/bg_shimmer_placeholder"/>
+
+                </LinearLayout>
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:columnCount="4">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="24dp"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                </GridLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_shimmer_placeholder"
+                    android:layout_marginBottom="8dp"/>
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/bg_shimmer_placeholder"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="visible"
+        android:id="@+id/ctn_detailPickup_detailOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/ctn_pickup_detail_status">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/btn_pickup_detail_openWith"
@@ -59,8 +265,6 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
-
-
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +321,6 @@
         </LinearLayout>
 
         <View
-
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -164,29 +367,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textAlignment="textStart"
-                    android:text="Nama Sampah" />
+                    android:text="Nama Sampah"
+                    android:textAlignment="textStart" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:textAlignment="center"
-                    android:text="Satuan" />
+                    android:text="Satuan"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:textAlignment="center"
-                    android:text="Harga Satuan" />
+                    android:text="Harga Satuan"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:text="Harga" />
+                    android:text="Harga"
+                    android:textAlignment="center" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -236,82 +439,159 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="16dp">
-
-            <TextView
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Estimasi Penjualan" />
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/ctn_detailPickup_actionMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp"
+                android:visibility="visible">
 
-                <LinearLayout
+                <TextView
+                    style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextAppearance.Material3.LabelSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Total Berat" />
-
-                    <TextView
-                        android:id="@+id/tv_pickup_detail_weight"
-                        style="@style/TextAppearance.Material3.BodyMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/ic_weight"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:text="8 Kg"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    android:text="Estimasi Penjualan" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp">
 
-                    <TextView
-                        style="@style/TextAppearance.Material3.LabelSmall"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Harga" />
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_pickup_detail_sum"
-                        style="@style/TextAppearance.Material3.BodyMedium"
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Berat" />
+
+                        <TextView
+                            android:id="@+id/tv_pickup_detail_weight"
+                            style="@style/TextAppearance.Material3.BodyMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:drawableStart="@drawable/ic_weight"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:text="8 Kg"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/ic_money"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:text="Rp 80.000"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Harga" />
+
+                        <TextView
+                            android:id="@+id/tv_pickup_detail_sum"
+                            style="@style/TextAppearance.Material3.BodyMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:drawableStart="@drawable/ic_money"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:text="Rp 80.000"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detailPickup_pickupOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="12dp"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:text="Pick Up" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/ctn_detailPickup_actionMenu_shimmer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="12dp"
-                android:backgroundTint="?attr/colorPrimary"
-                android:text="Pick Up" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="16dp">
+
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginVertical="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </FrameLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
