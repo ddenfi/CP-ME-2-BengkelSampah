@@ -96,11 +96,13 @@ class HomeScreenFragment : Fragment() {
                         when (newsUiState) {
                             is NewsUiState.Success -> {
                                 binding.homeNewsShimmer.visibility = View.GONE
+                                binding.rvHomeNews.visibility = View.VISIBLE
                                 newsAdapter.submitList(newsUiState.news)
                             }
 
                             is NewsUiState.Loading -> {
                                 binding.homeNewsShimmer.visibility = View.VISIBLE
+                                binding.rvHomeNews.visibility = View.GONE
                             }
 
                             is NewsUiState.Error -> {
