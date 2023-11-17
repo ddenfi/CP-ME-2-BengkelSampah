@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -22,8 +21,8 @@ import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
 import com.bengkelsampah.bengkelsampahapp.ui.moneybag.MoneyBagActivity
+import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -43,6 +42,12 @@ class HomeScreenFragment : Fragment() {
         binding.rvHomeNews.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_0)
+                )
+            )
         }
 
         navigation()
@@ -60,7 +65,8 @@ class HomeScreenFragment : Fragment() {
                         when (dashboardData) {
                             is DashboardUiState.Success -> {
                                 binding.tvHomeName.text = dashboardData.user.name
-                                binding.tvHomeBalance.text = getString(R.string.idr,dashboardData.user.balance)
+                                binding.tvHomeBalance.text =
+                                    getString(R.string.idr, dashboardData.user.balance)
                                 binding.apply {
                                     homeDashboard.visibility = View.VISIBLE
                                     homeMenuShimmer.stopShimmer()
@@ -97,8 +103,8 @@ class HomeScreenFragment : Fragment() {
                                 binding.homeNewsShimmer.visibility = View.VISIBLE
                             }
 
-                            is NewsUiState.Error ->{
-                                Log.d("Home",newsUiState.toString())
+                            is NewsUiState.Error -> {
+                                Log.d("Home", newsUiState.toString())
                             }
                         }
                     }
@@ -116,7 +122,7 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.btnHomeBankSampah.setOnClickListener {
-            val intent = Intent(activity,BankSampahActivity::class.java)
+            val intent = Intent(activity, BankSampahActivity::class.java)
             startActivity(intent)
         }
 
@@ -125,7 +131,7 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.btnHomeMoneyBag.setOnClickListener {
-            val intent = Intent(activity,MoneyBagActivity::class.java)
+            val intent = Intent(activity, MoneyBagActivity::class.java)
             startActivity(intent)
         }
 
@@ -136,7 +142,6 @@ class HomeScreenFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 }
