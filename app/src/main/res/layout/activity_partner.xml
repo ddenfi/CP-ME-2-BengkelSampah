@@ -34,4 +34,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar"
         tools:listitem="@layout/item_partner" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/shimmer_rv_mitra"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        tools:visibility="gone">
+
+        <include layout="@layout/item_partner_shimmer" />
+
+        <include layout="@layout/item_partner_shimmer" />
+
+        <include layout="@layout/item_partner_shimmer" />
+
+        <include layout="@layout/item_partner_shimmer" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
