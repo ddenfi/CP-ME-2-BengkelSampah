@@ -16,7 +16,7 @@
     <string name="body_helpcenter">Kami ingin memberitahukan bahwa saat ini kami lebih memilih menerima dan menangani pertanyaan serta permintaan melalui layanan WhatsApp kami. Kami percaya bahwa ini akan membantu kami memberikan dukungan yang lebih efisien dan responsif kepada pelanggan kami.</string>
     <string name="whatsapp_button">Hubungi Kami Melalui WhatsApp</string>
     <string name="save_edited_button_profile">Simpan</string>
-    
+
     <string name="name">Nama</string>
     <string name="name_hint">Masukkan nama lengkap kamu …</string>
     <string name="phone_number">Nomor Telepon</string>
@@ -47,6 +47,7 @@
     <string name="reset_password_successful">Link reset kata sandi telah dikirimkan melalui sms</string>
     <string name="all_forgot_password_field_must_be_filled">Nomor telepon harus diisi!</string>
 
+    <!-- History -->
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
     <string name="in_process_status">Diproses</string>
@@ -58,7 +59,7 @@
     <string name="cancel_order">Batalkan Pesanan</string>
     <string name="bengkel_sampah_agent">Agen Bengkel Sampah : </string>
     <string name="agent_phone">Nomor Agen : %s</string>
-    <string name="waste_type">Jenis Sampah :</string>
+    <string name="waste_type">Jenis Sampah</string>
     <string name="total_detail_history">Total : %s</string>
     <string name="description">Deskripsi :</string>
     <string name="multiplication">x</string>
@@ -71,6 +72,7 @@
     <string name="transaction_downloaded">Transaksi berhasil disimpan</string>
     <string name="transaction_download_failed">Trasanksi gagal disimpan</string>
     <string name="idr">Rp %d</string>
+    <string name="history_empty">Tidak Ada Riwayat Transaksi</string>
 
     <string name="date">1 Oktober 2023</string>
     <string name="agent_name">Nama Agen</string>
@@ -79,6 +81,25 @@
     <string name="waste_amount">25</string>
     <string name="waste_unit">kg</string>
     <string name="waste_price">1000</string>
+
+    <!-- waste box -->
+    <string name="waste_box_page">Keranjang Sampah</string>
+    <string name="add">Tambah</string>
+    <string name="minus">Kurang</string>
+    <string name="add_from_my_box">Dari Kotakku</string>
+    <string name="waste_box_empty">Kotak keranjang kosong.\nIsi kembali untuk dapat melanjutkan</string>
+    <string name="waste_sold_estimation">Estimasi Penjualan</string>
+    <string name="weight">Berat</string>
+    <string name="weight_estimation">Estimasi berat/kg</string>
+    <string name="price">Harga</string>
+    <string name="price_value">Rp %d</string>
+    <string name="price_per_unit_value">\@%s/%s</string>
+    <string name="finish">Selesai</string>
+    <string name="add_waste_page">Tambah Sampah</string>
+    <string name="search">Cari Sampah</string>
+    <string name="waste_box">Kotak sampah</string>
+    <string name="dialog_add_waste_title">Tambahkan Sampah Anda</string>
+    <string name="initial_weight">0</string>
 
     <string name="home">Home</string>
     <string name="history">Riwayat</string>

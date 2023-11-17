@@ -1,4 +1,4 @@
-package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
+package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

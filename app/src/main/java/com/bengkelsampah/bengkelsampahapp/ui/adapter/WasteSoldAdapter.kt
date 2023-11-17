@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteSoldBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyWaste
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
 
-class WasteSoldAdapter : ListAdapter<DummyWaste, WasteSoldAdapter.WasteSoldViewHolder>(
-    object : DiffUtil.ItemCallback<DummyWaste>() {
-        override fun areItemsTheSame(oldItem: DummyWaste, newItem: DummyWaste): Boolean {
+class WasteSoldAdapter : ListAdapter<WasteSoldModel, WasteSoldAdapter.WasteSoldViewHolder>(
+    object : DiffUtil.ItemCallback<WasteSoldModel>() {
+        override fun areItemsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DummyWaste, newItem: DummyWaste): Boolean {
+        override fun areContentsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -28,12 +28,13 @@ class WasteSoldAdapter : ListAdapter<DummyWaste, WasteSoldAdapter.WasteSoldViewH
         private val tvWastePricePerUnit by lazy { binding.tvWastePricePerUnit }
         private val tvWastePrice by lazy { binding.tvWastePrice }
 
-        fun bind(waste: DummyWaste) {
-            tvWasteName.text = waste.name
+        fun bind(waste: WasteSoldModel) {
+            tvWasteName.text = waste.waste.name
             tvWasteAmount.text = waste.amount.toString()
-            tvWasteUnit.text = waste.unit
-            tvWastePricePerUnit.text = waste.pricePerUnit.toString()
-            tvWastePrice.text = (waste.amount * waste.pricePerUnit).toInt().toString()
+            tvWasteUnit.text = waste.waste.unit
+            tvWastePricePerUnit.text = waste.waste.pricePerUnit.toString()
+            tvWastePrice.text =
+                WasteSoldModel.countSubtotal(waste.waste.pricePerUnit, waste.amount).toString()
         }
     }
 

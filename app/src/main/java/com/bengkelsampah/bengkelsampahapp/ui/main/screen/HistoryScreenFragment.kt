@@ -14,11 +14,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryScreenBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.DummyHistoryData
+import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.HistoryUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
+import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -35,10 +36,9 @@ class HistoryScreenFragment : Fragment() {
     ): View {
         _binding = FragmentHistoryScreenBinding.inflate(inflater, container, false)
 
-        binding.btnStatusFilter.text = getString(R.string.all_status)
+        binding.chipStatusFilter.text = getString(R.string.all_status)
         setUpFilterBottomSheet()
         setUpHistoryList()
-
 
         return binding.root
     }
@@ -56,20 +56,20 @@ class HistoryScreenFragment : Fragment() {
 
         val filterChipGroup = bottomSheetView.findViewById<ChipGroup>(R.id.chip_group_status)
 
-        binding.btnStatusFilter.setOnClickListener {
+        binding.chipStatusFilter.setOnClickListener {
             bottomSheetDialog.show()
             filterChipGroup.setOnCheckedStateChangeListener { _, _ ->
                 val checkedId = filterChipGroup.checkedChipId
                 if (checkedId != View.NO_ID) {
                     val checkedText = bottomSheetView.findViewById<Chip>(checkedId).text.toString()
-                    binding.btnStatusFilter.text = checkedText
+                    binding.chipStatusFilter.text = checkedText
                 }
                 bottomSheetDialog.dismiss()
             }
 
             bottomSheetView.findViewById<Button>(R.id.btn_reset_filter).setOnClickListener {
                 filterChipGroup.clearCheck()
-                binding.btnStatusFilter.text = getString(R.string.all_status)
+                binding.chipStatusFilter.text = getString(R.string.all_status)
                 bottomSheetDialog.dismiss()
             }
         }
@@ -83,15 +83,28 @@ class HistoryScreenFragment : Fragment() {
                 when (historyUiState) {
                     is HistoryUiState.Success -> {
                         binding.shimmerHistory.visibility = View.GONE
-                        binding.rvHistory.visibility = View.VISIBLE
-                        binding.rvHistory.apply {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = historyAdapter
+
+                        if (historyUiState.history.isEmpty()) {
+                            binding.tvHistoryEmpty.visibility = View.VISIBLE
+                        } else {
+                            binding.tvHistoryEmpty.visibility = View.GONE
+                            binding.rvHistory.visibility = View.VISIBLE
+                            binding.rvHistory.apply {
+                                layoutManager = LinearLayoutManager(context)
+                                adapter = historyAdapter
+                                addItemDecoration(
+                                    MarginItemDecoration(
+                                        resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                                        resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
+                                    )
+                                )
+                            }
+                            historyAdapter.submitList(historyUiState.history)
                         }
-                        historyAdapter.submitList(historyUiState.history)
                     }
 
                     is HistoryUiState.Loading -> {
+                        binding.tvHistoryEmpty.visibility = View.GONE
                         binding.rvHistory.visibility = View.GONE
                         binding.shimmerHistory.visibility = View.VISIBLE
                     }
@@ -104,7 +117,7 @@ class HistoryScreenFragment : Fragment() {
         }
     }
 
-    private fun adapterOnClick(history: DummyHistoryData) {
+    private fun adapterOnClick(history: HistoryModel) {
         val intent = Intent(this.requireContext(), HistoryDetailActivity::class.java)
         intent.putExtra(HistoryDetailActivity.HISTORY_ID, history.id)
         startActivity(intent)

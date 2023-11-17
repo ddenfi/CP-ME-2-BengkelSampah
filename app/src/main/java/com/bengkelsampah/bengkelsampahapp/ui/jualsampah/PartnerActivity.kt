@@ -1,39 +1,58 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.GetPartnerItem
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerDummyData
-import com.google.android.material.appbar.AppBarLayout
+import com.bengkelsampah.bengkelsampahapp.databinding.ActivityPartnerBinding
+import com.bengkelsampah.bengkelsampahapp.ui.adapter.PartnerAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 
 class PartnerActivity : AppCompatActivity() {
-
-    private val partnerAdapter = PartnerAdapter { _, _ ->
-
-    }
+    private lateinit var binding: ActivityPartnerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_partner)
+        binding = ActivityPartnerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val appBarLayout: AppBarLayout = findViewById(R.id.appBar)
-        val toolbar: Toolbar = findViewById(R.id.top_app_bar)
-
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.topAppBar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        toolbar.setNavigationOnClickListener { onBackPressed() }
-
-        val recyclerView = findViewById<RecyclerView>(R.id.rv_mitra)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = partnerAdapter
-
         val dummyData = PartnerDummyData.getDummyPartnerList()
-        partnerAdapter.submitData(dummyData)
+        setUpPartner(dummyData)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressedDispatcher.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setUpPartner(partner: List<GetPartnerItem>) {
+        val partnerAdapter = PartnerAdapter { uuid, _ ->
+            val addWasteIntent = Intent(this, AddWasteActivity::class.java)
+            addWasteIntent.putExtra(AddWasteActivity.PARTNER_ID, uuid.toString())
+            startActivity(addWasteIntent)
+        }
+
+        binding.rvMitra.apply {
+            layoutManager = LinearLayoutManager(this@PartnerActivity)
+            adapter = partnerAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
+                )
+            )
+        }
+        partnerAdapter.submitData(partner)
     }
 }
