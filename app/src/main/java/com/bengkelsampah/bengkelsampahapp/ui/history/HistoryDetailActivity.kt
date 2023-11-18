@@ -5,15 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -58,11 +59,13 @@ class HistoryDetailActivity : AppCompatActivity() {
                     }
 
                     is HistoryDetailUiState.Error -> {
-                        Toast.makeText(
+                        SweetAlertDialogUtils.showSweetAlertDialog(
                             this@HistoryDetailActivity,
-                            historyDetailUiState.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            historyDetailUiState.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
                     }
                 }
             }
@@ -104,27 +107,35 @@ class HistoryDetailActivity : AppCompatActivity() {
 
             btnDownloadTransaction.setOnClickListener {
                 try {
-
                     HistoryDetailPdfFile().generatePdfFile(this@HistoryDetailActivity, history)
-                    Toast.makeText(
+                    SweetAlertDialogUtils.showSweetAlertDialog(
                         this@HistoryDetailActivity,
                         getString(R.string.transaction_downloaded),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        SweetAlertDialog.SUCCESS_TYPE,
+                        hasConfirmationButton = false,
+                        willFinishActivity = false
+                    )
                 } catch (e: Exception) {
-                    Toast.makeText(
+                    SweetAlertDialogUtils.showSweetAlertDialog(
                         this@HistoryDetailActivity,
                         getString(R.string.transaction_download_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        SweetAlertDialog.ERROR_TYPE,
+                        hasConfirmationButton = false,
+                        willFinishActivity = false
+                    )
                 }
             }
         }
     }
 
     private fun cancelOrder() {
-        Toast.makeText(this, getString(R.string.order_cancelled), Toast.LENGTH_LONG).show()
-        this.finish()
+        SweetAlertDialogUtils.showSweetAlertDialog(
+            this,
+            getString(R.string.order_cancelled),
+            SweetAlertDialog.SUCCESS_TYPE,
+            hasConfirmationButton = true,
+            willFinishActivity = true
+        )
     }
 
     private fun setDownloadFileVisibility(historyStatus: String) {

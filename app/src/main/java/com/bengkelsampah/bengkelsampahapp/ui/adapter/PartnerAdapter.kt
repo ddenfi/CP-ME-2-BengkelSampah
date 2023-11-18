@@ -9,7 +9,7 @@ import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.Ge
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemPartnerBinding
 import java.util.UUID
 
-class PartnerAdapter(private val onClickListener: (id: UUID, partner: GetPartnerItem) -> Unit) :
+class PartnerAdapter(private val onClickListener: (id: UUID) -> Unit) :
     RecyclerView.Adapter<PartnerAdapter.PartnerViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<GetPartnerItem>() {
@@ -46,7 +46,7 @@ class PartnerAdapter(private val onClickListener: (id: UUID, partner: GetPartner
                 tvPhoneNumber.text = item.phoneNumber
 
                 itemPartner.setOnClickListener {
-                    onClickListener.invoke(item.partnerId, item)
+                    onClickListener.invoke(item.partnerId)
                 }
             }
         }

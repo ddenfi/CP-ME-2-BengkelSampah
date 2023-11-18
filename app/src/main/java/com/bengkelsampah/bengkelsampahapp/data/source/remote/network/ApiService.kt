@@ -5,7 +5,7 @@ import com.bengkelsampah.bengkelsampahapp.data.source.remote.request.auth.Regist
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.auth.LoginResponse
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.auth.RegisterResponse
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.GetPartner
-import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.GetPartnerItem
+import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerById
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,5 +30,5 @@ interface ApiService {
     @GET("partners/{partnerid}")
     suspend fun getPartnerById(
         @Path("partnerid") partnerId: UUID
-    ) : GetPartnerItem
+    ): PartnerById
 }

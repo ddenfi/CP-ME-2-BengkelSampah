@@ -3,15 +3,17 @@ package com.bengkelsampah.bengkelsampahapp.ui.main.screen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryScreenBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
@@ -110,7 +112,15 @@ class HistoryScreenFragment : Fragment() {
                     }
 
                     is HistoryUiState.Error -> {
-                        Toast.makeText(context, historyUiState.message, Toast.LENGTH_SHORT).show()
+                        val dialog = SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText(historyUiState.message)
+                            .hideConfirmButton()
+
+                        dialog.show()
+                        Handler(Looper.getMainLooper()).postDelayed(
+                            { dialog.dismissWithAnimation() },
+                            1500
+                        )
                     }
                 }
             }

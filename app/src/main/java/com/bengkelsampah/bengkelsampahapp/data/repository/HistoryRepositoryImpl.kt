@@ -9,12 +9,12 @@ import javax.inject.Inject
 
 class HistoryRepositoryImpl @Inject constructor() : HistoryRepository {
     override fun getActiveTransaction(): Flow<List<HistoryModel>> = flow {
-        delay(5000)
+        delay(2000)
         emit(HistoryModel.dummyData)
     }
 
     override fun getHistoryById(id: Int): Flow<HistoryModel> = flow {
-        delay(5000)
+        delay(2000)
         emit(HistoryModel.dummyData[id])
     }
 }
