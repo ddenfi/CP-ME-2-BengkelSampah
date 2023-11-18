@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.formorder.FormOrderActivity">
+    tools:context=".ui.jualsampah.FormOrderActivity">
 
     <!-- App Bar -->
     <com.google.android.material.appbar.AppBarLayout
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
-                android:hint="Masukkan alamat penjemputan"
+                android:hint="@string/enter_pick_up_address_fo"
                 app:endIconDrawable="@drawable/ic_marker_alt_size"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:hint="Deskripsi (Opsional)"
+                android:hint="@string/pick_up_address_desc_fo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_pickUpAddress_formOrder">
@@ -134,7 +134,7 @@
                         android:layout_marginTop="20dp"
                         android:background="@color/md_theme_light_primary"
                         android:fontFamily="@font/inter_semi_bold"
-                        android:text="Ganti Agen"
+                        android:text="@string/change_agent_fo"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="9sp"
@@ -222,7 +222,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter"
                                 android:padding="8dp"
-                                android:text="Agen bisa menjemput sampah sewaktu waktu, dikarenakan jumlah armada yang kurang!"
+                                android:text="@string/agent_note_fo"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -258,7 +258,7 @@
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Sampah : " />
+                        android:text="@string/waste_total_fo" />
 
                     <Space
                         android:layout_width="0dp"
@@ -273,7 +273,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:background="@color/md_theme_light_primary"
                         android:fontFamily="@font/inter_semi_bold"
-                        android:text="Tambah Sampah"
+                        android:text="@string/add_waste_fo"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="9sp" />
@@ -288,28 +288,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Nama Sampah" />
+                        android:text="@string/waste_name" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Satuan" />
+                        android:text="@string/waste_unit" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Harga Satuan" />
+                        android:text="@string/waste_price_unit" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Harga" />
+                        android:text="@string/price" />
                 </LinearLayout>
 
-                <ListView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -334,7 +334,7 @@
                     style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Metode Pembayaran" />
+                    android:text="@string/payment_method_fo" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
@@ -351,7 +351,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="16dp"
                             android:layout_marginVertical="8dp"
-                            android:text="Cash" />
+                            android:text="@string/cash" />
 
                     </RadioGroup>
 
@@ -386,7 +386,7 @@
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estimasi Penjualan" />
+                android:text="@string/waste_sold_estimation" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -403,7 +403,7 @@
                         style="@style/TextAppearance.Material3.LabelSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Berat" />
+                        android:text="@string/weight" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
@@ -427,7 +427,7 @@
                         style="@style/TextAppearance.Material3.LabelSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Harga" />
+                        android:text="@string/price" />
 
                     <TextView
                         style="@style/TextAppearance.Material3.BodyMedium"
@@ -452,7 +452,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/md_theme_light_primary"
                 android:fontFamily="@font/inter_semi_bold"
-                android:text="Ajukan Penjumputan"
+                android:text="@string/request_pick_up_fo"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
