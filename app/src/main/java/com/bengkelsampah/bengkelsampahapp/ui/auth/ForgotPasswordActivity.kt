@@ -27,9 +27,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
      */
     private fun performForgotPassword() {
         binding.btnSendLinkForgotPassword.setOnClickListener {
-            val email = binding.tietEmailForgotPassword.text.toString()
-            if (email.isNotEmpty()) {
-                viewModel.forgotPassword(email)
+            val phoneNumber = binding.tietPhoneNumberForgotPassword.text.toString()
+            if (phoneNumber.isNotEmpty()) {
+                viewModel.forgotPassword(phoneNumber)
             } else {
                 SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     .setTitleText(getString(R.string.all_forgot_password_field_must_be_filled))

@@ -6,47 +6,42 @@
     android:layout_height="match_parent"
     android:background="@drawable/img_bg_onboarding"
     android:clipToPadding="false"
-    android:paddingVertical="24dp"
     android:orientation="vertical"
+    android:paddingVertical="24dp"
     tools:context=".ui.onboarding.OnboardingActivity">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_onboard"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_onboard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-            android:id="@+id/indicator_onboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="16dp"
-            app:dotsColor="?attr/colorOutline"
-            app:progressMode="true"
-            app:selectedDotColor="?attr/colorPrimary" />
-
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/indicator_onboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="16dp"
+        app:dotsColor="?attr/colorOutline"
+        app:progressMode="true"
+        app:selectedDotColor="?attr/colorPrimary" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="24dp"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp">
 
         <LinearLayout
             android:id="@+id/ctn_onboard_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="24dp"
             android:clipChildren="false"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="24dp">
 
             <TextView
                 android:id="@+id/tv_onboard_skip"
@@ -75,14 +70,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_onboard_finish"
-            android:visibility="gone"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textStyle="bold"
+            android:background="@drawable/bg_button"
             android:text="Done!"
             android:textColor="?attr/colorOnPrimary"
-            android:background="@drawable/bg_button"/>
+            android:textStyle="bold"
+            android:visibility="gone" />
     </FrameLayout>
-
 </LinearLayout>
