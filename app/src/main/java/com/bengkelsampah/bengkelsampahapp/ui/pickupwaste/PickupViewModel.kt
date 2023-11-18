@@ -26,7 +26,7 @@ class PickupViewModel @Inject constructor(
         initialValue = Resource.Loading()
     )
 
-    fun getOrderById(ids: Int): StateFlow<Resource<WasteOrderModel>> =
+    fun getOrderById(ids: String): StateFlow<Resource<WasteOrderModel>> =
         pickupWasteRepository.getOrderById(ids).asResource().stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000), Resource.Loading()

@@ -7,5 +7,5 @@ interface PickupWasteRepository {
 
     fun getAllOrders(): Flow<List<WasteOrderModel>>
 
-    fun getOrderById(ids: Int):Flow<WasteOrderModel>
+    fun getOrderById(ids: String):Flow<WasteOrderModel>
 }

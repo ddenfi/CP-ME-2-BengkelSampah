@@ -69,7 +69,7 @@ class DetailPickupActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getOrderById(1).collect {
+                viewModel.getOrderById("S-111").collect {
                     when (it) {
                         is Resource.Error -> {
 
@@ -91,7 +91,7 @@ class DetailPickupActivity : AppCompatActivity() {
                                 tvPickupDetailSum.text = getString(R.string.idr, 2000)
                                 tvPickupDetailPhoneNumber.text = it.data.agentPhone
                             }
-                            wasteListAdapter.submitList(it.data.waste)
+                            wasteListAdapter.submitList(it.data.wasteBox)
                         }
                     }
                 }

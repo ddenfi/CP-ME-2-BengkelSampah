@@ -13,7 +13,7 @@ class PickupWasteRepositoryImpl @Inject constructor(): PickupWasteRepository {
         emit(WasteOrderModel.dummyData)
     }
 
-    override fun getOrderById(ids: Int): Flow<WasteOrderModel> = flow {
+    override fun getOrderById(ids: String): Flow<WasteOrderModel> = flow {
         val dummyOrder = WasteOrderModel.dummyData.find {
             it.id == ids
         }

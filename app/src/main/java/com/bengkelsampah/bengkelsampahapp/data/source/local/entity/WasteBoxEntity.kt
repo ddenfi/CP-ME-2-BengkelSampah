@@ -3,12 +3,13 @@ package com.bengkelsampah.bengkelsampahapp.data.source.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.math.BigDecimal
 
-@Entity(tableName = "KeranjangKu")
-data class UserWasteEntity(
+@Entity(tableName = "WasteBox")
+data class WasteBoxEntity(
     @PrimaryKey
     @ColumnInfo("wasteId")
-    val wasteId: Int,
+    val wasteId: String,
 
     @ColumnInfo("name")
     val name: String,

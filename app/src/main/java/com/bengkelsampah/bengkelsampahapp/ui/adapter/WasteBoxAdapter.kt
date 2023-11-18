@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteBoxBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 
-class WasteBoxAdapter : ListAdapter<WasteSoldModel, WasteBoxAdapter.WasteBoxViewHolder>(
-    object : DiffUtil.ItemCallback<WasteSoldModel>() {
-        override fun areItemsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
+class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewHolder>(
+    object : DiffUtil.ItemCallback<WasteBoxModel>() {
+        override fun areItemsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
+        override fun areContentsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -28,11 +28,11 @@ class WasteBoxAdapter : ListAdapter<WasteSoldModel, WasteBoxAdapter.WasteBoxView
         private val chipAdd by lazy { binding.chipAdd }
         private val chipMinus by lazy { binding.chipMinus }
 
-        fun bind(wasteSold: WasteSoldModel) {
+        fun bind(wasteSold: WasteBoxModel) {
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                WasteSoldModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
+                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,
