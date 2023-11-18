@@ -8,54 +8,36 @@ data class NewsResourceModel(
     var urlToImage: String,
     var publishedAt: String,
     var content: String
-){
-    companion object{
+) {
+    companion object {
         val dummyData = listOf(
             NewsResourceModel(
-                author = "sodales",
-                title = "ferri",
-                description = "inani",
-                url = "https://duckduckgo.com/?q=patrioque",
-                urlToImage = "https://egsa.geo.ugm.ac.id/wp-content/uploads/sites/94/2019/10/WhatsApp-Image-2019-10-19-at-7.39.49-PM-540x360.jpeg",
-                publishedAt = "potenti",
-                content = "vivendo"
+                author = "Koran Tempo",
+                title = "Nazamuddin Siregar Ubah Sampah Jadi Rupiah",
+                description = "",
+                url = "https://koran.tempo.co/read/profil/474204/kisah-nazamuddin-siregar-mendirikan-bengkel-sampah",
+                urlToImage = "data:image/jpeg;base64,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",
+                publishedAt = "Minggu, 5 Juni 2022",
+                content = "Nazamuddin Siregar membuat aplikasi pengelolaan sampah terpadu pertama di Tapanuli Selatan sejak Maret 2021. Ia berhasil mengubah persepsi masyarakat bahwa sampah bisa menjadi salah satu sumber ekonomi.\n\nBanyak orang memandang sampah rumah tangga tidak berguna. Namun tidak di mata Nazamuddin Siregar. Pemuda asal Tapanuli Selatan, Sumatera Utara, itu berhasil membuktikan bahwa sampah rumah tangga menjadi salah satu sumber ekonomi. Lewat Bengkel Sampah yang didirikan Nazamuddin, ada sekitar 160 warga di desa di Tapanuli Selatan kini memiliki pendapat tambahan dari menabung sampah."
             ),
             NewsResourceModel(
-                author = "sodales",
-                title = "ferri",
-                description = "inani",
-                url = "https://duckduckgo.com/?q=patrioque",
-                urlToImage = "https://egsa.geo.ugm.ac.id/wp-content/uploads/sites/94/2019/10/WhatsApp-Image-2019-10-19-at-7.39.49-PM-540x360.jpeg",
-                publishedAt = "potenti",
-                content = "vivendo"
+                author = "Rachel Farahdiba Regar & S. Dian Andryanto",
+                title = "Daftar 10 Provinsi Penghasil Sampah Terbanyak 2022, Peringkat 3 besar: Jawa Tengah, Jawa Timur, Jawa Barat",
+                description = "",
+                url = "https://tekno.tempo.co/read/1794240/daftar-10-provinsi-penghasil-sampah-terbanyak-2022-peringkat-3-besar-jawa-tengah-jawa-timur-jawa-barat",
+                urlToImage = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSZZnRUYdIpkjXGufzPDyL4CpBO7w79Ymp642y0yO-LnrkIY8PT",
+                publishedAt = "Rabu, 8 November 2023",
+                content = "Di Indonesia, sampah dari beragam jenis tersebut menjadi permasalahan utama yang sudah mengakar kuat. Banyak sampah di berbagai daerah Indonesia memiliki jumlah sangat banyak sehingga sulit ditangani karena memerlukan waktu yang lama.\n\nBerikut adalah 10 provinsi di Indonesia penghasil sampah terbanyak sepanjang 2022, berdasarkan data Sistem Informasi Pengelolaan Sampah Nasional (SIPSN) Kementerian Lingkungan Hidup dan Kehutanan (KLHK) yaitu:\n1. Jawa Tengah\n2. Jawa Timur\n3. Jawa Barat\n4. DKI Jakart\n5. Banten\n6. Sumatera Utara\n7. Sumatera Selatan\n8. Bali\n9. Sumatera Barat\n10. Sulawesi Selatan"
             ),
             NewsResourceModel(
-                author = "sodales",
-                title = "ferri",
-                description = "inani",
-                url = "https://duckduckgo.com/?q=patrioque",
-                urlToImage = "https://egsa.geo.ugm.ac.id/wp-content/uploads/sites/94/2019/10/WhatsApp-Image-2019-10-19-at-7.39.49-PM-540x360.jpeg",
-                publishedAt = "potenti",
-                content = "vivendo"
-            ),
-            NewsResourceModel(
-                author = "sodales",
-                title = "ferri",
-                description = "inani",
-                url = "https://duckduckgo.com/?q=patrioque",
-                urlToImage = "https://egsa.geo.ugm.ac.id/wp-content/uploads/sites/94/2019/10/WhatsApp-Image-2019-10-19-at-7.39.49-PM-540x360.jpeg",
-                publishedAt = "potenti",
-                content = "vivendo"
-            ),
-            NewsResourceModel(
-                author = "sodales",
-                title = "ferri",
-                description = "inani",
-                url = "https://duckduckgo.com/?q=patrioque",
-                urlToImage = "https://egsa.geo.ugm.ac.id/wp-content/uploads/sites/94/2019/10/WhatsApp-Image-2019-10-19-at-7.39.49-PM-540x360.jpeg",
-                publishedAt = "potenti",
-                content = "vivendo"
-            ),
+                author = "Anindyadevi Aurellia",
+                title = "Kisah Asti Daur Ulang Sampah hingga Karyanya Sampai ke Pesohor",
+                description = "",
+                url = "https://www.detik.com/jabar/berita/d-6956616/jalan-asti-daur-ulang-sampah-hingga-karyanya-sampai-ke-pesohor",
+                urlToImage = "https://akcdn.detik.net.id/community/media/visual/2023/09/29/asti-dan-sang-suami-menunjukkan-hasil-karyanya_169.jpeg?w=700&q=90",
+                publishedAt = "Minggu, 01 Oktober 2023",
+                content = "Bandung - Asti Gustiasih (63), perempuan dari Bandung ini punya semangat luar biasa. Fisiknya terlahir tak sempurna, kaki kirinya tak bisa befungsi dengan baik karena polio. Tapi keterbatasannya bukan jadi penghalang untuk menjalani hidup.\n\nAsti bertekat, tak ingin menengadahkan tangan untuk meminta belas kasihan. Sejak lulus sekolah, ia selalu menjajal aneka ketrampilan yang dimampunya. Seperti membuat kue, menjahit, dan masih banyak lagi.\n\nBerkat ketekunannya, kini namanya terkenal dan bahkan sampai ke mancanegara. Asti dikenal sebagai pegiat daur ulang sampah yang inspiratif. Ia mampu menyulap tumpukan kertas yang tak bernilai jadi aneka kerajinan berniali rupiah"
+            )
         )
     }
 }

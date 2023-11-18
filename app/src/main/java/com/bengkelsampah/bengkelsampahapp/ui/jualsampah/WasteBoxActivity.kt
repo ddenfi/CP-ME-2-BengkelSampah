@@ -4,16 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityWasteBoxBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -72,11 +73,13 @@ class WasteBoxActivity : AppCompatActivity() {
                     }
 
                     is WasteBoxUiState.Error -> {
-                        Toast.makeText(
+                        SweetAlertDialogUtils.showSweetAlertDialog(
                             this@WasteBoxActivity,
-                            wasteBoxUiState.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            wasteBoxUiState.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
                     }
                 }
             }
