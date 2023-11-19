@@ -1,10 +1,16 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,6 +23,7 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.WasteBoxUiState
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
@@ -29,8 +36,10 @@ import kotlin.math.roundToInt
 class EditWasteBoxActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWasteBoxBinding
     private val viewModel: PickupViewModel by viewModels()
-    private lateinit var mWasteOrder: WasteOrderModel
-    private lateinit var sweetAlertDialog: SweetAlertDialog
+    private var mWasteBox: List<WasteBoxModel> = listOf()
+    private lateinit var wasteBoxAdapter: WasteBoxAdapter
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityWasteBoxBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -39,17 +48,29 @@ class EditWasteBoxActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val orderId = intent.getStringExtra(ORDER_ID) ?: ""
+        wasteBoxAdapter = WasteBoxAdapter()
 
-        setupView(orderId)
+        val orderId = intent.getStringExtra(ORDER_ID) ?: ""
+        val getWasteBox = intent.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
+
+        val getAddWasteResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == ADD_WASTE_RESULT_CODE) {
+                    val wasteBox =
+                        it.data?.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
+                    mWasteBox = wasteBox ?: listOf()
+                    wasteBoxAdapter.submitList(mWasteBox)
+                    Log.d("TAG", "onCreate: ${mWasteBox.size}")
+                }
+            }
 
         binding.btnAdd.setOnClickListener {
-
+            val intent = Intent(this@EditWasteBoxActivity, PickupAddWasteActivity::class.java)
+            intent.putParcelableArrayListExtra(WASTE_BOX, ArrayList(mWasteBox))
+            getAddWasteResult.launch(intent)
         }
 
-        binding.btnFinish.setOnClickListener {
-//            updateOrder(mWasteOrder.copy())
-        }
+        setupView(orderId)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -59,40 +80,44 @@ class EditWasteBoxActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setupView(orderId:String) {
+    private fun setupView(orderId: String) {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.getOrderById(orderId).collect{ wasteOrder->
-                    when (wasteOrder) {
-                        is Resource.Success -> {
-                            mWasteOrder = wasteOrder.data
-                            binding.shimmerWasteBoxPage.visibility = View.GONE
-                            binding.wasteBoxPage.visibility = View.VISIBLE
+            viewModel.getOrderById(orderId).collect { wasteOrder ->
+                when (wasteOrder) {
+                    is Resource.Success -> {
+                        mWasteBox = wasteOrder.data.wasteBox
+                        wasteBoxAdapter.submitList(mWasteBox)
 
-                            if (wasteOrder.data.wasteBox.isEmpty()) {
-                                binding.tvWasteBoxEmpty.visibility = View.VISIBLE
-                            } else {
-                                binding.tvWasteBoxEmpty.visibility = View.GONE
-                                setUpWasteSold(wasteOrder.data.wasteBox)
-                            }
-                            countTotalWeightAndPrice(wasteOrder.data.wasteBox)
-                        }
+                        binding.shimmerWasteBoxPage.visibility = View.GONE
+                        binding.wasteBoxPage.visibility = View.VISIBLE
 
-                        is Resource.Loading -> {
-                            binding.shimmerWasteBoxPage.visibility = View.VISIBLE
-                            binding.wasteBoxPage.visibility = View.GONE
+                        if (mWasteBox.isEmpty()) {
+                            binding.tvWasteBoxEmpty.visibility = View.VISIBLE
+                        } else {
                             binding.tvWasteBoxEmpty.visibility = View.GONE
+                            setUpWasteSold()
                         }
+                        countTotalWeightAndPrice(mWasteBox)
 
-                        is Resource.Error -> {
-                            SweetAlertDialogUtils.showSweetAlertDialog(
-                                this@EditWasteBoxActivity,
-                                wasteOrder.exception?.message.toString(),
-                                SweetAlertDialog.ERROR_TYPE,
-                                hasConfirmationButton = true,
-                                willFinishActivity = false
-                            )
+                        binding.btnFinish.setOnClickListener {
+                            updateOrder(wasteOrder.data.copy(wasteBox = mWasteBox))
                         }
+                    }
+
+                    is Resource.Loading -> {
+                        binding.shimmerWasteBoxPage.visibility = View.VISIBLE
+                        binding.wasteBoxPage.visibility = View.GONE
+                        binding.tvWasteBoxEmpty.visibility = View.GONE
+                    }
+
+                    is Resource.Error -> {
+                        SweetAlertDialogUtils.showSweetAlertDialog(
+                            this@EditWasteBoxActivity,
+                            wasteOrder.exception?.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
                     }
                 }
             }
@@ -112,9 +137,7 @@ class EditWasteBoxActivity : AppCompatActivity() {
         binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.roundToInt())
     }
 
-    private fun setUpWasteSold(wasteBoxItems: List<WasteBoxModel>) {
-        val wasteBoxAdapter = WasteBoxAdapter()
-
+    private fun setUpWasteSold() {
         binding.rvWasteBox.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = wasteBoxAdapter
@@ -125,28 +148,40 @@ class EditWasteBoxActivity : AppCompatActivity() {
                 )
             )
         }
-
-        wasteBoxAdapter.submitList(wasteBoxItems)
     }
 
-    private fun updateOrder(wasteOrder:WasteOrderModel){
+    private fun updateOrder(wasteOrder: WasteOrderModel) {
         lifecycleScope.launch {
-            viewModel.updateOrder(wasteOrder).collect{
-                when(it){
+            viewModel.updateOrder(wasteOrder).collect {
+                when (it) {
                     is Resource.Error -> {
-                        //TODO Snackbar error
+                        SweetAlertDialogUtils.showSweetAlertDialog(
+                            this@EditWasteBoxActivity,
+                            it.exception?.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = true,
+                            willFinishActivity = true
+                        )
                     }
+
                     is Resource.Loading -> {
-                        sweetAlertDialog.hide()
-                        sweetAlertDialog = SweetAlertDialog(this@EditWasteBoxActivity,SweetAlertDialog.PROGRESS_TYPE)
-                        sweetAlertDialog.show()
+                        SweetAlertDialogUtils.showSweetAlertDialog(
+                            this@EditWasteBoxActivity,
+                            "Saving",
+                            SweetAlertDialog.PROGRESS_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = false
+                        )
                     }
+
                     is Resource.Success -> {
-                        sweetAlertDialog.hide()
-                        sweetAlertDialog = SweetAlertDialog(this@EditWasteBoxActivity,SweetAlertDialog.SUCCESS_TYPE)
-                        sweetAlertDialog.show()
-                        delay(1000)
-                        finish()
+                        SweetAlertDialogUtils.showSweetAlertDialog(
+                            this@EditWasteBoxActivity,
+                            "Saving",
+                            SweetAlertDialog.SUCCESS_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
                     }
                 }
             }
@@ -155,5 +190,7 @@ class EditWasteBoxActivity : AppCompatActivity() {
 
     companion object {
         const val PARTNER_ID = "partner_id"
+        const val ADD_WASTE_RESULT_CODE = 123
+        const val WASTE_BOX = "waste_box"
     }
 }

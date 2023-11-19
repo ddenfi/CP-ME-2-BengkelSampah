@@ -17,6 +17,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityDetailPickupBindin
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteListAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.EditWasteBoxActivity.Companion.WASTE_BOX
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -104,6 +105,7 @@ class DetailPickupActivity : AppCompatActivity() {
         binding.btnDetailPickupEditOrder.setOnClickListener {
             val intent = Intent(this@DetailPickupActivity, EditWasteBoxActivity::class.java)
             intent.putExtra(ORDER_ID, wasteOrder.id)
+            intent.putParcelableArrayListExtra(WASTE_BOX, ArrayList(wasteOrder.wasteBox))
             startActivity(intent)
         }
     }

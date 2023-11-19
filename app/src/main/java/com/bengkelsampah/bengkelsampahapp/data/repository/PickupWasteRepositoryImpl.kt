@@ -49,10 +49,12 @@ class PickupWasteRepositoryImpl @Inject constructor(
     /**
      * Search waste from populated waste local database
      * @param query use asterisk to include search in the middle of words
+     * Purpose [delay] on flow is to simulate call API
      */
     override fun searchWaste(query: String): Flow<List<WasteModel>> =
-        wasteResourceDao.searchWaste("*${query}*")
-            .map { it.map(WasteResourceEntity::asExternalModel) }
+        wasteResourceDao.searchWaste("%${query}%").onStart {
+            delay(1000)
+        }.map { it.map(WasteResourceEntity::asExternalModel) }
 
     /**
      * Update waste order to local database
