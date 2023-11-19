@@ -47,6 +47,20 @@
     <string name="reset_password_successful">Link reset kata sandi telah dikirimkan melalui sms</string>
     <string name="all_forgot_password_field_must_be_filled">Nomor telepon harus diisi!</string>
 
+    <!-- Form Order -->
+    <string name="form_order">Form Order</string>
+    <string name="pick_up_address_fo">Alamat Penjemputan</string>
+    <string name="enter_pick_up_address_fo">Masukkan alamat penjemputan</string>
+    <string name="pick_up_address_desc_fo">Deskripsi (Opsional)</string>
+    <string name="change_agent_fo">Ganti Agen</string>
+    <string name="agent_note_fo">Agen bisa menjemput sampah sewaktu waktu, dikarenakan jumlah armada yang kurang!</string>
+    <string name="waste_total_fo">Total Sampah</string>
+    <string name="add_waste_fo">Tambah Sampah</string>
+    <string name="waste_price_unit">Harga Satuan</string>
+    <string name="payment_method_fo">Metode Pembayaran</string>
+    <string name="cash">Cash</string>
+    <string name="request_pick_up_fo">Ajukan Penjumputan</string>
+
     <!-- History -->
     <string name="all_status">Semua Status</string>
     <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>

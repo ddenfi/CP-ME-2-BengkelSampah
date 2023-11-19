@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,7 +30,9 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
         private val chipAdd by lazy { binding.chipAdd }
         private val chipMinus by lazy { binding.chipMinus }
 
-        fun bind(wasteSold: WasteBoxModel) {
+
+        @SuppressLint("StringFormatMatches")
+        fun bind(wasteSold: WasteSoldModel) {
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
