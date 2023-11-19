@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteListAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,14 +34,20 @@ class DetailPickupActivity : AppCompatActivity() {
         binding = ActivityDetailPickupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val orderId = intent.getStringExtra(ORDER_ID) ?: ""
+        val orderId = intent.getStringExtra(ORDER_ID)!!
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getOrderById(orderId).collect {
                     when (it) {
                         is Resource.Error -> {
-
+                            SweetAlertDialogUtils.showSweetAlertDialog(
+                                this@DetailPickupActivity,
+                                it.exception?.message.toString(),
+                                SweetAlertDialog.ERROR_TYPE,
+                                hasConfirmationButton = false,
+                                willFinishActivity = true
+                            )
                         }
 
                         is Resource.Loading -> {
@@ -88,7 +96,16 @@ class DetailPickupActivity : AppCompatActivity() {
 
         pickupOrder(wasteOrder)
         finishOrder(wasteOrder)
+        editOrder(wasteOrder)
 
+    }
+
+    private fun editOrder(wasteOrder: WasteOrderModel) {
+        binding.btnDetailPickupEditOrder.setOnClickListener {
+            val intent = Intent(this@DetailPickupActivity, EditWasteBoxActivity::class.java)
+            intent.putExtra(ORDER_ID, wasteOrder.id)
+            startActivity(intent)
+        }
     }
 
     private fun finishOrder(wasteOrder: WasteOrderModel) {

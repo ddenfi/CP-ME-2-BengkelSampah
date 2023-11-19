@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import java.math.BigDecimal
 
 @Entity(tableName = "WasteBox")
@@ -33,7 +34,7 @@ fun WasteBoxEntity.asExternalLayer() = WasteBoxModel(
     waste = WasteModel(
         wasteId = wasteId,
         name = name,
-        unit = unit,
+        unit = WasteUnit.valueOf(unit),
         pricePerUnit = pricePerUnit,
         wasteType = wasteType
     ), amount = amount

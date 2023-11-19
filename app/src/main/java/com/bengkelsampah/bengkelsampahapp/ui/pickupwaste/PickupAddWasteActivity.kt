@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.DialogAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
@@ -20,10 +25,12 @@ import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.WasteBoxActivity
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class PickupAddWasteActivity:AppCompatActivity() {
+class PickupAddWasteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWasteBinding
+    private val viewModel: PickupViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         binding = ActivityAddWasteBinding.inflate(layoutInflater)
@@ -32,17 +39,49 @@ class PickupAddWasteActivity:AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        getWasteType()
-
         binding.fabWasteBox.setOnClickListener {
-            val wasteBoxIntent = Intent(this, WasteBoxActivity::class.java)
-            wasteBoxIntent.putExtra(
-                WasteBoxActivity.PARTNER_ID, intent.getStringExtra(
-                    AddWasteActivity.PARTNER_ID
-                ))
-            startActivity(wasteBoxIntent)
+
         }
 
+//        binding.searchBarWaste.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                viewModel.onSearchQueryChange(newText ?: "")
+//                return true
+//            }
+//        })
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.wasteSearchResult.collect { searchResult ->
+                    when (searchResult) {
+                        is Resource.Error -> {
+                            SweetAlertDialogUtils.showSweetAlertDialog(
+                                this@PickupAddWasteActivity,
+                                searchResult.exception?.message.toString(),
+                                SweetAlertDialog.ERROR_TYPE,
+                                hasConfirmationButton = false,
+                                willFinishActivity = true
+                            )
+                        }
+
+                        is Resource.Loading -> {
+                            binding.shimmerWasteType.visibility = View.VISIBLE
+                            binding.rvWasteType.visibility = View.GONE
+                        }
+
+                        is Resource.Success -> {
+                            binding.rvWasteType.visibility = View.VISIBLE
+                            binding.shimmerWasteType.visibility = View.GONE
+                            setUpWasteType(searchResult.data)
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
@@ -51,12 +90,6 @@ class PickupAddWasteActivity:AppCompatActivity() {
             android.R.id.home -> onBackPressedDispatcher.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun getWasteType() {
-        lifecycleScope.launch {
-
-        }
     }
 
     private fun setUpWasteType(waste: List<WasteModel>) {

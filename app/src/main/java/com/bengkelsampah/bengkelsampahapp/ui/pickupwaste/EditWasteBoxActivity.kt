@@ -1,11 +1,10 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,22 +17,23 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
-import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.WasteBoxUiState
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class EditWasteBoxActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWasteBoxBinding
     private val viewModel: PickupViewModel by viewModels()
-    private lateinit var mWasteOrder:WasteOrderModel
+    private lateinit var mWasteOrder: WasteOrderModel
     private lateinit var sweetAlertDialog: SweetAlertDialog
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityWasteBoxBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState, persistentState)
+        super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setSupportActionBar(binding.topAppBar)
@@ -48,7 +48,7 @@ class EditWasteBoxActivity : AppCompatActivity() {
         }
 
         binding.btnFinish.setOnClickListener {
-            updateOrder(mWasteOrder.copy())
+//            updateOrder(mWasteOrder.copy())
         }
     }
 
@@ -89,8 +89,8 @@ class EditWasteBoxActivity : AppCompatActivity() {
                                 this@EditWasteBoxActivity,
                                 wasteOrder.exception?.message.toString(),
                                 SweetAlertDialog.ERROR_TYPE,
-                                hasConfirmationButton = false,
-                                willFinishActivity = true
+                                hasConfirmationButton = true,
+                                willFinishActivity = false
                             )
                         }
                     }
@@ -109,7 +109,7 @@ class EditWasteBoxActivity : AppCompatActivity() {
 
         binding.tvWasteTotalWeight.text = totalWeight.toString()
         binding.tvWasteUnit.text = WasteUnit.KG.abbreviation
-        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice)
+        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.roundToInt())
     }
 
     private fun setUpWasteSold(wasteBoxItems: List<WasteBoxModel>) {
