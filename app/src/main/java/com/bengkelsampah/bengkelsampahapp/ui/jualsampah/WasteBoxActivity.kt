@@ -96,7 +96,7 @@ class WasteBoxActivity : AppCompatActivity() {
 
         binding.tvWasteTotalWeight.text = totalWeight.toString()
         binding.tvWasteUnit.text = WasteUnit.KG.abbreviation
-        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice)
+        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.toInt())
     }
 
     private fun setUpWasteSold(wasteBoxItems: List<WasteBoxModel>) {

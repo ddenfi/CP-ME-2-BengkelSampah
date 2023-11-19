@@ -33,7 +33,8 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount).roundToInt()
+                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
+                    .roundToInt()
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,
@@ -47,12 +48,12 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
         }
 
         private fun addWeight() {
-            val newValue = tvWasteWeight.text.toString().toInt() + 1
+            val newValue = tvWasteWeight.text.toString().toDouble() + 1
             tvWasteWeight.text = newValue.toString()
         }
 
         private fun subtractWeight() {
-            val newValue = tvWasteWeight.text.toString().toInt() - 1
+            val newValue = tvWasteWeight.text.toString().toDouble() - 1
             tvWasteWeight.text = newValue.toString()
         }
     }
