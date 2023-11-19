@@ -12,4 +12,7 @@ interface WasteResourceDao {
 
     @Query("SELECT * FROM WasteResource WHERE wasteId = :ids")
     fun getWasteById(ids: String): Flow<WasteResourceEntity>
+
+    @Query("SELECT * FROM WasteResource WHERE name LIKE :query")
+    fun searchWaste(query: String): Flow<List<WasteResourceEntity>>
 }

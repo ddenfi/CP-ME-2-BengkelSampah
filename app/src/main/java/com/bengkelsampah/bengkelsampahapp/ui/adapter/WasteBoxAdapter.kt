@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteBoxBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import kotlin.math.roundToInt
 
 class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewHolder>(
     object : DiffUtil.ItemCallback<WasteBoxModel>() {
@@ -32,7 +33,7 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
+                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount).roundToInt()
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,

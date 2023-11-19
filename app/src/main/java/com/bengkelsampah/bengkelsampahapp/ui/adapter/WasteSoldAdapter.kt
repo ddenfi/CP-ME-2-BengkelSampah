@@ -31,7 +31,7 @@ class WasteSoldAdapter : ListAdapter<WasteBoxModel, WasteSoldAdapter.WasteSoldVi
         fun bind(waste: WasteBoxModel) {
             tvWasteName.text = waste.waste.name
             tvWasteAmount.text = waste.amount.toString()
-            tvWasteUnit.text = waste.waste.unit
+            tvWasteUnit.text = waste.waste.unit.name
             tvWastePricePerUnit.text = waste.waste.pricePerUnit.toString()
             tvWastePrice.text =
                 WasteBoxModel.countSubtotal(waste.waste.pricePerUnit, waste.amount).toString()

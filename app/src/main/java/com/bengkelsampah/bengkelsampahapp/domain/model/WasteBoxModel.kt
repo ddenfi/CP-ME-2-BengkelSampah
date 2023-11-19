@@ -12,7 +12,7 @@ data class WasteBoxModel(
                 WasteModel(
                     wasteId = "WS-1",
                     name = "Buku",
-                    unit = WasteUnit.KG.abbreviation,
+                    unit = WasteUnit.KG,
                     pricePerUnit = 1000,
                     wasteType = "INORGANIC"
                 ),
@@ -22,7 +22,7 @@ data class WasteBoxModel(
                 WasteModel(
                     wasteId = "WS-1",
                     name = "Karton",
-                    unit = WasteUnit.KG.abbreviation,
+                    unit = WasteUnit.KG,
                     pricePerUnit = 1200,
                     wasteType = "INORGANIC"
                 ),
@@ -32,7 +32,7 @@ data class WasteBoxModel(
                 WasteModel(
                     wasteId = "WS-1",
                     name = "Tembaga Kabel",
-                    unit = WasteUnit.KG.abbreviation,
+                    unit = WasteUnit.KG,
                     pricePerUnit = 5000,
                     wasteType = "INORGANIC"
                 ),
@@ -42,7 +42,7 @@ data class WasteBoxModel(
                 WasteModel(
                     wasteId = "WS-1",
                     name = "Kaleng",
-                    unit = WasteUnit.KG.abbreviation,
+                    unit = WasteUnit.KG,
                     pricePerUnit = 1500,
                     wasteType = "INORGANIC"
                 ),
@@ -56,4 +56,11 @@ data class WasteBoxModel(
 }
 
 fun WasteBoxModel.asWasteBoxEntity() =
-    WasteBoxEntity(wasteId = waste.wasteId, name = waste.name, amount = amount)
+    WasteBoxEntity(
+        wasteId = waste.wasteId,
+        name = waste.name,
+        amount = amount,
+        unit = waste.unit.name,
+        pricePerUnit = waste.pricePerUnit,
+        wasteType = waste.wasteType
+    )

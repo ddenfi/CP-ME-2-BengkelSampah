@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityOnboadingBinding
@@ -18,6 +19,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityPickupBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.PickupOrderAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -54,7 +56,15 @@ class PickupActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.wasteOrders.collect {
                     when (it) {
-                        is Resource.Error -> TODO()
+                        is Resource.Error -> {
+                            SweetAlertDialogUtils.showSweetAlertDialog(
+                                this@PickupActivity,
+                                it.exception?.message.toString(),
+                                SweetAlertDialog.ERROR_TYPE,
+                                hasConfirmationButton = true,
+                                willFinishActivity = false
+                            )
+                        }
                         is Resource.Loading -> {
                             showLoading(true)
                         }
@@ -71,6 +81,7 @@ class PickupActivity : AppCompatActivity() {
         pickupAdapter.setOnItemClickCallback(object : PickupOrderAdapter.OnItemClickCallback {
             override fun onItemClicked(data: WasteOrderModel) {
                 val intent = Intent(this@PickupActivity, DetailPickupActivity::class.java)
+                intent.putExtra(ORDER_ID,data.id)
                 startActivity(intent)
             }
 
@@ -86,5 +97,9 @@ class PickupActivity : AppCompatActivity() {
             binding.ctnPickupShimmer.visibility = View.VISIBLE
         }
 
+    }
+
+    companion object{
+        const val ORDER_ID = "ORDER ID"
     }
 }

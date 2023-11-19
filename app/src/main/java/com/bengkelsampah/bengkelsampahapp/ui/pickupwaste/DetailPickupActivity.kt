@@ -14,10 +14,13 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityDetailPickupBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteListAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,48 +34,20 @@ class DetailPickupActivity : AppCompatActivity() {
         binding = ActivityDetailPickupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
-
-        binding.btnDetailPickupPickupOrder.setOnClickListener {
-            lifecycleScope.launch {
-                viewModel.pickupOrder().collect{
-                    when (it){
-                        is Resource.Error -> {
-
-                        }
-                        is Resource.Loading -> {
-                            progressDialog = SweetAlertDialog(this@DetailPickupActivity, SweetAlertDialog.PROGRESS_TYPE)
-                                .setTitleText(getString(R.string.loading))
-                            progressDialog?.show()
-                        }
-                        is Resource.Success -> {
-                            progressDialog?.dismiss()
-                            progressDialog = SweetAlertDialog(this@DetailPickupActivity, SweetAlertDialog.SUCCESS_TYPE)
-                                .setTitleText(it.data)
-                            progressDialog?.hideConfirmButton()
-                            progressDialog?.show()
-                            delay(800)
-                            progressDialog?.dismissWithAnimation()
-                            onBackPressedDispatcher.onBackPressed()
-                        }
-                    }
-                }
-            }
-
-        }
-    }
-
-    private fun setupView() {
-        val wasteListAdapter = WasteListAdapter()
-        binding.rvPickupDetailWasteList.adapter = wasteListAdapter
-        binding.rvPickupDetailWasteList.layoutManager = LinearLayoutManager(this)
+        val orderId = intent.getStringExtra(ORDER_ID)!!
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getOrderById("S-111").collect {
+                viewModel.getOrderById(orderId).collect {
                     when (it) {
                         is Resource.Error -> {
-
+                            SweetAlertDialogUtils.showSweetAlertDialog(
+                                this@DetailPickupActivity,
+                                it.exception?.message.toString(),
+                                SweetAlertDialog.ERROR_TYPE,
+                                hasConfirmationButton = false,
+                                willFinishActivity = true
+                            )
                         }
 
                         is Resource.Loading -> {
@@ -81,17 +56,141 @@ class DetailPickupActivity : AppCompatActivity() {
 
                         is Resource.Success -> {
                             showLoading(false)
+                            setupView(it.data)
+                        }
+                    }
+                }
+            }
+        }
 
-                            with(binding) {
-                                tvPickupDetailDistance.text = it.data.distance.toString()
-                                tvPickupDetailCustomerName.text = it.data.consumerName
-                                tvPickupDetailPaymentMethod.text = "Cash"
-                                tvPickupDetailWeight.text = "30Kg"
-                                tvPickupDetailPaymentMethod.text = "Cash"
-                                tvPickupDetailSum.text = getString(R.string.idr, 2000)
-                                tvPickupDetailPhoneNumber.text = it.data.agentPhone
-                            }
-                            wasteListAdapter.submitList(it.data.wasteBox)
+    }
+
+    private fun setupView(wasteOrder: WasteOrderModel) {
+        val wasteListAdapter = WasteListAdapter()
+        binding.rvPickupDetailWasteList.adapter = wasteListAdapter
+        binding.rvPickupDetailWasteList.layoutManager = LinearLayoutManager(this)
+        wasteListAdapter.submitList(wasteOrder.wasteBox)
+
+
+        with(binding) {
+            tvPickupDetailDistance.text = wasteOrder.distance.toString()
+            tvPickupDetailCustomerName.text = wasteOrder.consumerName
+            tvPickupDetailPaymentMethod.text = "Cash"
+            tvPickupDetailWeight.text = "30Kg"
+            tvPickupDetailPaymentMethod.text = "Cash"
+            tvPickupDetailSum.text = getString(R.string.idr, 2000)
+            tvPickupDetailPhoneNumber.text = wasteOrder.agentPhone
+
+            if (wasteOrder.status == OrderStatus.PICKING_UP) {
+                ctnPickupDetailStatus.visibility = View.VISIBLE
+                btnDetailPickupEditOrder.visibility = View.VISIBLE
+                btnDetailPickupPickupOrder.visibility = View.GONE
+                btnDetailPickupFinishedOrder.visibility = View.VISIBLE
+            } else {
+                ctnPickupDetailStatus.visibility = View.GONE
+                btnDetailPickupEditOrder.visibility = View.GONE
+                btnDetailPickupPickupOrder.visibility = View.VISIBLE
+                btnDetailPickupFinishedOrder.visibility = View.GONE
+            }
+        }
+
+        pickupOrder(wasteOrder)
+        finishOrder(wasteOrder)
+        editOrder(wasteOrder)
+
+    }
+
+    private fun editOrder(wasteOrder: WasteOrderModel) {
+        binding.btnDetailPickupEditOrder.setOnClickListener {
+            val intent = Intent(this@DetailPickupActivity, EditWasteBoxActivity::class.java)
+            intent.putExtra(ORDER_ID, wasteOrder.id)
+            startActivity(intent)
+        }
+    }
+
+    private fun finishOrder(wasteOrder: WasteOrderModel) {
+        val updatedData = wasteOrder.copy()
+
+        binding.btnDetailPickupFinishedOrder.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.pickupOrder(updatedData).collect {
+                    when (it) {
+                        is Resource.Error -> {
+                            progressDialog?.dismiss()
+                            progressDialog = SweetAlertDialog(
+                                this@DetailPickupActivity,
+                                SweetAlertDialog.ERROR_TYPE
+                            )
+                                .setTitleText("Error ${it.exception?.message}")
+                            progressDialog?.show()
+                        }
+
+                        is Resource.Loading -> {
+                            progressDialog?.dismiss()
+                            progressDialog = SweetAlertDialog(
+                                this@DetailPickupActivity,
+                                SweetAlertDialog.PROGRESS_TYPE
+                            )
+                                .setTitleText(getString(R.string.loading))
+                            progressDialog?.show()
+                        }
+
+                        is Resource.Success -> {
+                            progressDialog?.dismiss()
+                            progressDialog = SweetAlertDialog(
+                                this@DetailPickupActivity,
+                                SweetAlertDialog.SUCCESS_TYPE
+                            )
+                                .setTitleText(it.data)
+                            progressDialog?.hideConfirmButton()
+                            progressDialog?.show()
+                            delay(1000)
+                            progressDialog?.dismissWithAnimation()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun pickupOrder(wasteOrderModel: WasteOrderModel) {
+        val updatedData = wasteOrderModel.copy(status = OrderStatus.PICKING_UP)
+
+        binding.btnDetailPickupPickupOrder.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.pickupOrder(updatedData).collect {
+                    when (it) {
+                        is Resource.Error -> {
+                            progressDialog?.dismiss()
+                            progressDialog = SweetAlertDialog(
+                                this@DetailPickupActivity,
+                                SweetAlertDialog.ERROR_TYPE
+                            )
+                                .setTitleText("Error ${it.exception?.message}")
+                            progressDialog?.show()
+                        }
+
+                        is Resource.Loading -> {
+                            progressDialog?.dismiss()
+                            progressDialog = SweetAlertDialog(
+                                this@DetailPickupActivity,
+                                SweetAlertDialog.PROGRESS_TYPE
+                            )
+                                .setTitleText(getString(R.string.loading))
+                            progressDialog?.show()
+                        }
+
+                        is Resource.Success -> {
+                            progressDialog?.dismiss()
+                            progressDialog = SweetAlertDialog(
+                                this@DetailPickupActivity,
+                                SweetAlertDialog.SUCCESS_TYPE
+                            )
+                                .setTitleText(it.data)
+                            progressDialog?.hideConfirmButton()
+                            progressDialog?.show()
+                            delay(1000)
+                            progressDialog?.dismissWithAnimation()
                         }
                     }
                 }

@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 
 @Entity(tableName = "OfflineWasteOrder")
 data class WasteOrderEntity(
@@ -23,3 +24,22 @@ data class WasteOrderEntity(
     val driverName: String? = "",
     val distance: Double
 )
+
+fun WasteOrderEntity.asExternalModel(): WasteOrderModel {
+    return WasteOrderModel(
+        id = orderId,
+        consumerName = consumerName,
+        date = date,
+        address = address,
+        pickUpDate = pickUpDate,
+        status = OrderStatus.valueOf(status),
+        agent = agent,
+        agentAddress = agentAddress,
+        agentPhone = agentPhone,
+        wasteBox = wasteBox?.map { it.asExternalLayer() } ?: listOf(),
+        total = 0,
+        description = null,
+        driverName = null,
+        distance = 0.0
+    )
+}
