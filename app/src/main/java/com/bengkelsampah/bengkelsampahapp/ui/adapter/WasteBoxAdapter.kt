@@ -36,7 +36,7 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,
-                wasteSold.waste.pricePerUnit,
+                wasteSold.waste.pricePerUnit.toString(),
                 wasteSold.waste.unit
             )
             tvWasteWeight.text = wasteSold.amount.toString()
