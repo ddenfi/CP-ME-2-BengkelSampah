@@ -56,4 +56,11 @@ data class WasteBoxModel(
 }
 
 fun WasteBoxModel.asWasteBoxEntity() =
-    WasteBoxEntity(wasteId = waste.wasteId, name = waste.name, amount = amount)
+    WasteBoxEntity(
+        wasteId = waste.wasteId,
+        name = waste.name,
+        amount = amount,
+        unit = waste.unit,
+        pricePerUnit = waste.pricePerUnit,
+        wasteType = waste.wasteType
+    )

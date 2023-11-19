@@ -1,8 +1,11 @@
 package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemPickupBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
@@ -25,7 +28,7 @@ class PickupOrderAdapter(
     inner class PickupOrderViewHolder(private val binding: ItemPickupBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WasteOrderModel) {
-            with(binding){
+            with(binding) {
                 tvPickupCustomerName.text = item.consumerName
                 tvPickupStatus.text = item.status.statusName
                 tvPickupDistance.text = "3Km"
@@ -33,6 +36,12 @@ class PickupOrderAdapter(
                 tvPickupVehicle.text = "Pick-up"
             }
 
+            val peekOrderAdapter = PickupOrderPeekAdapter(item.wasteBox.subList(0, 3))
+            binding.rvItemPickupPeekOrder.layoutManager = LinearLayoutManager(binding.root.context)
+            binding.rvItemPickupPeekOrder.adapter = peekOrderAdapter
+            if (item.wasteBox.size > 3) {
+                binding.ivItemPickupMore.visibility = View.VISIBLE
+            }
             binding.root.setOnClickListener {
                 onItemClickCallback.onItemClicked(item)
             }

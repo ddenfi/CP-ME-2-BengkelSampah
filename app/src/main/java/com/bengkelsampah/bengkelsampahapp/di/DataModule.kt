@@ -50,7 +50,7 @@ interface DataModule {
 
     @Binds
     fun bindsPickupWasteRepository(
-        pickupWasteRepository: PickupWasteRepositoryImpl = PickupWasteRepositoryImpl()
+        pickupWasteRepository: PickupWasteRepositoryImpl
     ): PickupWasteRepository
 
 

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Upsert
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteOrderEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +18,7 @@ interface WasteOrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE, entity = WasteOrderEntity::class)
     fun insertOrders(userWasteOrder:List<WasteOrderEntity>)
+
+    @Upsert
+    suspend fun upsertOrder(userWasteOrder: WasteOrderEntity)
 }

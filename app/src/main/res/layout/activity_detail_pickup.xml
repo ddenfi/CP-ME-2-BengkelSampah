@@ -352,6 +352,7 @@
                     android:layout_weight="1" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detailPickup_editOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Edit"
@@ -521,6 +522,15 @@
                     android:layout_marginVertical="12dp"
                     android:backgroundTint="?attr/colorPrimary"
                     android:text="Pick Up" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detailPickup_finishedOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="12dp"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:text="Finsih Order"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <com.facebook.shimmer.ShimmerFrameLayout
@@ -592,6 +602,5 @@
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
         </FrameLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,9 @@
             android:name=".ui.driverhistory.HistoryDriverDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.pickupwaste.EditWasteBoxActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.jualsampah.AddWasteActivity"
             android:exported="false" />
         <activity
@@ -37,8 +40,9 @@
             android:name=".ui.pickupwaste.DetailPickupActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.driver.DriverMainActivity"
-            android:exported="false" />
+            android:name=".ui.StartingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BengkelSampahApp.Splash"/>
         <activity
             android:name=".ui.pickupwaste.PickupActivity"
             android:exported="false" />
@@ -73,9 +77,8 @@
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.StartingActivity"
-            android:exported="true"
-            android:theme="@style/Theme.BengkelSampahApp.Splash">
+            android:name=".ui.driver.DriverMainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

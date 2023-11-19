@@ -71,6 +71,7 @@ class PickupActivity : AppCompatActivity() {
         pickupAdapter.setOnItemClickCallback(object : PickupOrderAdapter.OnItemClickCallback {
             override fun onItemClicked(data: WasteOrderModel) {
                 val intent = Intent(this@PickupActivity, DetailPickupActivity::class.java)
+                intent.putExtra(ORDER_ID,data.id)
                 startActivity(intent)
             }
 
@@ -86,5 +87,9 @@ class PickupActivity : AppCompatActivity() {
             binding.ctnPickupShimmer.visibility = View.VISIBLE
         }
 
+    }
+
+    companion object{
+        const val ORDER_ID = "ORDER ID"
     }
 }
