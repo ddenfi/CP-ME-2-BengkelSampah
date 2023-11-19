@@ -1,11 +1,11 @@
 package com.bengkelsampah.bengkelsampahapp.domain.repository
 
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import kotlinx.coroutines.flow.Flow
 
 interface WasteBoxRepository {
-    fun getWasteBoxItems(): Flow<List<WasteSoldModel>>
+    fun getWasteBoxItems(): Flow<List<WasteBoxModel>>
 
     fun getWasteTypes(): Flow<List<WasteModel>>
 }

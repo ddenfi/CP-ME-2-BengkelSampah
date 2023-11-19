@@ -2,13 +2,21 @@ package com.bengkelsampah.bengkelsampahapp.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bengkelsampah.bengkelsampahapp.data.source.local.room.BsDatabase
-import com.bengkelsampah.bengkelsampahapp.data.source.local.room.KeranjangkuDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.MyBucketDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.NewsResourceDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteBoxDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteOrderDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteResourceDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.util.WasteOrderCallback
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -16,13 +24,36 @@ import javax.inject.Singleton
 object DataBaseModule {
     @Provides
     @Singleton
-    fun providesBsDatabase(@ApplicationContext context: Context): BsDatabase = Room.databaseBuilder(
+    fun providesBsDatabase(
+        @ApplicationContext context: Context,
+        provider: Provider<WasteOrderDao>
+    ): BsDatabase = Room.databaseBuilder(
         context, BsDatabase::class.java, "bs-database"
-    ).build()
+    ).createFromAsset("database/BSDatabase.db").addCallback(WasteOrderCallback(provider)).build()
 
     @Provides
-    fun providesKeranjangkuDao(
+    fun providesMyBucketDao(
         database: BsDatabase
-    ): KeranjangkuDao = database.keranjangkuDao()
+    ): MyBucketDao = database.myBucketDao()
+
+    @Provides
+    fun providesWasteBoxDao(
+        database: BsDatabase
+    ): WasteBoxDao = database.wasteBoxDao()
+
+    @Provides
+    fun providesWasteResourceDao(
+        database: BsDatabase
+    ): WasteResourceDao = database.wasteResourceDao()
+
+    @Provides
+    fun providesNewsResourceDao(
+        database: BsDatabase
+    ): NewsResourceDao = database.newsResourceDao()
+
+    @Provides
+    fun providesWasteOrderDao(
+        database: BsDatabase
+    ): WasteOrderDao = database.wasteOrderDao()
 
 }

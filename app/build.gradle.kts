@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
@@ -100,9 +101,12 @@ dependencies {
     //viewpager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
-    //viewpager indiator
+    //viewpager indicator
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     //splash screen
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    //gson converter
+    implementation("com.google.code.gson:gson:2.10.1")
 }
