@@ -12,7 +12,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -179,7 +179,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpWasteSold(waste: List<WasteSoldModel>) {
+    private fun setUpWasteSold(waste: List<WasteBoxModel>) {
         val wasteSoldAdapter = WasteSoldAdapter()
 
         historyDetailBinding.rvWasteSold.apply {

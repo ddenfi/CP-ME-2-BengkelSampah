@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityWasteBoxBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
@@ -86,9 +86,9 @@ class WasteBoxActivity : AppCompatActivity() {
         }
     }
 
-    private fun countTotalWeightAndPrice(wasteBoxItems: List<WasteSoldModel>) {
-        var totalWeight = 0
-        var totalPrice = 0
+    private fun countTotalWeightAndPrice(wasteBoxItems: List<WasteBoxModel>) {
+        var totalWeight = 0.0
+        var totalPrice = 0.0
         for (waste in wasteBoxItems) {
             totalWeight += waste.amount
             totalPrice += waste.waste.pricePerUnit * waste.amount
@@ -99,7 +99,7 @@ class WasteBoxActivity : AppCompatActivity() {
         binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice)
     }
 
-    private fun setUpWasteSold(wasteBoxItems: List<WasteSoldModel>) {
+    private fun setUpWasteSold(wasteBoxItems: List<WasteBoxModel>) {
         val wasteBoxAdapter = WasteBoxAdapter()
 
         binding.rvWasteBox.apply {
