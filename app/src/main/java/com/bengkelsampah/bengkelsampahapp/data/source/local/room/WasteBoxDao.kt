@@ -21,4 +21,7 @@ interface WasteBoxDao {
 
     @Delete(entity = WasteBoxEntity::class)
     fun deleteUserWaste(userWaste: WasteBoxEntity)
+
+    @Query("SELECT COUNT(*) FROM WasteBox")
+    fun countWasteBoxItems(): Flow<Int>
 }

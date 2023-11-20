@@ -11,4 +11,5 @@ interface WasteBoxRepository {
     fun addToWasteBox(waste: WasteBoxModel)
     fun searchWaste(query: String): Flow<List<WasteModel>>
     fun deleteFromWasteBox(waste: WasteBoxModel)
+    fun countWasteBoxItems(): Flow<Int>
 }

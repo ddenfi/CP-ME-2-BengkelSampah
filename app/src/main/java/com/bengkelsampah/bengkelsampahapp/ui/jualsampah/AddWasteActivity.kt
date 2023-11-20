@@ -1,7 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +8,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,9 +23,12 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteTypeAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class AddWasteActivity : AppCompatActivity() {
@@ -33,6 +36,7 @@ class AddWasteActivity : AppCompatActivity() {
     private val viewModel: WasteBoxViewModel by viewModels()
     private val wasteTypeAdapter = WasteTypeAdapter { wasteType -> adapterOnClick(wasteType) }
 
+    @com.google.android.material.badge.ExperimentalBadgeUtils
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWasteBinding.inflate(layoutInflater)
@@ -43,9 +47,26 @@ class AddWasteActivity : AppCompatActivity() {
 
         getWasteType()
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.countWasteBoxItems().collect { wasteBoxItemsNumber ->
+                    binding.fabWasteBox.viewTreeObserver.addOnGlobalLayoutListener {
+                        val badgeDrawable = BadgeDrawable.create(this@AddWasteActivity)
+//                        badgeDrawable.number = wasteBoxItemsNumber
+//                        Log.d("TAG", "onCreate: $wasteBoxItemsNumber")
+
+                        BadgeUtils.attachBadgeDrawable(badgeDrawable, binding.fabWasteBox, null)
+                    }
+                }
+            }
+        }
+
         binding.fabWasteBox.setOnClickListener {
-            val wasteBoxIntent = Intent(this, WasteBoxActivity::class.java)
-            wasteBoxIntent.putExtra(WasteBoxActivity.PARTNER_ID, intent.getStringExtra(PARTNER_ID))
+            val wasteBoxIntent = Intent(this@AddWasteActivity, WasteBoxActivity::class.java)
+            wasteBoxIntent.putExtra(
+                WasteBoxActivity.PARTNER_ID,
+                intent.getStringExtra(PARTNER_ID)
+            )
             startActivity(wasteBoxIntent)
         }
 
@@ -186,12 +207,10 @@ class AddWasteActivity : AppCompatActivity() {
                     btnDialogAdd.isEnabled = false
                     btnDialogAdd.setOnClickListener {
                         if (btnDialogAdd.text == getString(R.string.add_to_box)) {
-                            Log.d("TAG", "add: ${btnDialogAdd.text}")
                             viewModel.addToWasteBox(
                                 wasteType, edDialogWasteWeight.text.toString().toDouble()
                             )
                         } else if (btnDialogAdd.text == getString(R.string.remove_from_box)) {
-                            Log.d("TAG", "remove: ${btnDialogAdd.text}")
                             viewModel.deleteFromWasteBox(
                                 wasteType,
                                 edDialogWasteWeight.text.toString().toDouble()

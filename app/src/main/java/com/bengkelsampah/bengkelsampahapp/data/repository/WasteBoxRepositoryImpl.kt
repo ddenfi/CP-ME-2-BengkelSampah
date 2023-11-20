@@ -61,4 +61,6 @@ class WasteBoxRepositoryImpl @Inject constructor(
             wasteBoxDao.deleteUserWaste(waste.asWasteBoxEntity())
         }
     }
+
+    override fun countWasteBoxItems(): Flow<Int> = wasteBoxDao.countWasteBoxItems()
 }

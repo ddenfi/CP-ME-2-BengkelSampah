@@ -63,4 +63,10 @@ class WasteBoxViewModel @Inject constructor(
 
     fun deleteFromWasteBox(waste: WasteModel, amount: Double) =
         wasteBoxRepository.deleteFromWasteBox(WasteBoxModel(waste, amount))
+
+    fun countWasteBoxItems() = wasteBoxRepository.countWasteBoxItems().stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        0
+    )
 }
