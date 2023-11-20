@@ -19,6 +19,7 @@ import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
 import com.bengkelsampah.bengkelsampahapp.ui.moneybag.MoneyBagActivity
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity
+import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -35,19 +36,26 @@ class HomeDriverFragment : Fragment() {
     ): View {
         _binding = FragmentHomeDriverBinding.inflate(inflater, container, false)
 
-        setupNavigation()
-        setupView()
-
-        return binding.root
-    }
-
-    private fun setupView() {
         val newsAdapter = NewsAdapter()
         binding.rvDriverHomeNews.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_0)
+                )
+            )
         }
 
+        setupNavigation()
+
+        setupView(newsAdapter)
+
+        return binding.root
+    }
+
+    private fun setupView(newsAdapter: NewsAdapter) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {

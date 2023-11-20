@@ -32,7 +32,7 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
 
 
         @SuppressLint("StringFormatMatches")
-        fun bind(wasteSold: WasteSoldModel) {
+        fun bind(wasteSold: WasteBoxModel) {
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,

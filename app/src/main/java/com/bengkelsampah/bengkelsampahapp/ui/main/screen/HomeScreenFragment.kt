@@ -50,7 +50,7 @@ class HomeScreenFragment : Fragment() {
             )
         }
 
-        navigation()
+        setupNavigation()
 
         setUpView(newsAdapter)
 
@@ -116,7 +116,7 @@ class HomeScreenFragment : Fragment() {
         }
     }
 
-    private fun navigation() {
+    private fun setupNavigation() {
 
         binding.btnHomeJualSampah.setOnClickListener {
             val intent = Intent(activity, PartnerActivity::class.java)
