@@ -61,8 +61,10 @@ class WasteBoxActivity : AppCompatActivity() {
                         binding.wasteBoxPage.visibility = View.VISIBLE
 
                         if (wasteBoxUiState.wasteBoxItems.isEmpty()) {
+                            binding.btnFinish.isEnabled = false
                             binding.tvWasteBoxEmpty.visibility = View.VISIBLE
                         } else {
+                            binding.btnFinish.isEnabled = true
                             binding.tvWasteBoxEmpty.visibility = View.GONE
                             setUpWasteSold(wasteBoxUiState.wasteBoxItems)
                         }
