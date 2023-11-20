@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface WasteBoxRepository {
     fun getWasteBoxItems(): Flow<List<WasteBoxModel>>
 
-    fun getWasteTypes(): Flow<List<WasteModel>>
+    fun getAllWastes(): Flow<List<WasteModel>>
 }

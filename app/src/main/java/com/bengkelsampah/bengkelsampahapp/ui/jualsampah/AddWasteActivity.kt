@@ -51,7 +51,7 @@ class AddWasteActivity : AppCompatActivity() {
 
     private fun getWasteType() {
         lifecycleScope.launch {
-            viewModel.getWasteTypes().collect { addWasteUiState ->
+            viewModel.getAllWastes().collect { addWasteUiState ->
                 when (addWasteUiState) {
                     is AddWasteUiState.Success -> {
                         binding.rvWasteType.visibility = View.VISIBLE
