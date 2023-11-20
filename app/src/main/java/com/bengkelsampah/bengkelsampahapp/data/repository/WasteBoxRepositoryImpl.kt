@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.data.repository
 
+import android.util.Log
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteBoxEntity
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteResourceEntity
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.asExternalLayer
@@ -15,9 +16,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 class WasteBoxRepositoryImpl @Inject constructor(
     private val wasteResourceDao: WasteResourceDao,
@@ -62,5 +65,7 @@ class WasteBoxRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun countWasteBoxItems(): Flow<Int> = wasteBoxDao.countWasteBoxItems()
+    override fun countWasteBoxItems(): Flow<Int> = wasteBoxDao.countWasteBoxItems().onEach {
+        Log.d("TAG", "countWasteBoxItems:${it} ")
+    }
 }
