@@ -114,6 +114,7 @@
     <string name="waste_box">Kotak sampah</string>
     <string name="dialog_add_waste_title">Tambahkan Sampah Anda</string>
     <string name="initial_weight">0</string>
+    <string name="waste_weight">%.1f %s</string>
 
     <string name="home">Home</string>
     <string name="history">Riwayat</string>

@@ -30,7 +30,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/materialCardView"
+        app:layout_constraintBottom_toTopOf="@id/card_estimation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
@@ -366,10 +366,10 @@
 
     <!-- Bottom Drawer -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+        android:id="@+id/card_estimation"
+        style="?attr/materialCardViewElevatedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -386,7 +386,8 @@
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/waste_sold_estimation" />
+                android:text="@string/waste_sold_estimation"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -406,16 +407,16 @@
                         android:text="@string/weight" />
 
                     <TextView
+                        android:id="@+id/tv_total_weight"
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/ic_weight"
                         android:drawablePadding="8dp"
                         android:gravity="center"
-                        android:text="7 Kg"
-                        android:textStyle="bold" />
-
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_weight"
+                        tools:text="@string/waste_weight" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -430,35 +431,29 @@
                         android:text="@string/price" />
 
                     <TextView
+                        android:id="@+id/tv_estimation_price"
                         style="@style/TextAppearance.Material3.BodyMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:drawableStart="@drawable/ic_money"
                         android:drawablePadding="8dp"
                         android:gravity="center"
-                        android:text="Rp 93.000"
-                        android:textStyle="bold" />
-
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_money"
+                        tools:text="@string/price_value" />
                 </LinearLayout>
-
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_requestPickUp_formOrder"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@color/md_theme_light_primary"
                 android:fontFamily="@font/inter_semi_bold"
                 android:text="@string/request_pick_up_fo"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
-
+                android:textColor="@color/white"
+                app:cornerRadius="12dp" />
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
     <!-- End of Bottom Drawer -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
