@@ -50,6 +50,10 @@ class WasteBoxViewModel @Inject constructor(
             }
         }
 
+    fun getWasteItemById(id: String): Flow<Double> =
+        wasteBoxRepository.getWasteBoxItemById(id)
+            .map { it?.amount ?: 0.0 }
+
     fun addToWasteBox(waste: WasteModel, amount: Double) =
         wasteBoxRepository.addToWasteBox(WasteBoxModel(waste, amount))
 

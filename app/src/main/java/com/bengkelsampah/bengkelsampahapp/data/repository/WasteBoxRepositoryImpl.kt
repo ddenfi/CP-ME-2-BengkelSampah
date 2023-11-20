@@ -32,6 +32,9 @@ class WasteBoxRepositoryImpl @Inject constructor(
             .onStart { delay(2000) }
             .map { it.map(WasteResourceEntity::asExternalModel) }
 
+    override fun getWasteBoxItemById(id: String): Flow<WasteBoxModel?> =
+        wasteBoxDao.getWasteBoxItemById(id).map { it?.asExternalLayer() }
+
     override fun addToWasteBox(waste: WasteBoxModel) {
         CoroutineScope(Dispatchers.IO).launch {
             wasteBoxDao.insertUserWaste(

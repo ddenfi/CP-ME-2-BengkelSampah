@@ -48,7 +48,7 @@ class AddWasteActivity : AppCompatActivity() {
             startActivity(wasteBoxIntent)
         }
 
-        binding.searchBarWaste.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        binding.searchBarWaste.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -126,7 +126,7 @@ class AddWasteActivity : AppCompatActivity() {
     }
 
     private fun setUpWasteType(waste: List<WasteModel>) {
-                binding.rvWasteType.apply {
+        binding.rvWasteType.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = wasteTypeAdapter
             addItemDecoration(
@@ -149,7 +149,41 @@ class AddWasteActivity : AppCompatActivity() {
 
         dialogBinding.apply {
             tvDialogWasteName.text = wasteType.name
-            edDialogWasteWeight.setText(getString(R.string.initial_weight))
+            lifecycleScope.launch {
+                viewModel.getWasteItemById(wasteType.wasteId).collect { amount ->
+                    edDialogWasteWeight.setText(amount.toString())
+                    edDialogWasteWeight.addTextChangedListener(object : TextWatcher {
+                        override fun beforeTextChanged(
+                            p0: CharSequence?,
+                            p1: Int,
+                            p2: Int,
+                            p3: Int
+                        ) {
+                        }
+
+                        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                        override fun afterTextChanged(editable: Editable?) {
+                            if (editable.toString().isNotEmpty()) {
+                                edDialogWasteWeight.error = null
+                                if (amount != 0.0 && editable.toString().toDouble() == 0.0) {
+                                    btnDialogAdd.text = getString(R.string.remove_from_box)
+                                    btnDialogAdd.isEnabled = true
+                                } else if (amount != 0.0) {
+                                    btnDialogAdd.text = getString(R.string.add_to_box)
+                                    btnDialogAdd.isEnabled = true
+                                } else {
+                                    btnDialogAdd.isEnabled = editable.toString().toDouble() != 0.0
+                                }
+                            } else {
+                                edDialogWasteWeight.error = getString(R.string.weight_error)
+                                btnDialogAdd.isEnabled = false
+                            }
+                        }
+                    })
+                }
+            }
+
             tvDialogPricePerUnit.text = getString(
                 R.string.price_per_unit_value,
                 wasteType.pricePerUnit.toString(),
@@ -182,26 +216,14 @@ class AddWasteActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
 
-            edDialogWasteWeight.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-                override fun afterTextChanged(editable: Editable?) {
-                    if (editable.toString().isNotEmpty()) {
-                        edDialogWasteWeight.error = null
-                        btnDialogAdd.isEnabled = editable.toString().toDouble() != 0.0
-                    } else {
-                        edDialogWasteWeight.error = getString(R.string.weight_error)
-                        btnDialogAdd.isEnabled = false
-                    }
-                }
-            })
-
             btnDialogAdd.isEnabled = false
-            btnDialogAdd.setOnClickListener {
-                viewModel.addToWasteBox(wasteType, edDialogWasteWeight.text.toString().toDouble())
-                dialog.dismiss()
+            if (btnDialogAdd.text == getString(R.string.add_to_box)) {
+                btnDialogAdd.setOnClickListener {
+                    viewModel.addToWasteBox(
+                        wasteType, edDialogWasteWeight.text.toString().toDouble()
+                    )
+                    dialog.dismiss()
+                }
             }
         }
         dialog.show()

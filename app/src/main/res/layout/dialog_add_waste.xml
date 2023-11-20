@@ -135,6 +135,6 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/add"
+        android:text="@string/add_to_box"
         app:cornerRadius="12dp" />
 </androidx.appcompat.widget.LinearLayoutCompat>

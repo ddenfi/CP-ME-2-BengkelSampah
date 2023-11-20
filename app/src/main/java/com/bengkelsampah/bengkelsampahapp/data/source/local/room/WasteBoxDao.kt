@@ -14,4 +14,7 @@ interface WasteBoxDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE, entity = WasteBoxEntity::class)
     fun insertUserWaste(userWaste: WasteBoxEntity)
+
+    @Query("SELECT * FROM WasteBox WHERE wasteId = :id")
+    fun getWasteBoxItemById(id: String): Flow<WasteBoxEntity?>
 }
