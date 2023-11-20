@@ -8,5 +8,5 @@ import java.util.UUID
 interface PartnerRepository {
     fun getPartners(): Flow<GetPartner>
 
-    fun getPartnersById(partnerId: UUID): Flow<PartnerById>
+    fun getPartnersById(partnerId: String): Flow<PartnerById>
 }
