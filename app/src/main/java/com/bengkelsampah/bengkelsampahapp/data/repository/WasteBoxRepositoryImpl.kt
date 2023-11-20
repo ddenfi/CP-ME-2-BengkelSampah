@@ -8,6 +8,7 @@ import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteBoxDao
 import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteResourceDao
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.asWasteBoxEntity
 import com.bengkelsampah.bengkelsampahapp.domain.repository.WasteBoxRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,4 +55,10 @@ class WasteBoxRepositoryImpl @Inject constructor(
         wasteResourceDao.searchWaste("%${query}%")
             .onStart { delay(1000) }
             .map { it.map(WasteResourceEntity::asExternalModel) }
+
+    override fun deleteFromWasteBox(waste: WasteBoxModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            wasteBoxDao.deleteUserWaste(waste.asWasteBoxEntity())
+        }
+    }
 }

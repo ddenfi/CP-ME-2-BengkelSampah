@@ -60,4 +60,7 @@ class WasteBoxViewModel @Inject constructor(
     fun onSearchQueryChange(text: String) {
         _searchText.value = text
     }
+
+    fun deleteFromWasteBox(waste: WasteModel, amount: Double) =
+        wasteBoxRepository.deleteFromWasteBox(WasteBoxModel(waste, amount))
 }

@@ -10,4 +10,5 @@ interface WasteBoxRepository {
     fun getWasteBoxItemById(id: String): Flow<WasteBoxModel?>
     fun addToWasteBox(waste: WasteBoxModel)
     fun searchWaste(query: String): Flow<List<WasteModel>>
+    fun deleteFromWasteBox(waste: WasteBoxModel)
 }

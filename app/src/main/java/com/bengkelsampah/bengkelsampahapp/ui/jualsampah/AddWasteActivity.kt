@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -181,6 +182,23 @@ class AddWasteActivity : AppCompatActivity() {
                             }
                         }
                     })
+
+                    btnDialogAdd.isEnabled = false
+                    btnDialogAdd.setOnClickListener {
+                        if (btnDialogAdd.text == getString(R.string.add_to_box)) {
+                            Log.d("TAG", "add: ${btnDialogAdd.text}")
+                            viewModel.addToWasteBox(
+                                wasteType, edDialogWasteWeight.text.toString().toDouble()
+                            )
+                        } else if (btnDialogAdd.text == getString(R.string.remove_from_box)) {
+                            Log.d("TAG", "remove: ${btnDialogAdd.text}")
+                            viewModel.deleteFromWasteBox(
+                                wasteType,
+                                edDialogWasteWeight.text.toString().toDouble()
+                            )
+                        }
+                        dialog.dismiss()
+                    }
                 }
             }
 
@@ -214,16 +232,6 @@ class AddWasteActivity : AppCompatActivity() {
 
             btnCloseDialog.setOnClickListener {
                 dialog.dismiss()
-            }
-
-            btnDialogAdd.isEnabled = false
-            if (btnDialogAdd.text == getString(R.string.add_to_box)) {
-                btnDialogAdd.setOnClickListener {
-                    viewModel.addToWasteBox(
-                        wasteType, edDialogWasteWeight.text.toString().toDouble()
-                    )
-                    dialog.dismiss()
-                }
             }
         }
         dialog.show()
