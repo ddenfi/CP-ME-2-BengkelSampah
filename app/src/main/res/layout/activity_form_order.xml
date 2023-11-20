@@ -35,332 +35,544 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <!-- Pick Up Address -->
-            <TextView
-                android:id="@+id/tv_pickUpAddress_formOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/pick_up_address_fo"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_pickUpAddress_formOrder"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fromOrder_orderPage"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/enter_pick_up_address_fo"
-                app:endIconDrawable="@drawable/ic_marker_alt_size"
-                app:endIconMode="custom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_pickUpAddress_formOrder">
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_pickUpAddress_formOrder"
+                <!-- Pick Up Address -->
+                <TextView
+                    android:id="@+id/tv_pickUpAddress_formOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="@string/pick_up_address_fo"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_pickUpAddress_formOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress" />
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/enter_pick_up_address_fo"
+                    app:endIconDrawable="@drawable/ic_marker_alt_size"
+                    app:endIconMode="custom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pickUpAddress_formOrder">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_pickUpAddress_formOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPostalAddress" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_addressDesc_formOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="8dp"
-                android:hint="@string/pick_up_address_desc_fo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_pickUpAddress_formOrder">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tiet_addressDesc_formOrder"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_addressDesc_formOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/pick_up_address_desc_fo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_pickUpAddress_formOrder">
 
-            </com.google.android.material.textfield.TextInputLayout>
-            <!-- End of Pick Up Address -->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_addressDesc_formOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
 
-            <!-- Agent Information -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_agentInfo_formOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_addressDesc_formOrder">
+                </com.google.android.material.textfield.TextInputLayout>
+                <!-- End of Pick Up Address -->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!-- Agent Information -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_agentInfo_formOrder"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_addressDesc_formOrder">
 
-                    <TextView
-                        android:id="@+id/tv_agentName_formOrder"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="8dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/inter_bold"
-                        android:maxLines="1"
-                        android:text="BS AGEN PASAR MINGGU"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_changeAgent_formOrder"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_changeAgent_formOrder"
-                        style="@style/Widget.AppCompat.Button.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@color/md_theme_light_primary"
-                        android:fontFamily="@font/inter_semi_bold"
-                        android:text="@string/change_agent_fo"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="9sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_agentDistance_formOrder"
-                        style="@style/Widget.AppCompat.Button.Colored"
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/md_theme_light_primary"
-                        android:clickable="false"
-                        android:drawableStart="@drawable/ic_marker"
-                        android:drawableTint="@color/white"
-                        android:fontFamily="@font/inter_semi_bold"
-                        android:minWidth="50dp"
-                        android:text="0.5 Km"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="9sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_agentName_formOrder" />
-
-                    <TextView
-                        android:id="@+id/tv_agentAddress_formOrder"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:text="Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540."
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/btn_agentDistance_formOrder" />
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/tv_agentPhoneNumber_formOrder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:drawableStart="@drawable/ic_phone_alt_size"
-                        android:drawablePadding="4dp"
-                        android:fontFamily="@font/inter_regular"
-                        android:text="089675234567"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_agentAddress_formOrder" />
+                        <TextView
+                            android:id="@+id/tv_agentName_formOrder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="8dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/inter_bold"
+                            android:maxLines="1"
+                            android:text="BS AGEN PASAR MINGGU"
+                            android:textSize="15sp"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_changeAgent_formOrder"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginVertical="20dp"
-                        app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
-                        app:cardCornerRadius="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_agentPhoneNumber_formOrder">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_changeAgent_formOrder"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/md_theme_light_primary"
+                            android:fontFamily="@font/inter_semi_bold"
+                            android:text="@string/change_agent_fo"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <LinearLayout
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_agentDistance_formOrder"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/md_theme_light_primary"
+                            android:clickable="false"
+                            android:drawableStart="@drawable/ic_marker"
+                            android:drawableTint="@color/white"
+                            android:fontFamily="@font/inter_semi_bold"
+                            android:minWidth="50dp"
+                            android:text="0.5 Km"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="9sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_agentName_formOrder" />
+
+                        <TextView
+                            android:id="@+id/tv_agentAddress_formOrder"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540."
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/btn_agentDistance_formOrder" />
 
-                            <ImageView
-                                android:id="@+id/iv_agentInfo_formOrder"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/ic_info_outline"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/tv_agentPhoneNumber_formOrder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/ic_phone_alt_size"
+                            android:drawablePadding="4dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="089675234567"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_agentAddress_formOrder" />
 
-                            <TextView
-                                android:id="@+id/tv_agentInfo_formOrder"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/inter"
-                                android:padding="8dp"
-                                android:text="@string/agent_note_fo"
-                                android:textColor="@color/black"
-                                android:textSize="12sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@id/iv_agentInfo_formOrder"
-                                app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginVertical="20dp"
+                            app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_agentPhoneNumber_formOrder">
 
-                        </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
 
-                    </androidx.cardview.widget.CardView>
+                                <ImageView
+                                    android:id="@+id/iv_agentInfo_formOrder"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="10dp"
+                                    android:src="@drawable/ic_info_outline"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                                <TextView
+                                    android:id="@+id/tv_agentInfo_formOrder"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter"
+                                    android:padding="8dp"
+                                    android:text="@string/agent_note_fo"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="@id/iv_agentInfo_formOrder"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-            </com.google.android.material.card.MaterialCardView>
-            <!--End of Agent Information -->
+                            </LinearLayout>
 
-            <!-- List of Waste -->
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/cv_agentInfo_formOrder">
+                        </androidx.cardview.widget.CardView>
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <!--End of Agent Information -->
+
+                <!-- List of Waste -->
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/cv_agentInfo_formOrder">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.TitleMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/waste_total_fo" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_addWaste_formOrder"
+                            style="@style/Widget.AppCompat.Button.Colored"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:background="@color/md_theme_light_primary"
+                            android:fontFamily="@font/inter_semi_bold"
+                            android:text="@string/add_waste_fo"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="9sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/waste_name" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/waste_unit" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/waste_price_unit" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/price" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_daftar_sampah" />
+                </LinearLayout>
+                <!-- End of List of Waste -->
+
+                <!-- Payment Method -->
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                     <TextView
                         style="@style/TextAppearance.Material3.TitleMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/waste_total_fo" />
+                        android:text="@string/payment_method_fo" />
 
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_addWaste_formOrder"
-                        style="@style/Widget.AppCompat.Button.Colored"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:layout_marginHorizontal="16dp"
-                        android:background="@color/md_theme_light_primary"
-                        android:fontFamily="@font/inter_semi_bold"
-                        android:text="@string/add_waste_fo"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="9sp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:minWidth="100dp">
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:layout_marginVertical="8dp"
+                                android:text="@string/cash" />
+
+                        </RadioGroup>
+
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
+                <!-- End of Payment Method -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_fromOrder_orderPage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    android:clipChildren="false">
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/waste_name" />
+                        android:orientation="vertical">
+                        <View
+                            android:layout_width="80dp"
+                            android:layout_height="24dp"
+                            android:background="@drawable/bg_shimmer_placeholder"
+                            android:layout_marginBottom="8dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_shimmer_placeholder"
+                            android:layout_marginBottom="8dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_shimmer_placeholder"
+                            android:layout_marginBottom="16dp"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/waste_unit" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/waste_price_unit" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/price" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    tools:itemCount="4"
-                    tools:listitem="@layout/item_daftar_sampah" />
-            </LinearLayout>
-            <!-- End of List of Waste -->
-
-            <!-- Payment Method -->
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="30dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-                <TextView
-                    style="@style/TextAppearance.Material3.TitleMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/payment_method_fo" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:minWidth="100dp">
-
-                    <RadioGroup
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginVertical="8dp"
-                            android:text="@string/cash" />
+                            android:padding="16dp"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <View
+                                    android:layout_width="150dp"
+                                    android:layout_height="24dp"
+                                    android:background="@drawable/bg_shimmer_placeholder"
+                                    android:layout_marginBottom="8dp"/>
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="1dp"
+                                    android:layout_weight="1"/>
+                                <View
+                                    android:layout_width="80dp"
+                                    android:layout_height="24dp"
+                                    android:background="@drawable/bg_shimmer_placeholder"
+                                    android:layout_marginBottom="8dp"/>
+                            </LinearLayout>
+                            <View
+                                android:layout_width="60dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder"
+                                android:layout_marginBottom="24dp"/>
 
-                    </RadioGroup>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder"
+                                android:layout_marginBottom="8dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder"
+                                android:layout_marginBottom="16dp"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="32dp"
+                                android:background="@drawable/bg_shimmer_placeholder"
+                                android:layout_marginBottom="8dp"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                </com.google.android.material.card.MaterialCardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp">
+                        <View
+                            android:layout_width="80dp"
+                            android:layout_height="24dp"
+                            android:background="@drawable/bg_shimmer_placeholder"
+                            android:layout_marginBottom="8dp"/>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"/>
 
-            </LinearLayout>
-            <!-- End of Payment Method -->
+                        <View
+                            android:layout_width="80dp"
+                            android:layout_height="24dp"
+                            android:background="@drawable/bg_shimmer_placeholder"
+                            android:layout_marginBottom="8dp"/>
+                    </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:columnCount="4">
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                        <View
+                            android:layout_width="50dp"
+                            android:layout_height="24dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/bg_shimmer_placeholder" />
+
+                    </GridLayout>
+
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/bg_shimmer_placeholder"
+                        android:layout_marginTop="16dp"/>
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/bg_shimmer_placeholder"
+                        android:layout_marginTop="16dp"/>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </FrameLayout>
 
     </ScrollView>
 
@@ -374,86 +586,159 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="16dp">
-
-            <TextView
-                style="@style/TextAppearance.Material3.TitleMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/waste_sold_estimation"
-                android:textStyle="bold" />
-
+            android:layout_height="wrap_content">
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/fromOrder_bottomActionMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="16dp">
 
-                <LinearLayout
+                <TextView
+                    style="@style/TextAppearance.Material3.TitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="25dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/TextAppearance.Material3.LabelSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/weight" />
-
-                    <TextView
-                        android:id="@+id/tv_total_weight"
-                        style="@style/TextAppearance.Material3.BodyMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        app:drawableStartCompat="@drawable/ic_weight"
-                        tools:text="@string/waste_weight" />
-                </LinearLayout>
+                    android:text="@string/waste_sold_estimation"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="16dp">
 
-                    <TextView
-                        style="@style/TextAppearance.Material3.LabelSmall"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/price" />
+                        android:layout_marginEnd="25dp"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_estimation_price"
-                        style="@style/TextAppearance.Material3.BodyMedium"
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/weight" />
+
+                        <TextView
+                            android:id="@+id/tv_total_weight"
+                            style="@style/TextAppearance.Material3.BodyMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_weight"
+                            tools:text="@string/waste_weight" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        app:drawableStartCompat="@drawable/ic_money"
-                        tools:text="@string/price_value" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextAppearance.Material3.LabelSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/price" />
+
+                        <TextView
+                            android:id="@+id/tv_estimation_price"
+                            style="@style/TextAppearance.Material3.BodyMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_money"
+                            tools:text="@string/price_value" />
+                    </LinearLayout>
                 </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_requestPickUp_formOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/inter_semi_bold"
+                    android:text="@string/request_pick_up_fo"
+                    android:textColor="@color/white"
+                    app:cornerRadius="12dp" />
             </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_requestPickUp_formOrder"
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_fromOrder_bottomActionMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/inter_semi_bold"
-                android:text="@string/request_pick_up_fo"
-                android:textColor="@color/white"
-                app:cornerRadius="12dp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="16dp">
+
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+
+                            <View
+                                android:layout_width="50dp"
+                                android:layout_height="24dp"
+                                android:background="@drawable/bg_shimmer_placeholder" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginVertical="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_shimmer_placeholder" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
     <!-- End of Bottom Drawer -->
 </androidx.constraintlayout.widget.ConstraintLayout>
