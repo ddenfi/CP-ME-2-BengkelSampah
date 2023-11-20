@@ -12,14 +12,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeDriverBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.NewsResourceModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.NewsAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
 import com.bengkelsampah.bengkelsampahapp.ui.moneybag.MoneyBagActivity
+import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity
+import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity.Companion.NEWS_RESOURCE
+import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -91,13 +97,33 @@ class HomeDriverFragment : Fragment() {
                 launch {
                     viewModel.newsUiState.collect { uiState ->
                         when (uiState) {
-                            is NewsUiState.Error -> TODO()
-                            NewsUiState.Loading ->{
-                                showLoading(true,binding.driverHomeNewsShimmer)
+                            is NewsUiState.Error -> {
+                                val sweetAlertDialog = SweetAlertDialog(
+                                    context,
+                                    SweetAlertDialog.ERROR_TYPE
+                                ).setTitleText(uiState.message)
+                                sweetAlertDialog.show()
                             }
+
+                            NewsUiState.Loading -> {
+                                showLoading(true, binding.driverHomeNewsShimmer)
+                            }
+
                             is NewsUiState.Success -> {
-                                showLoading(false,binding.driverHomeNewsShimmer)
+                                showLoading(false, binding.driverHomeNewsShimmer)
+
                                 newsAdapter.submitList(uiState.news)
+
+                                newsAdapter.setOnItemClickCallback(object :
+                                    NewsAdapter.OnItemClickCallback {
+                                    override fun onItemClicked(data: NewsResourceModel) {
+                                        val intent =
+                                            Intent(activity, NewsFeedDetailActivity::class.java)
+                                        intent.putExtra(NEWS_RESOURCE, data)
+                                        startActivity(intent)
+                                    }
+
+                                })
                             }
                         }
 
@@ -126,7 +152,8 @@ class HomeDriverFragment : Fragment() {
         }
 
         binding.btnDriverHomeArtikel.setOnClickListener {
-            //TODO Connect to article list
+            val intent = Intent(activity, NewsFeedActivity::class.java)
+            startActivity(intent)
         }
         binding.btnDriverHomeMoneyBag.setOnClickListener {
             val intent = Intent(activity, MoneyBagActivity::class.java)
