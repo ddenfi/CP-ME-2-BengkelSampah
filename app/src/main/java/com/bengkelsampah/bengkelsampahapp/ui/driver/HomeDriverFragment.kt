@@ -2,6 +2,8 @@ package com.bengkelsampah.bengkelsampahapp.ui.driver
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,8 +69,18 @@ class HomeDriverFragment : Fragment() {
                 launch {
                     viewModel.dashboardUiState.collect { uiState ->
                         when (uiState) {
-                            is DashboardUiState.Error -> TODO()
-                            DashboardUiState.Loading -> {
+                            is DriverDashboardUiState.Error -> {
+                                val dialog = SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText(uiState.message)
+                                    .hideConfirmButton()
+
+                                dialog.show()
+                                Handler(Looper.getMainLooper()).postDelayed(
+                                    { dialog.dismissWithAnimation() },
+                                    1500
+                                )
+                            }
+                            is DriverDashboardUiState.Loading -> {
                                 showLoading(
                                     true,
                                     binding.driverHomeShimmer,
@@ -77,7 +89,7 @@ class HomeDriverFragment : Fragment() {
                                 binding.driverHomeMenuShimmer.startShimmer()
                             }
 
-                            is DashboardUiState.Success -> {
+                            is DriverDashboardUiState.Success -> {
                                 showLoading(
                                     false,
                                     binding.driverHomeShimmer,

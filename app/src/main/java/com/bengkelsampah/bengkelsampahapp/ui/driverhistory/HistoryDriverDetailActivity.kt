@@ -3,25 +3,40 @@ package com.bengkelsampah.bengkelsampahapp.ui.driverhistory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDriverDetailBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus.*
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailPdfFile
+import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HistoryDriverDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHistoryDriverDetailBinding
+
+    private val viewModel: DriverHistoryDetailViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDriverDetailBinding.inflate(layoutInflater)
@@ -30,8 +45,11 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val historyId = intent.getIntExtra(HistoryDetailActivity.HISTORY_ID, 0)
-        gettingDetailData(historyId)
+        val historyId = intent.getStringExtra(HistoryDetailActivity.HISTORY_ID)
+
+        historyId?.let {
+            gettingDetailData(historyId)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -41,36 +59,45 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun gettingDetailData(historyId: Int) {
+    private fun gettingDetailData(historyId: String) {
         lifecycleScope.launch {
-//            viewModel.getHistoryDetail(historyId).collect { historyDetailUiState ->
-//                when (historyDetailUiState) {
-//                    is HistoryDetailUiState.Success -> {
-//                        binding.shimmerHistoryDetail.visibility = View.GONE
-//                        binding.historyDetail.visibility = View.VISIBLE
-//                        setUpDetailPage(historyDetailUiState.history)
-//                    }
-//
-//                    is HistoryDetailUiState.Loading -> {
-//                        binding.historyDetail.visibility = View.GONE
-//                        binding.shimmerHistoryDetail.visibility = View.VISIBLE
-//                    }
-//
-//                    is HistoryDetailUiState.Error -> {
-//                        Toast.makeText(
-//                            this@HistoryDetailActivity,
-//                            historyDetailUiState.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                }
-//            }
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getHistoryById(historyId).collect { orderHistory ->
+                    when (orderHistory) {
+                        is Resource.Error -> {
+                            val dialog = SweetAlertDialog(
+                                this@HistoryDriverDetailActivity,
+                                SweetAlertDialog.ERROR_TYPE
+                            )
+                                .setTitleText(orderHistory.exception?.message.toString())
+                                .hideConfirmButton()
+
+                            dialog.show()
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { dialog.dismissWithAnimation() },
+                                1500
+                            )
+                        }
+
+                        is Resource.Loading -> {
+                            binding.historyDetail.visibility = View.GONE
+                            binding.shimmerHistoryDetail.visibility = View.VISIBLE
+                        }
+
+                        is Resource.Success -> {
+                            binding.shimmerHistoryDetail.visibility = View.GONE
+                            binding.historyDetail.visibility = View.VISIBLE
+                            setUpDetailPage(orderHistory.data)
+                        }
+                    }
+                }
+            }
         }
     }
 
-    private fun setUpDetailPage(history: HistoryModel) {
+    private fun setUpDetailPage(history: WasteOrderModel) {
         binding.apply {
-            tvStatus.text = history.status
+            tvStatus.text = history.status.statusName
             tvAgentName.text = history.agent
             tvAgentAddress.text = history.agentAddress
             tvAgentPhone.text =
@@ -83,7 +110,7 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
             tvPickUpAddress.text = history.address
             tvPickUpDescription.text = history.description
 
-            setUpWasteSold(history.waste)
+            setUpWasteSold(history.wasteBox)
             setHistoryStatusColor(history.status)
             setCancelButtonVisibility(history.status)
             setDownloadFileVisibility(history.status)
@@ -106,11 +133,11 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
 
             btnDownloadTransaction.setOnClickListener {
                 try {
-
-                    HistoryDetailPdfFile().generatePdfFile(
-                        this@HistoryDriverDetailActivity,
-                        history
-                    )
+//                    HistoryDetailPdfFile().generatePdfFile(
+//                        this@HistoryDriverDetailActivity,
+//                        history
+//                    )
+                    //TODO Make conversion to history model
                     Toast.makeText(
                         this@HistoryDriverDetailActivity,
                         getString(R.string.transaction_downloaded),
@@ -132,18 +159,18 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
         this.finish()
     }
 
-    private fun setDownloadFileVisibility(historyStatus: String) {
-        if (historyStatus == OrderStatus.DONE.statusName) {
+    private fun setDownloadFileVisibility(historyStatus: OrderStatus) {
+        if (historyStatus == DONE) {
             binding.btnDownloadTransaction.visibility = View.VISIBLE
         } else {
             binding.btnDownloadTransaction.visibility = View.GONE
         }
     }
 
-    private fun setCancelButtonVisibility(historyStatus: String) {
+    private fun setCancelButtonVisibility(historyStatus: OrderStatus) {
         binding.apply {
             when (historyStatus) {
-                OrderStatus.WAIT_CONFIRMATION.statusName -> btnCancelOrder.visibility =
+                WAIT_CONFIRMATION -> btnCancelOrder.visibility =
                     View.VISIBLE
 
                 else -> btnCancelOrder.visibility = View.GONE
@@ -151,23 +178,27 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setHistoryStatusColor(historyStatus: String) {
+    private fun setHistoryStatusColor(historyStatus: OrderStatus) {
         binding.apply {
             when (historyStatus) {
-                OrderStatus.WAIT_CONFIRMATION.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
+                WAIT_CONFIRMATION -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(WAIT_CONFIRMATION.color)
                 )
 
-                OrderStatus.DONE.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.DONE.color)
+                DONE -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(DONE.color)
                 )
 
-                OrderStatus.PROCESSED.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.PROCESSED.color)
+                PROCESSED -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(PROCESSED.color)
                 )
 
-                OrderStatus.CANCELLED.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.CANCELLED.color)
+                CANCELLED -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(CANCELLED.color)
+                )
+
+                PICKING_UP -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(PICKING_UP.color)
                 )
             }
         }

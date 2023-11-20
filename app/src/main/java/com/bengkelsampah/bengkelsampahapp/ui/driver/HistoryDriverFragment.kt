@@ -3,6 +3,8 @@ package com.bengkelsampah.bengkelsampahapp.ui.driver
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +12,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryDriverBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeDriverBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryDriverAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.driverhistory.HistoryDriverDetailActivity
@@ -25,6 +32,7 @@ import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HistoryDriverFragment : Fragment() {
@@ -84,11 +92,54 @@ class HistoryDriverFragment : Fragment() {
         val historyAdapter = HistoryDriverAdapter { history -> adapterOnClick(history) }
 
         viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.orderHistory.collect { orderHistory ->
+                    when (orderHistory) {
+                        is Resource.Error -> {
+                            val dialog = SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText(orderHistory.exception?.message.toString())
+                                .hideConfirmButton()
 
+                            dialog.show()
+                            Handler(Looper.getMainLooper()).postDelayed(
+                                { dialog.dismissWithAnimation() },
+                                1500
+                            )
+                        }
+                        is Resource.Loading -> {
+                            binding.tvHistoryEmpty.visibility = View.GONE
+                            binding.rvHistory.visibility = View.GONE
+                            binding.shimmerHistory.visibility = View.VISIBLE
+                        }
+
+                        is Resource.Success -> {
+                            binding.shimmerHistory.visibility = View.GONE
+
+                            if (orderHistory.data.isEmpty()) {
+                                binding.tvHistoryEmpty.visibility = View.VISIBLE
+                            } else {
+                                binding.tvHistoryEmpty.visibility = View.GONE
+                                binding.rvHistory.visibility = View.VISIBLE
+                                binding.rvHistory.apply {
+                                    layoutManager = LinearLayoutManager(context)
+                                    adapter = historyAdapter
+                                    addItemDecoration(
+                                        MarginItemDecoration(
+                                            resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                                            resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
+                                        )
+                                    )
+                                }
+                                historyAdapter.submitList(orderHistory.data)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
-    private fun adapterOnClick(history: HistoryModel) {
+    private fun adapterOnClick(history: WasteOrderModel) {
         val intent = Intent(this.requireContext(), HistoryDriverDetailActivity::class.java)
         intent.putExtra(HistoryDetailActivity.HISTORY_ID, history.id)
         startActivity(intent)

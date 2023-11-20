@@ -46,7 +46,7 @@ interface DataModule {
 
     @Binds
     fun bindsDriverHistoryRepository(
-        driverHistoryRepository: DriverHistoryRepositoryImpl = DriverHistoryRepositoryImpl()
+        driverHistoryRepository: DriverHistoryRepositoryImpl
     ): DriverHistoryRepository
 
     @Binds

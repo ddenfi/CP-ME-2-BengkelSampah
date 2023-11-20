@@ -6,6 +6,7 @@ import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.asResource
 import com.bengkelsampah.bengkelsampahapp.domain.repository.DriverHistoryRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.NewsRepository
+import com.bengkelsampah.bengkelsampahapp.domain.repository.PickupWasteRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
@@ -22,13 +23,14 @@ import javax.inject.Inject
 class DriverMainViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val driverHistoryRepository: DriverHistoryRepository,
+    private val pickupWasteRepository: PickupWasteRepository,
     private val newsRepository: NewsRepository
 ) : ViewModel() {
 
     val dashboardUiState = dashboardUiState().stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        DashboardUiState.Loading
+        DriverDashboardUiState.Loading
     )
 
     val newsUiState = newsUiState().stateIn(
@@ -37,9 +39,14 @@ class DriverMainViewModel @Inject constructor(
         NewsUiState.Loading
     )
 
-    private fun dashboardUiState(): Flow<DashboardUiState> {
-        return userRepository.userData.combine(driverHistoryRepository.getActiveTransaction()) { userData, activeTransaction ->
-            DashboardUiState.Success(userData, activeTransaction)
+    val orderHistory = driverHistoryRepository.getOrdersHistory().asResource().stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000), Resource.Loading()
+    )
+
+    private fun dashboardUiState(): Flow<DriverDashboardUiState> {
+        return userRepository.userData.combine(pickupWasteRepository.getAllOrders()) { userData, activeTransaction ->
+            DriverDashboardUiState.Success(userData, activeTransaction)
         }
     }
 

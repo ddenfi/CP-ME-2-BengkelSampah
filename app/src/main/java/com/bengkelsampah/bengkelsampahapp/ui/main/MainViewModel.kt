@@ -26,8 +26,12 @@ class MainViewModel @Inject constructor(
     private val historyRepository: HistoryRepository
 ) : ViewModel() {
 
-    val dashboardUiState = dashboardUiState().catch {
-        emit(DashboardUiState.Error(it.toString()))
+    val dashboardUiState = userRepository.userData.asResource().map {
+        when (it) {
+            is Resource.Error -> DashboardUiState.Error(it.exception?.message.toString())
+            is Resource.Loading -> DashboardUiState.Loading
+            is Resource.Success -> DashboardUiState.Success(it.data)
+        }
     }.stateIn(
         viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -55,11 +59,6 @@ class MainViewModel @Inject constructor(
             }
         }
 
-    private fun dashboardUiState(): Flow<DashboardUiState> {
-        return userRepository.userData.combine(historyRepository.getActiveTransaction()) { userData, activeTransaction ->
-            DashboardUiState.Success(userData, activeTransaction)
-        }
-    }
 
     private fun historyUiState(): Flow<HistoryUiState> =
         historyRepository.getActiveTransaction().asResource().map { resourceHistory ->

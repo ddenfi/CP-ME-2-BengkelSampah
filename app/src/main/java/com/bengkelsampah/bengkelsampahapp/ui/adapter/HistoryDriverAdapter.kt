@@ -10,20 +10,22 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryDriverBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus.*
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 
-class HistoryDriverAdapter(private val onClick: (HistoryModel) -> Unit) :
-    ListAdapter<HistoryModel, HistoryDriverAdapter.HistoryViewHolder>(
-        object : DiffUtil.ItemCallback<HistoryModel>() {
+class HistoryDriverAdapter(private val onClick: (WasteOrderModel) -> Unit) :
+    ListAdapter<WasteOrderModel, HistoryDriverAdapter.HistoryViewHolder>(
+        object : DiffUtil.ItemCallback<WasteOrderModel>() {
             override fun areItemsTheSame(
-                oldItem: HistoryModel,
-                newItem: HistoryModel
+                oldItem: WasteOrderModel,
+                newItem: WasteOrderModel
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: HistoryModel,
-                newItem: HistoryModel
+                oldItem: WasteOrderModel,
+                newItem: WasteOrderModel
             ): Boolean {
                 return oldItem == newItem
             }
@@ -39,27 +41,31 @@ class HistoryDriverAdapter(private val onClick: (HistoryModel) -> Unit) :
         private val tvTotal by lazy { binding.tvTotal }
         private val cardStatus by lazy { binding.cardStatus }
 
-        fun bind(history: HistoryModel) {
+        fun bind(history: WasteOrderModel) {
             tvPickUpDate.text = history.pickUpDate
             tvPickUpAddress.text = history.address
             tvOrderDate.text = history.date
-            tvStatus.text = history.status
+            tvStatus.text = history.status.statusName
 
             when (history.status) {
-                OrderStatus.WAIT_CONFIRMATION.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
+                WAIT_CONFIRMATION -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(WAIT_CONFIRMATION.color)
                 )
 
-                OrderStatus.DONE.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.DONE.color)
+                DONE -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(DONE.color)
                 )
 
-                OrderStatus.PROCESSED.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.PROCESSED.color)
+                PROCESSED -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(PROCESSED.color)
                 )
 
-                OrderStatus.CANCELLED.statusName -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(OrderStatus.CANCELLED.color)
+                CANCELLED -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(CANCELLED.color)
+                )
+
+                PICKING_UP -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(PICKING_UP.color)
                 )
             }
 
