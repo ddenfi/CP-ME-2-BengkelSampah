@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -38,7 +39,9 @@ class WasteBoxActivity : AppCompatActivity() {
         }
 
         binding.btnFinish.setOnClickListener {
-
+            val formIntent = Intent(this, FormOrderActivity::class.java)
+            formIntent.putExtra(FormOrderActivity.PARTNER_ID, intent.getStringExtra(PARTNER_ID))
+            startActivity(formIntent)
         }
     }
 
@@ -94,7 +97,8 @@ class WasteBoxActivity : AppCompatActivity() {
             totalPrice += waste.waste.pricePerUnit * waste.amount
         }
 
-        binding.tvTotalWeight.text = getString(R.string.waste_weight, totalWeight, WasteUnit.KG.abbreviation)
+        binding.tvTotalWeight.text =
+            getString(R.string.waste_weight, totalWeight, WasteUnit.KG.abbreviation)
         binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.toInt())
     }
 

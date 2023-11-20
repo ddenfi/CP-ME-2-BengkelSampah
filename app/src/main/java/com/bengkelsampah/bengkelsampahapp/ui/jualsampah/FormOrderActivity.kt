@@ -10,4 +10,8 @@ class FormOrderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form_order)
     }
+
+    companion object {
+        const val PARTNER_ID = "partner_id"
+    }
 }
