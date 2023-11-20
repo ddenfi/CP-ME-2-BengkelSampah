@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -49,6 +50,12 @@ class DriverMainViewModel @Inject constructor(
                 is Resource.Loading -> NewsUiState.Loading
                 is Resource.Success -> NewsUiState.Success(newsRes.data)
             }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            userRepository.setLoginStatus(false)
         }
     }
 }

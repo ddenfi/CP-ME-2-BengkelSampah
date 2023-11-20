@@ -1,5 +1,9 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class NewsResourceModel(
     var author: String,
     var title: String,
@@ -8,7 +12,7 @@ data class NewsResourceModel(
     var urlToImage: String,
     var publishedAt: String,
     var content: String
-) {
+):Parcelable {
     companion object {
         val dummyData = listOf(
             NewsResourceModel(

@@ -8,6 +8,7 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.network.ApiService
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.request.auth.LoginRequest
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserRole
 import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -28,6 +29,9 @@ class LoginViewModel @Inject constructor(
     private val _responseMessage = MutableLiveData<String>()
     val responseMessage: LiveData<String> get() = _responseMessage
 
+    private val _loginUserRole = MutableLiveData<UserRole>()
+    val loginUserRole:LiveData<UserRole> get() = _loginUserRole
+
     /**
      * Check login live data value
      */
@@ -38,6 +42,17 @@ class LoginViewModel @Inject constructor(
             try {
                 val response = apiService.postLogin(loginRequest)
                 if (response.isSuccessful) {
+                    //Login driver account
+
+                    val driverPhoneNumber = "08980978900"
+                    if (phoneNumber == driverPhoneNumber){
+                        _loginUserRole.postValue(UserRole.DRIVER)
+                        userRepository.setUserRole(UserRole.DRIVER)
+                    } else {
+                        _loginUserRole.postValue(UserRole.CONSUMER)
+                        userRepository.setUserRole(UserRole.CONSUMER)
+                    }
+
                     userRepository.setLoginStatus(true)
                     userRepository.setShouldShowOnboard(false)
 

@@ -10,6 +10,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityLoginBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserRole
+import com.bengkelsampah.bengkelsampahapp.ui.driver.DriverMainActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,7 +90,14 @@ class LoginActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             dialog.dismissWithAnimation()
-            val intent = Intent(this, MainActivity::class.java)
+            var intent = Intent()
+            viewModel.loginUserRole.observe(this@LoginActivity) {
+                intent = when (it) {
+                    UserRole.DRIVER -> Intent(this@LoginActivity, DriverMainActivity::class.java)
+
+                    UserRole.CONSUMER -> Intent(this, MainActivity::class.java)
+                }
+            }
             startActivity(intent)
             finish()
         }, 1500)

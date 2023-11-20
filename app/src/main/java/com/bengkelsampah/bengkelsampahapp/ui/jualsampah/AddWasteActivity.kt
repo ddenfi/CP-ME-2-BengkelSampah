@@ -50,13 +50,9 @@ class AddWasteActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.countWasteBoxItems().collect { wasteBoxItemsNumber ->
-                    binding.fabWasteBox.viewTreeObserver.addOnGlobalLayoutListener {
-                        val badgeDrawable = BadgeDrawable.create(this@AddWasteActivity)
-//                        badgeDrawable.number = wasteBoxItemsNumber
-//                        Log.d("TAG", "onCreate: $wasteBoxItemsNumber")
-
-                        BadgeUtils.attachBadgeDrawable(badgeDrawable, binding.fabWasteBox, null)
-                    }
+                    val badgeDrawable = BadgeDrawable.create(this@AddWasteActivity)
+                    badgeDrawable.number = wasteBoxItemsNumber
+                    BadgeUtils.attachBadgeDrawable(badgeDrawable, binding.fabWasteBox, null)
                 }
             }
         }

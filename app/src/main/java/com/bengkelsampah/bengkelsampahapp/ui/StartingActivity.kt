@@ -27,21 +27,12 @@ import javax.inject.Inject
 class StartingActivity : AppCompatActivity() {
     private lateinit var intent: Intent
     private val viewModel:StartingViewModel by viewModels()
-
-    @Inject
-    lateinit var wasteResourceDao:WasteResourceDao
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_starting)
 
         lifecycleScope.launch {
-            launch {
-                wasteResourceDao.getAllWasteResources().collect{
-                    Log.d("DB", it.toString())
-                }
-            }
             launch {
                 viewModel.getUserPreferences().collect{
                     navigate(it)
@@ -54,7 +45,7 @@ class StartingActivity : AppCompatActivity() {
     private fun navigate(userPreference:UserPreferencesDataModel) {
         val isLogin = userPreference.isLogin
         val showOnBoarding = userPreference.shouldShowOnboard
-        val userRole = UserRole.DRIVER
+        val userRole = userPreference.userRole
 
         intent = if (showOnBoarding) {
             Intent(this@StartingActivity, OnboardingActivity::class.java)
