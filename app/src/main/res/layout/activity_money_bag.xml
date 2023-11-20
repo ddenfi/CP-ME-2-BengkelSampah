@@ -17,10 +17,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingHorizontal="24dp"
-        android:paddingVertical="16dp"
-        android:clipToPadding="false">
+        android:paddingVertical="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,9 +35,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:text="My Point"
                 android:textColor="?attr/colorSurface"
-                android:text="My Point" />
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="0dp"
@@ -64,14 +64,16 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    app:tint="?attr/colorOnSurface"
-                    android:src="@drawable/ic_horizontal_menu"/>
+                    android:src="@drawable/ic_horizontal_menu"
+                    app:tint="?attr/colorOnSurface" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -103,12 +105,32 @@
                             android:layout_width="16dp"
                             android:layout_height="1dp" />
 
-                        <TextView
-                            style="@style/TextAppearance.Material3.HeadlineMedium"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            tools:text="25.000" />
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tv_moneybag_balancePoint"
+                                style="@style/TextAppearance.Material3.HeadlineMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:visibility="gone"
+                                tools:text="25.000" />
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/moneybag_balance_shimmer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:layout_width="150dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/bg_shimmer_placeholder" />
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+                        </FrameLayout>
+
+
                     </LinearLayout>
 
                     <TextView
@@ -123,277 +145,286 @@
             android:layout_width="1dp"
             android:layout_height="16dp" />
 
-        <LinearLayout
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_moneybag_withdraw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:shimmer_auto_start="false"
+            app:shimmer_base_alpha="1"
+            app:shimmer_highlight_alpha="0.5">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tukar Point"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
-
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alignmentMode="alignMargins"
-                android:columnCount="4"
-                android:rowCount="2">
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_columnWeight="1"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="8dp"
+                    android:text="Tukar Point"
+                    android:textStyle="bold" />
 
-                    <FrameLayout
-                        android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="50dp"
+                <GridLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="4"
+                    android:rowCount="2">
 
-                    <FrameLayout
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
 
-                    <FrameLayout
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
 
-                    <FrameLayout
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_columnWeight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
 
-                    <FrameLayout
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
 
-                    <FrameLayout
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
 
-                    <FrameLayout
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
 
-                    <FrameLayout
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="50dp"
-                        android:layout_height="50dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.4"
-                            android:background="@drawable/bg_dashboard_order" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="8dp"
-                            android:src="@drawable/ic_smartphone" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pulsa" />
-                </LinearLayout>
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="8dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.4"
+                                android:background="@drawable/bg_dashboard_order" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_smartphone" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulsa" />
+                    </LinearLayout>
 
 
-            </GridLayout>
+                </GridLayout>
 
-        </LinearLayout>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <Space
             android:layout_width="1dp"
@@ -413,15 +444,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical">
 
                     <TextView
+                        style="@style/TextAppearance.Material3.TitleLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/TextAppearance.Material3.TitleLarge"
-                        android:textStyle="bold"
-                        android:text="Riwayat" />
+                        android:text="Riwayat"
+                        android:textStyle="bold" />
 
                     <Space
                         android:layout_width="0dp"
@@ -433,15 +464,35 @@
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/ic_arrow_right"
                         android:gravity="center_vertical"
-                        android:textStyle="bold"
+                        android:text="Detail"
                         android:textColor="?attr/colorSecondary"
-                        android:text="Detail" />
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/rv_moneybag_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_moneybag_history"/>
+                    tools:listitem="@layout/item_moneybag_history" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/moneybag_history_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <include layout="@layout/item_moneybag_history_shimmer"/>
+                        <include layout="@layout/item_moneybag_history_shimmer"/>
+                        <include layout="@layout/item_moneybag_history_shimmer"/>
+                        <include layout="@layout/item_moneybag_history_shimmer"/>
+                        <include layout="@layout/item_moneybag_history_shimmer"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
