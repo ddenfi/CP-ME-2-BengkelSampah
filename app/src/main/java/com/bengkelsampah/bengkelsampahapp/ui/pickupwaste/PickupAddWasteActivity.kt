@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -140,8 +142,10 @@ class PickupAddWasteActivity : AppCompatActivity() {
 
         dialogBinding.apply {
             tvDialogWasteName.text = wasteType.name
-            tvDialogWasteWeight.text = if (isAdded) userWasteBox?.amount?.toInt()
-                .toString() else getString(R.string.initial_weight)
+            edDialogWasteWeight.setText(
+                if (isAdded) userWasteBox?.amount?.toInt()
+                    .toString() else getString(R.string.initial_weight)
+            )
             tvDialogPricePerUnit.text = getString(
                 R.string.price_per_unit_value,
                 wasteType.pricePerUnit.toString(),
@@ -149,31 +153,60 @@ class PickupAddWasteActivity : AppCompatActivity() {
             )
 
             chipDialogAdd.setOnClickListener {
-                val newValue = tvDialogWasteWeight.text.toString().toInt() + 1
-                tvDialogWasteWeight.text = newValue.toString()
+                var newValue = 0.0
+                if (edDialogWasteWeight.text.isNotEmpty()) {
+                    newValue = edDialogWasteWeight.text.toString().toDouble() + 1
+                } else {
+                    newValue++
+                }
+                edDialogWasteWeight.setText(newValue.toString())
             }
 
             chipDialogMinus.setOnClickListener {
-                val newValue = tvDialogWasteWeight.text.toString().toInt() - 1
-                tvDialogWasteWeight.text = newValue.toString()
+                var newValue = 0.0
+                if (edDialogWasteWeight.text.isNotEmpty()) {
+                    newValue = edDialogWasteWeight.text.toString().toDouble() - 1
+                }
+                if (newValue < 0) {
+                    edDialogWasteWeight.setText(getString(R.string.initial_weight))
+                } else {
+                    edDialogWasteWeight.setText(newValue.toString())
+                }
             }
 
             btnCloseDialog.setOnClickListener {
                 dialog.dismiss()
             }
 
-            btnDilaogAdd.setOnClickListener {
+            edDialogWasteWeight.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(editable: Editable?) {
+                    if (editable.toString().isNotEmpty()) {
+                        edDialogWasteWeight.error = null
+                        btnDialogAdd.isEnabled = editable.toString().toDouble() != 0.0
+                    } else {
+                        edDialogWasteWeight.error = getString(R.string.weight_error)
+                        btnDialogAdd.isEnabled = false
+                    }
+                }
+            })
+
+            btnDialogAdd.isEnabled = false
+            btnDialogAdd.setOnClickListener {
                 if (isAdded) {
                     mWasteBox.removeAt(userWasteBoxIndex)
                     mWasteBox.add(
                         WasteBoxModel(
                             waste = wasteType,
-                            amount = tvDialogWasteWeight.text.toString().toDouble()
+                            amount = edDialogWasteWeight.text.toString().toDouble()
                         )
                     )
                 } else {
                     mWasteBox.add(
-                        WasteBoxModel(wasteType, tvDialogWasteWeight.text.toString().toDouble())
+                        WasteBoxModel(wasteType, edDialogWasteWeight.text.toString().toDouble())
                     )
                 }
                 Log.d("TAG", mWasteBox.size.toString())

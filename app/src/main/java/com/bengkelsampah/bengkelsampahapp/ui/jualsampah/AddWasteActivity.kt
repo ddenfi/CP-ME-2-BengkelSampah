@@ -3,6 +3,8 @@ package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -104,7 +106,7 @@ class AddWasteActivity : AppCompatActivity() {
 
         dialogBinding.apply {
             tvDialogWasteName.text = wasteType.name
-            tvDialogWasteWeight.text = getString(R.string.initial_weight)
+            edDialogWasteWeight.setText(getString(R.string.initial_weight))
             tvDialogPricePerUnit.text = getString(
                 R.string.price_per_unit_value,
                 wasteType.pricePerUnit.toString(),
@@ -112,21 +114,50 @@ class AddWasteActivity : AppCompatActivity() {
             )
 
             chipDialogAdd.setOnClickListener {
-                val newValue = tvDialogWasteWeight.text.toString().toInt() + 1
-                tvDialogWasteWeight.text = newValue.toString()
+                var newValue = 0.0
+                if (edDialogWasteWeight.text.isNotEmpty()) {
+                    newValue = edDialogWasteWeight.text.toString().toDouble() + 1
+                } else {
+                    newValue++
+                }
+                edDialogWasteWeight.setText(newValue.toString())
             }
 
             chipDialogMinus.setOnClickListener {
-                val newValue = tvDialogWasteWeight.text.toString().toInt() - 1
-                tvDialogWasteWeight.text = newValue.toString()
+                var newValue = 0.0
+                if (edDialogWasteWeight.text.isNotEmpty()) {
+                    newValue = edDialogWasteWeight.text.toString().toDouble() - 1
+                }
+                if (newValue < 0) {
+                    edDialogWasteWeight.setText(getString(R.string.initial_weight))
+                } else {
+                    edDialogWasteWeight.setText(newValue.toString())
+                }
             }
 
             btnCloseDialog.setOnClickListener {
                 dialog.dismiss()
             }
 
-            btnDilaogAdd.setOnClickListener {
-                viewModel.addToWasteBox(wasteType, tvDialogWasteWeight.text.toString().toDouble())
+            edDialogWasteWeight.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(editable: Editable?) {
+                    if (editable.toString().isNotEmpty()) {
+                        edDialogWasteWeight.error = null
+                        btnDialogAdd.isEnabled = editable.toString().toDouble() != 0.0
+                    } else {
+                        edDialogWasteWeight.error = getString(R.string.weight_error)
+                        btnDialogAdd.isEnabled = false
+                    }
+                }
+            })
+
+            btnDialogAdd.isEnabled = false
+            btnDialogAdd.setOnClickListener {
+                viewModel.addToWasteBox(wasteType, edDialogWasteWeight.text.toString().toDouble())
                 dialog.dismiss()
             }
         }
