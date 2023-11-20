@@ -20,7 +20,6 @@ import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.WasteBoxRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
@@ -43,9 +42,7 @@ interface DataModule {
     ): HistoryRepository
 
     @Binds
-    fun bindsWasteBoxRepository(
-        wasteBoxRepositoryImpl: WasteBoxRepositoryImpl = WasteBoxRepositoryImpl()
-    ): WasteBoxRepository
+    fun bindsWasteBoxRepository(wasteBoxRepositoryImpl: WasteBoxRepositoryImpl): WasteBoxRepository
 
     @Binds
     fun bindsDriverHistoryRepository(

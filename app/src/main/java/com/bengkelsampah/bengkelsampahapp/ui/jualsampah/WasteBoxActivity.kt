@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -38,7 +39,9 @@ class WasteBoxActivity : AppCompatActivity() {
         }
 
         binding.btnFinish.setOnClickListener {
-
+            val formIntent = Intent(this, FormOrderActivity::class.java)
+            formIntent.putExtra(FormOrderActivity.PARTNER_ID, intent.getStringExtra(PARTNER_ID))
+            startActivity(formIntent)
         }
     }
 
@@ -58,8 +61,10 @@ class WasteBoxActivity : AppCompatActivity() {
                         binding.wasteBoxPage.visibility = View.VISIBLE
 
                         if (wasteBoxUiState.wasteBoxItems.isEmpty()) {
+                            binding.btnFinish.isEnabled = false
                             binding.tvWasteBoxEmpty.visibility = View.VISIBLE
                         } else {
+                            binding.btnFinish.isEnabled = true
                             binding.tvWasteBoxEmpty.visibility = View.GONE
                             setUpWasteSold(wasteBoxUiState.wasteBoxItems)
                         }
@@ -94,9 +99,9 @@ class WasteBoxActivity : AppCompatActivity() {
             totalPrice += waste.waste.pricePerUnit * waste.amount
         }
 
-        binding.tvWasteTotalWeight.text = totalWeight.toString()
-        binding.tvWasteUnit.text = WasteUnit.KG.abbreviation
-        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice)
+        binding.tvTotalWeight.text =
+            getString(R.string.waste_weight, totalWeight, WasteUnit.KG.abbreviation)
+        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.toInt())
     }
 
     private fun setUpWasteSold(wasteBoxItems: List<WasteBoxModel>) {

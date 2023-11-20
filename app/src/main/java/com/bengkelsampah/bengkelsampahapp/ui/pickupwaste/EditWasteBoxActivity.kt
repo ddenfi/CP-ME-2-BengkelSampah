@@ -132,8 +132,8 @@ class EditWasteBoxActivity : AppCompatActivity() {
             totalPrice += waste.waste.pricePerUnit * waste.amount
         }
 
-        binding.tvWasteTotalWeight.text = totalWeight.toString()
-        binding.tvWasteUnit.text = WasteUnit.KG.abbreviation
+        binding.tvTotalWeight.text =
+            getString(R.string.waste_weight, totalWeight, WasteUnit.KG.abbreviation)
         binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.roundToInt())
     }
 

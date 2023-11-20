@@ -28,6 +28,9 @@
             android:name=".ui.news.NewsFeedActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.jualsampah.FormOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.pickupwaste.PickupAddWasteActivity"
             android:exported="false" />
         <activity
@@ -87,7 +90,7 @@
         <activity
             android:name=".ui.StartingActivity"
             android:exported="true"
-            android:theme="@style/Theme.BengkelSampahApp.Splash" >
+            android:theme="@style/Theme.BengkelSampahApp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
