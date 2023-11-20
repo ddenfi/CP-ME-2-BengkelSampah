@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.driver.AccountDriverFragment">
 
     <ImageView
@@ -77,8 +77,8 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/md_theme_light_tertiary"
         android:text="@string/Log_Out"
         app:icon="@drawable/logout"
@@ -121,6 +121,22 @@
         app:drawableStartCompat="@drawable/help_center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_driver_account_privacyPolicy" />
+
+    <TextView
+        android:id="@+id/tv_driver_account_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Ubah Bahasa"
+        android:textColor="@color/md_theme_light_onSecondaryContainer"
+        app:drawableStartCompat="@drawable/ic_langugange"
+        android:gravity="center"
+        android:drawableTint="?attr/colorOutline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_driver_account_helpCenter" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
