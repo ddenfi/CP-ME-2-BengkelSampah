@@ -46,4 +46,9 @@ class WasteBoxRepositoryImpl @Inject constructor(
             )
         }
     }
+
+    override fun searchWaste(query: String): Flow<List<WasteModel>> =
+        wasteResourceDao.searchWaste("%${query}%")
+            .onStart { delay(1000) }
+            .map { it.map(WasteResourceEntity::asExternalModel) }
 }

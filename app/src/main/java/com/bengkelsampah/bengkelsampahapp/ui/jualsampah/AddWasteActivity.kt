@@ -8,10 +8,14 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.DialogAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
@@ -26,6 +30,7 @@ import kotlinx.coroutines.launch
 class AddWasteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWasteBinding
     private val viewModel: WasteBoxViewModel by viewModels()
+    private val wasteTypeAdapter = WasteTypeAdapter { wasteType -> adapterOnClick(wasteType) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,46 @@ class AddWasteActivity : AppCompatActivity() {
             val wasteBoxIntent = Intent(this, WasteBoxActivity::class.java)
             wasteBoxIntent.putExtra(WasteBoxActivity.PARTNER_ID, intent.getStringExtra(PARTNER_ID))
             startActivity(wasteBoxIntent)
+        }
+
+        binding.searchBarWaste.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.onSearchQueryChange(newText ?: "")
+                return true
+            }
+        })
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.wasteSearchResult.collect { searchResult ->
+                    when (searchResult) {
+                        is Resource.Error -> {
+                            SweetAlertDialogUtils.showSweetAlertDialog(
+                                this@AddWasteActivity,
+                                searchResult.exception?.message.toString(),
+                                SweetAlertDialog.ERROR_TYPE,
+                                hasConfirmationButton = false,
+                                willFinishActivity = true
+                            )
+                        }
+
+                        is Resource.Loading -> {
+                            binding.shimmerWasteType.visibility = View.VISIBLE
+                            binding.rvWasteType.visibility = View.GONE
+                        }
+
+                        is Resource.Success -> {
+                            binding.rvWasteType.visibility = View.VISIBLE
+                            binding.shimmerWasteType.visibility = View.GONE
+                            wasteTypeAdapter.submitList(searchResult.data)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -81,9 +126,7 @@ class AddWasteActivity : AppCompatActivity() {
     }
 
     private fun setUpWasteType(waste: List<WasteModel>) {
-        val wasteTypeAdapter = WasteTypeAdapter { wasteType -> adapterOnClick(wasteType) }
-
-        binding.rvWasteType.apply {
+                binding.rvWasteType.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = wasteTypeAdapter
             addItemDecoration(

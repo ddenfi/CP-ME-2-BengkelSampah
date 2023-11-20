@@ -1,20 +1,37 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.asResource
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.repository.WasteBoxRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class WasteBoxViewModel @Inject constructor(
     private val wasteBoxRepository: WasteBoxRepository
 ) : ViewModel() {
+    private val _searchText = MutableStateFlow("")
+    private val searchText = _searchText.asStateFlow()
+
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+    val wasteSearchResult = searchText.debounce(200).flatMapLatest {
+        wasteBoxRepository.searchWaste(it)
+    }.asResource().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Resource.Loading())
+
     fun getWasteBoxItem(): Flow<WasteBoxUiState> =
         wasteBoxRepository.getWasteBoxItems().asResource().map { resourceWasteBox ->
             when (resourceWasteBox) {
@@ -35,4 +52,8 @@ class WasteBoxViewModel @Inject constructor(
 
     fun addToWasteBox(waste: WasteModel, amount: Double) =
         wasteBoxRepository.addToWasteBox(WasteBoxModel(waste, amount))
+
+    fun onSearchQueryChange(text: String) {
+        _searchText.value = text
+    }
 }
