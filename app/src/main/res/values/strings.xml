@@ -97,7 +97,6 @@
     <string name="waste_price">1000</string>
 
     <!-- waste box -->
-    <string name="waste_box_page">Keranjang Sampah</string>
     <string name="add">Tambah</string>
     <string name="minus">Kurang</string>
     <string name="add_from_my_box">Dari Kotakku</string>
