@@ -2,6 +2,7 @@ package com.bengkelsampah.bengkelsampahapp.domain.repository
 
 import com.bengkelsampah.bengkelsampahapp.domain.model.UserDataModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.UserPreferencesDataModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserRole
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
@@ -23,12 +24,16 @@ interface UserRepository {
     /**
      * Set user login status to preferences data store
      */
-    val loginStatus: Flow<Boolean>
     suspend fun setLoginStatus(isLogin: Boolean)
 
     /**
      * Set whether app should show onboarding to preferences data store
      */
     suspend fun setShouldShowOnboard(shouldShowOnboard: Boolean)
+
+    /**
+     * Set user role
+     */
+    suspend fun setUserRole(userRole: UserRole)
 
 }

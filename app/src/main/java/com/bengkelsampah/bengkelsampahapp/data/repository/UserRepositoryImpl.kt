@@ -3,6 +3,7 @@ package com.bengkelsampah.bengkelsampahapp.data.repository
 import com.bengkelsampah.bengkelsampahapp.data.source.local.PreferenceDataStore
 import com.bengkelsampah.bengkelsampahapp.domain.model.UserDataModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.UserPreferencesDataModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserRole
 import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -25,10 +26,6 @@ class UserRepositoryImpl @Inject constructor(
     override val userPreferencesData: Flow<UserPreferencesDataModel> =
         preferenceDataStore.userPreferencesData
 
-    override val loginStatus: Flow<Boolean> = preferenceDataStore.userPreferencesData
-        .map { userPreferencesData ->
-            userPreferencesData.isLogin
-        }
 
     override fun updateUser(data: UserDataModel) {
         TODO("Not yet implemented")
@@ -41,4 +38,10 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun setShouldShowOnboard(shouldShowOnboard: Boolean) {
         preferenceDataStore.setShouldShowOnboard(shouldShowOnboard)
     }
+
+    override suspend fun setUserRole(userRole: UserRole) {
+        preferenceDataStore.setUserRole(userRole)
+    }
+
+
 }
