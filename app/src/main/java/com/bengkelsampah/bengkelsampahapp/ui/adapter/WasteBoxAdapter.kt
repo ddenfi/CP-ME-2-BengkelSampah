@@ -1,6 +1,5 @@
 package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -30,17 +29,16 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
         private val chipAdd by lazy { binding.chipAdd }
         private val chipMinus by lazy { binding.chipMinus }
 
-
-        @SuppressLint("StringFormatMatches")
         fun bind(wasteSold: WasteBoxModel) {
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount).roundToInt()
+                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
+                    .roundToInt()
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,
-                wasteSold.waste.pricePerUnit,
+                wasteSold.waste.pricePerUnit.toString(),
                 wasteSold.waste.unit
             )
             tvWasteWeight.text = wasteSold.amount.toString()
@@ -50,12 +48,12 @@ class WasteBoxAdapter : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewH
         }
 
         private fun addWeight() {
-            val newValue = tvWasteWeight.text.toString().toInt() + 1
+            val newValue = tvWasteWeight.text.toString().toDouble() + 1
             tvWasteWeight.text = newValue.toString()
         }
 
         private fun subtractWeight() {
-            val newValue = tvWasteWeight.text.toString().toInt() - 1
+            val newValue = tvWasteWeight.text.toString().toDouble() - 1
             tvWasteWeight.text = newValue.toString()
         }
     }

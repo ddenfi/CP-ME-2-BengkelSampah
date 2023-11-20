@@ -97,9 +97,10 @@
     <string name="waste_price">1000</string>
 
     <!-- waste box -->
-    <string name="waste_box_page">Keranjang Sampah</string>
     <string name="add">Tambah</string>
     <string name="minus">Kurang</string>
+    <string name="add_to_box">Masukkan ke Kotak</string>
+    <string name="remove_from_box">Hapus dari Kotak</string>
     <string name="add_from_my_box">Dari Kotakku</string>
     <string name="waste_box_empty">Kotak keranjang kosong.\nIsi kembali untuk dapat melanjutkan</string>
     <string name="waste_sold_estimation">Estimasi Penjualan</string>
@@ -113,7 +114,9 @@
     <string name="search">Cari Sampah</string>
     <string name="waste_box">Kotak sampah</string>
     <string name="dialog_add_waste_title">Tambahkan Sampah Anda</string>
-    <string name="initial_weight">0</string>
+    <string name="initial_weight">0.0</string>
+    <string name="waste_weight">%.1f %s</string>
+    <string name="weight_error">Berat tidak boleh kosong</string>
 
     <string name="home">Home</string>
     <string name="history">Riwayat</string>
