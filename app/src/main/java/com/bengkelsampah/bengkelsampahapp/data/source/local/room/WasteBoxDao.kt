@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteBoxEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -24,4 +25,7 @@ interface WasteBoxDao {
 
     @Query("SELECT count(*) FROM WasteBox")
     fun countWasteBoxItems(): Flow<Int>
+
+    @Update(entity = WasteBoxEntity::class)
+    fun updateUserWaste(userWaste: WasteBoxEntity)
 }

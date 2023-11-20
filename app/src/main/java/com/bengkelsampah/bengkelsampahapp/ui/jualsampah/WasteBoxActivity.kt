@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,38 @@ import kotlinx.coroutines.launch
 class WasteBoxActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWasteBoxBinding
     private val viewModel: WasteBoxViewModel by viewModels()
+    private val wasteBoxAdapter = WasteBoxAdapter(
+        onClickAdd = { wasteModel, weight ->
+            binding.apply {
+                lifecycleScope.launch {
+                    val edWasteWeight =
+                        binding.rvWasteBox.findViewById<EditText>(R.id.ed_waste_weight)
+                    if (edWasteWeight.text.isNotEmpty()) {
+                        val newWeight = weight + 1
+                        edWasteWeight.setText(newWeight.toString())
+                        viewModel.updateWasteBoxItem(wasteModel, newWeight)
+                    }
+                }
+            }
+        },
+        onClickSubtract = { wasteModel, weight ->
+            binding.apply {
+                lifecycleScope.launch {
+                    val edWasteWeight =
+                        binding.rvWasteBox.findViewById<EditText>(R.id.ed_waste_weight)
+                    if (edWasteWeight.text.isNotEmpty()) {
+                        val newWeight = weight - 1
+                        edWasteWeight.setText(newWeight.toString())
+                        if (newWeight == 0.0) {
+                            viewModel.deleteFromWasteBox(wasteModel, weight)
+                        } else {
+                            viewModel.updateWasteBoxItem(wasteModel, newWeight)
+                        }
+                    }
+                }
+            }
+        }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +66,7 @@ class WasteBoxActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         gettingData()
+        setUpWasteSold()
 
         binding.btnAdd.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -63,10 +97,12 @@ class WasteBoxActivity : AppCompatActivity() {
                         if (wasteBoxUiState.wasteBoxItems.isEmpty()) {
                             binding.btnFinish.isEnabled = false
                             binding.tvWasteBoxEmpty.visibility = View.VISIBLE
+                            binding.rvWasteBox.visibility = View.GONE
                         } else {
                             binding.btnFinish.isEnabled = true
                             binding.tvWasteBoxEmpty.visibility = View.GONE
-                            setUpWasteSold(wasteBoxUiState.wasteBoxItems)
+                            binding.rvWasteBox.visibility = View.VISIBLE
+                            wasteBoxAdapter.submitList(wasteBoxUiState.wasteBoxItems)
                         }
                         countTotalWeightAndPrice(wasteBoxUiState.wasteBoxItems)
                     }
@@ -104,9 +140,7 @@ class WasteBoxActivity : AppCompatActivity() {
         binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.toInt())
     }
 
-    private fun setUpWasteSold(wasteBoxItems: List<WasteBoxModel>) {
-        val wasteBoxAdapter = WasteBoxAdapter()
-
+    private fun setUpWasteSold() {
         binding.rvWasteBox.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = wasteBoxAdapter
@@ -117,8 +151,6 @@ class WasteBoxActivity : AppCompatActivity() {
                 )
             )
         }
-
-        wasteBoxAdapter.submitList(wasteBoxItems)
     }
 
     companion object {

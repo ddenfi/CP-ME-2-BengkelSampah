@@ -7,7 +7,6 @@ import com.bengkelsampah.bengkelsampahapp.domain.repository.PartnerRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.util.UUID
 import javax.inject.Inject
 
 class PartnerRepositoryImpl @Inject constructor() : PartnerRepository {
@@ -16,7 +15,7 @@ class PartnerRepositoryImpl @Inject constructor() : PartnerRepository {
         emit(PartnerObject.partnerDummyData)
     }
 
-    override fun getPartnersById(partnerId: UUID): Flow<PartnerById> = flow {
+    override fun getPartnersById(partnerId: String): Flow<PartnerById> = flow {
         delay(2000)
         emit(PartnerObject.partnerByIdDummyData)
     }
