@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 
 class HistoryAdapter(private val onClick: (HistoryModel) -> Unit) :
     ListAdapter<HistoryModel, HistoryAdapter.HistoryViewHolder>(
@@ -46,20 +46,20 @@ class HistoryAdapter(private val onClick: (HistoryModel) -> Unit) :
             tvStatus.text = history.status
 
             when (history.status) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
+                OrderStatus.WAIT_CONFIRMATION.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
                 )
 
-                HistoryStatus.SELESAI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.SELESAI.color)
+                OrderStatus.DONE.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.DONE.color)
                 )
 
-                HistoryStatus.DIPROSES.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIPROSES.color)
+                OrderStatus.PROCESSED.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.PROCESSED.color)
                 )
 
-                HistoryStatus.DIBATALKAN.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIBATALKAN.color)
+                OrderStatus.CANCELLED.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.CANCELLED.color)
                 )
             }
 
