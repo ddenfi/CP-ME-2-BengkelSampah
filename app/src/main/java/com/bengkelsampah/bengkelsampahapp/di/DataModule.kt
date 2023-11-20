@@ -1,5 +1,6 @@
 package com.bengkelsampah.bengkelsampahapp.di
 
+import com.bengkelsampah.bengkelsampahapp.data.repository.BankSampahRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.DriverHistoryRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.HistoryRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.MoneybagRepositoryImpl
@@ -8,6 +9,7 @@ import com.bengkelsampah.bengkelsampahapp.data.repository.PickupWasteRepositoryI
 import com.bengkelsampah.bengkelsampahapp.data.repository.PartnerRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.UserRepositoryImpl
 import com.bengkelsampah.bengkelsampahapp.data.repository.WasteBoxRepositoryImpl
+import com.bengkelsampah.bengkelsampahapp.domain.repository.BankSampahRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.DriverHistoryRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.HistoryRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.MoneybagRepository
@@ -65,4 +67,9 @@ interface DataModule {
     fun bindsMoneybagRepository(
         moneybagRepositoryImpl: MoneybagRepositoryImpl = MoneybagRepositoryImpl()
     ): MoneybagRepository
+
+    @Binds
+    fun bindsBankSampahRepository(
+        bankSampahRepositoryImpl: BankSampahRepositoryImpl = BankSampahRepositoryImpl()
+    ): BankSampahRepository
 }
