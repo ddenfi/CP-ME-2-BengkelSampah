@@ -1,12 +1,14 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
 import android.content.Intent
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,42 +19,55 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.DialogAddWasteBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteTypeAdapter
-import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.AddWasteActivity
-import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.AddWasteUiState
-import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.WasteBoxActivity
+import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.EditWasteBoxActivity.Companion.ADD_WASTE_RESULT_CODE
+import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.EditWasteBoxActivity.Companion.WASTE_BOX
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.flow.collect
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class PickupAddWasteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWasteBinding
     private val viewModel: PickupViewModel by viewModels()
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    private var mWasteBox: MutableList<WasteBoxModel> = mutableListOf()
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityAddWasteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.fabWasteBox.setOnClickListener {
-
+        val getWasteBox = intent.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
+        if (getWasteBox != null) {
+            mWasteBox = getWasteBox.toMutableList()
         }
 
-//        binding.searchBarWaste.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                viewModel.onSearchQueryChange(newText ?: "")
-//                return true
-//            }
-//        })
+
+        binding.fabWasteBox.setOnClickListener {
+            val intent = Intent()
+            intent.putParcelableArrayListExtra(WASTE_BOX, ArrayList(mWasteBox))
+            setResult(ADD_WASTE_RESULT_CODE, intent)
+            finish()
+        }
+
+        binding.searchBarWaste.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.onSearchQueryChange(newText ?: "")
+                return true
+            }
+        })
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -77,6 +92,7 @@ class PickupAddWasteActivity : AppCompatActivity() {
                             binding.rvWasteType.visibility = View.VISIBLE
                             binding.shimmerWasteType.visibility = View.GONE
                             setUpWasteType(searchResult.data)
+                            Log.d("TAG", searchResult.data.toString())
                         }
                     }
                 }
@@ -110,6 +126,12 @@ class PickupAddWasteActivity : AppCompatActivity() {
     }
 
     private fun adapterOnClick(wasteType: WasteModel) {
+        val userWasteBox = mWasteBox.find {
+            it.waste.wasteId == wasteType.wasteId
+        }
+        val isAdded = userWasteBox != null
+        val userWasteBoxIndex = mWasteBox.indexOf(userWasteBox)
+
         val dialogBinding = DialogAddWasteBinding.inflate(layoutInflater)
         val dialog = MaterialAlertDialogBuilder(this)
             .setCancelable(false)
@@ -118,7 +140,8 @@ class PickupAddWasteActivity : AppCompatActivity() {
 
         dialogBinding.apply {
             tvDialogWasteName.text = wasteType.name
-            tvDialogWasteWeight.text = getString(R.string.initial_weight)
+            tvDialogWasteWeight.text = if (isAdded) userWasteBox?.amount?.toInt()
+                .toString() else getString(R.string.initial_weight)
             tvDialogPricePerUnit.text = getString(
                 R.string.price_per_unit_value,
                 wasteType.pricePerUnit.toString(),
@@ -140,6 +163,20 @@ class PickupAddWasteActivity : AppCompatActivity() {
             }
 
             btnDilaogAdd.setOnClickListener {
+                if (isAdded) {
+                    mWasteBox.removeAt(userWasteBoxIndex)
+                    mWasteBox.add(
+                        WasteBoxModel(
+                            waste = wasteType,
+                            amount = tvDialogWasteWeight.text.toString().toDouble()
+                        )
+                    )
+                } else {
+                    mWasteBox.add(
+                        WasteBoxModel(wasteType, tvDialogWasteWeight.text.toString().toDouble())
+                    )
+                }
+                Log.d("TAG", mWasteBox.size.toString())
                 dialog.dismiss()
             }
         }

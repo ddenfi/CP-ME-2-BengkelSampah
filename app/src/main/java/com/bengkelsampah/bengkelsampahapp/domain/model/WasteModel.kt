@@ -1,12 +1,16 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class WasteModel(
     val wasteId:String,
     val name: String,
     val unit: WasteUnit,
     val pricePerUnit: Int,
     val wasteType:String
-) {
+):Parcelable {
     companion object {
         val wasteDummyData = listOf(
             WasteModel(

@@ -32,7 +32,7 @@ class PickupViewModel @Inject constructor(
     private val searchText = _searchText.asStateFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-    val wasteSearchResult = searchText.debounce(500).flatMapLatest {
+    val wasteSearchResult = searchText.debounce(200).flatMapLatest {
         pickupWasteRepository.searchWaste(it)
     }.asResource().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Resource.Loading())
 

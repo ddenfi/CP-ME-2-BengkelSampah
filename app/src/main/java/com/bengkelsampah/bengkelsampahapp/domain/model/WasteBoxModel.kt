@@ -1,11 +1,14 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
+import android.os.Parcelable
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteBoxEntity
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class WasteBoxModel(
     val waste: WasteModel,
     val amount: Double
-) {
+) : Parcelable {
     companion object {
         val dummyData = listOf(
             WasteBoxModel(
