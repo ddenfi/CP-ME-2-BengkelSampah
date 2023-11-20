@@ -12,6 +12,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
@@ -139,7 +140,7 @@ class HistoryDetailActivity : AppCompatActivity() {
     }
 
     private fun setDownloadFileVisibility(historyStatus: String) {
-        if (historyStatus == HistoryStatus.SELESAI.statusValue) {
+        if (historyStatus == OrderStatus.DONE.statusName) {
             historyDetailBinding.btnDownloadTransaction.visibility = View.VISIBLE
         } else {
             historyDetailBinding.btnDownloadTransaction.visibility = View.GONE
@@ -149,7 +150,7 @@ class HistoryDetailActivity : AppCompatActivity() {
     private fun setCancelButtonVisibility(historyStatus: String) {
         historyDetailBinding.apply {
             when (historyStatus) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> btnCancelOrder.visibility =
+                OrderStatus.WAIT_CONFIRMATION.statusName -> btnCancelOrder.visibility =
                     View.VISIBLE
 
                 else -> btnCancelOrder.visibility = View.GONE
@@ -160,20 +161,20 @@ class HistoryDetailActivity : AppCompatActivity() {
     private fun setHistoryStatusColor(historyStatus: String) {
         historyDetailBinding.apply {
             when (historyStatus) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
+                OrderStatus.WAIT_CONFIRMATION.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
                 )
 
-                HistoryStatus.SELESAI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.SELESAI.color)
+                OrderStatus.DONE.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.DONE.color)
                 )
 
-                HistoryStatus.DIPROSES.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIPROSES.color)
+                OrderStatus.PROCESSED.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.PROCESSED.color)
                 )
 
-                HistoryStatus.DIBATALKAN.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIBATALKAN.color)
+                OrderStatus.CANCELLED.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.CANCELLED.color)
                 )
             }
         }

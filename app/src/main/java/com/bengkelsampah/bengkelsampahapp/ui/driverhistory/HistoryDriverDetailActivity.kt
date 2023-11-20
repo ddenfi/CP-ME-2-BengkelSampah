@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDriverDetailBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailPdfFile
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
 class HistoryDriverDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityHistoryDriverDetailBinding
+    private lateinit var binding: ActivityHistoryDriverDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDriverDetailBinding.inflate(layoutInflater)
@@ -89,7 +89,10 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
             setDownloadFileVisibility(history.status)
 
             btnCancelOrder.setOnClickListener {
-                MaterialAlertDialogBuilder(this@HistoryDriverDetailActivity, R.style.AlertDialogTheme)
+                MaterialAlertDialogBuilder(
+                    this@HistoryDriverDetailActivity,
+                    R.style.AlertDialogTheme
+                )
                     .setMessage(getString(R.string.cancel_order_confirmation))
                     .setCancelable(false)
                     .setPositiveButton(getString(R.string.yes)) { _, _ ->
@@ -104,7 +107,10 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
             btnDownloadTransaction.setOnClickListener {
                 try {
 
-                    HistoryDetailPdfFile().generatePdfFile(this@HistoryDriverDetailActivity, history)
+                    HistoryDetailPdfFile().generatePdfFile(
+                        this@HistoryDriverDetailActivity,
+                        history
+                    )
                     Toast.makeText(
                         this@HistoryDriverDetailActivity,
                         getString(R.string.transaction_downloaded),
@@ -127,7 +133,7 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
     }
 
     private fun setDownloadFileVisibility(historyStatus: String) {
-        if (historyStatus == HistoryStatus.SELESAI.statusValue) {
+        if (historyStatus == OrderStatus.DONE.statusName) {
             binding.btnDownloadTransaction.visibility = View.VISIBLE
         } else {
             binding.btnDownloadTransaction.visibility = View.GONE
@@ -137,7 +143,7 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
     private fun setCancelButtonVisibility(historyStatus: String) {
         binding.apply {
             when (historyStatus) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> btnCancelOrder.visibility =
+                OrderStatus.WAIT_CONFIRMATION.statusName -> btnCancelOrder.visibility =
                     View.VISIBLE
 
                 else -> btnCancelOrder.visibility = View.GONE
@@ -148,20 +154,20 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
     private fun setHistoryStatusColor(historyStatus: String) {
         binding.apply {
             when (historyStatus) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
+                OrderStatus.WAIT_CONFIRMATION.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
                 )
 
-                HistoryStatus.SELESAI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.SELESAI.color)
+                OrderStatus.DONE.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.DONE.color)
                 )
 
-                HistoryStatus.DIPROSES.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIPROSES.color)
+                OrderStatus.PROCESSED.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.PROCESSED.color)
                 )
 
-                HistoryStatus.DIBATALKAN.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIBATALKAN.color)
+                OrderStatus.CANCELLED.statusName -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.CANCELLED.color)
                 )
             }
         }

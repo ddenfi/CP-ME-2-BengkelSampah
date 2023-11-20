@@ -1,7 +1,5 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
-
 data class HistoryModel(
     val id: Int,
     val date: String,
@@ -22,7 +20,7 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.MENUNGGU_KONFIRMASI.statusValue,
+                status = OrderStatus.WAIT_CONFIRMATION.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
@@ -106,7 +104,7 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.DIBATALKAN.statusValue,
+                status = OrderStatus.CANCELLED.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
@@ -190,7 +188,7 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.SELESAI.statusValue,
+                status = OrderStatus.DONE.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
@@ -274,7 +272,7 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.DIPROSES.statusValue,
+                status = OrderStatus.PROCESSED.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",

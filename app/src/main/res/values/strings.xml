@@ -62,11 +62,11 @@
     <string name="request_pick_up_fo">Ajukan Penjumputan</string>
 
     <!-- History -->
-    <string name="all_status">Semua Status</string>
-    <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
-    <string name="in_process_status">Diproses</string>
-    <string name="finished_status">Selesai</string>
-    <string name="canceled_status">Dibatalkan</string>
+    <string name="all_status">All Status</string>
+    <string name="waiting_confirmation_status">Wait Confirmation</string>
+    <string name="in_process_status">Processed</string>
+    <string name="finished_status">Done</string>
+    <string name="canceled_status">Cancelled</string>
     <string name="pick_up_date">Tanggal Penjemputan :</string>
     <string name="pick_up_address">Alamat Penjemputan :</string>
     <string name="pick_up_detail">Detail Penjemputan : </string>
