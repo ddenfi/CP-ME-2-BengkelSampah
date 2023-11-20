@@ -3,6 +3,8 @@ package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 import androidx.lifecycle.ViewModel
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.asResource
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.repository.WasteBoxRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -30,4 +32,7 @@ class WasteBoxViewModel @Inject constructor(
                 is Resource.Error -> AddWasteUiState.Error(resourceAddWaste.exception?.message)
             }
         }
+
+    fun addToWasteBox(waste: WasteModel, amount: Double) =
+        wasteBoxRepository.addToWasteBox(WasteBoxModel(waste, amount))
 }

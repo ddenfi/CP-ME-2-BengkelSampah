@@ -126,10 +126,10 @@ class AddWasteActivity : AppCompatActivity() {
             }
 
             btnDilaogAdd.setOnClickListener {
+                viewModel.addToWasteBox(wasteType, tvDialogWasteWeight.text.toString().toDouble())
                 dialog.dismiss()
             }
         }
-
         dialog.show()
     }
 
