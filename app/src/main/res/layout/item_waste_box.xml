@@ -102,11 +102,12 @@
                     app:textEndPadding="0dp"
                     app:textStartPadding="0dp" />
 
-                <TextView
-                    android:id="@+id/tv_waste_weight"
+                <EditText
+                    android:id="@+id/ed_waste_weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
+                    android:inputType="numberDecimal"
                     tools:text="@string/waste_amount" />
 
                 <com.google.android.material.chip.Chip

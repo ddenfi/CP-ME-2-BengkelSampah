@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -48,7 +49,29 @@ class EditWasteBoxActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        wasteBoxAdapter = WasteBoxAdapter()
+        val edWasteWeight = binding.rvWasteBox.findViewById<EditText>(R.id.ed_waste_weight)
+        wasteBoxAdapter = WasteBoxAdapter(
+            onClickAdd = { wasteModel, weight ->
+                binding.apply {
+                    lifecycleScope.launch {
+                        if (edWasteWeight.text.isNotEmpty()) {
+                            val newWeight = weight + 1
+                            edWasteWeight.setText(newWeight.toString())
+                        }
+                    }
+                }
+            },
+            onClickSubtract = { wasteModel, weight ->
+                binding.apply {
+                    lifecycleScope.launch {
+                        if (edWasteWeight.text.isNotEmpty()) {
+                            val newWeight = weight - 1
+                            edWasteWeight.setText(newWeight.toString())
+                        }
+                    }
+                }
+            }
+        )
 
         val orderId = intent.getStringExtra(ORDER_ID) ?: ""
         val getWasteBox = intent.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
