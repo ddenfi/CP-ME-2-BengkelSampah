@@ -38,7 +38,6 @@ class PickupAddWasteActivity : AppCompatActivity() {
     private val viewModel: PickupViewModel by viewModels()
     private var mWasteBox: MutableList<WasteBoxModel> = mutableListOf()
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddWasteBinding.inflate(layoutInflater)
@@ -47,7 +46,12 @@ class PickupAddWasteActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val getWasteBox = intent.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
+        val getWasteBox =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) intent.getParcelableArrayListExtra(
+                WASTE_BOX,
+                WasteBoxModel::class.java
+            ) else intent.getParcelableArrayListExtra(WASTE_BOX)
+
         if (getWasteBox != null) {
             mWasteBox = getWasteBox.toMutableList()
         }
