@@ -1,6 +1,9 @@
 package com.bengkelsampah.bengkelsampahapp.ui.jualsampah
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -14,6 +17,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityFormOrderBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteFormAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +49,22 @@ class FormOrderActivity : AppCompatActivity() {
                 binding.tilPickUpAddressFormOrder.error = getString(R.string.address_error)
             } else {
                 binding.tilPickUpAddressFormOrder.error = null
+
+                SweetAlertDialogUtils.showSweetAlertDialog(
+                    this@FormOrderActivity,
+                    getString(R.string.request_pick_up_success),
+                    SweetAlertDialog.SUCCESS_TYPE,
+                    hasConfirmationButton = false,
+                    willFinishActivity = false
+                )
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                    this.finish()
+                },1500)
                 // TODO add order to database
             }
         }
