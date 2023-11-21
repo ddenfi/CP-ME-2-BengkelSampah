@@ -61,6 +61,20 @@
     <string name="cash" translatable="false">Cash</string>
     <string name="request_pick_up_fo" translatable="false">Ajukan Penjumputan</string>
     <string name="address_error" translatable="false">Alamat tidak boleh kosong</string>
+    <string name="form_order">Form Order</string>
+    <string name="pick_up_address_fo">Alamat Penjemputan</string>
+    <string name="enter_pick_up_address_fo">Masukkan alamat penjemputan</string>
+    <string name="pick_up_address_desc_fo">Deskripsi (Opsional)</string>
+    <string name="change_agent_fo">Ganti Agen</string>
+    <string name="agent_note_fo">Agen bisa menjemput sampah sewaktu waktu, dikarenakan jumlah armada yang kurang!</string>
+    <string name="waste_total_fo">Total Sampah</string>
+    <string name="add_waste_fo">Tambah Sampah</string>
+    <string name="waste_price_unit">Harga Satuan</string>
+    <string name="payment_method_fo">Metode Pembayaran</string>
+    <string name="cash">Cash</string>
+    <string name="request_pick_up_fo">Ajukan Penjumputan</string>
+    <string name="address_error">Alamat tidak boleh kosong</string>
+    <string name="request_pick_up_success">Berhasil diajukan penjemputan</string>
 
     <!-- History -->
     <string name="all_status" translatable="false">All Status</string>
