@@ -22,7 +22,6 @@ import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.Date
 
 @AndroidEntryPoint
 class FormOrderActivity : AppCompatActivity() {

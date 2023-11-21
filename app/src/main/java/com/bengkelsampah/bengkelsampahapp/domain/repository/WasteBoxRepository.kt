@@ -1,7 +1,5 @@
 package com.bengkelsampah.bengkelsampahapp.domain.repository
 
-import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.MyBucketEntity
-import com.bengkelsampah.bengkelsampahapp.data.source.local.room.util.WasteBoxConverter
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel

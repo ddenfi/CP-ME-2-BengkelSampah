@@ -9,7 +9,6 @@ import androidx.room.Update
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.MyBucketEntity
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface MyBucketDao {
     @Query("SELECT * FROM MyBucket")

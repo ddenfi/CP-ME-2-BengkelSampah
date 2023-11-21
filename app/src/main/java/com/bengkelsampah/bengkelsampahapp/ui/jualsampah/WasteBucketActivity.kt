@@ -17,7 +17,6 @@ import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

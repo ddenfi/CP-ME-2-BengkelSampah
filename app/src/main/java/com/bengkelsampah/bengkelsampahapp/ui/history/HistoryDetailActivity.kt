@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel

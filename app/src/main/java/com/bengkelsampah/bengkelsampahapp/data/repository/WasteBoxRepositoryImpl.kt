@@ -31,18 +31,17 @@ class WasteBoxRepositoryImpl @Inject constructor(
     private val wasteOrderDao: WasteOrderDao,
     private val myBucketDao: MyBucketDao
 ) : WasteBoxRepository {
-    override fun getWasteBoxItems(): Flow<List<WasteBoxModel>> =
-        wasteBoxDao.getUserWastes()
-            .onStart { delay(2000) }
-            .map { it.map(WasteBoxEntity::asExternalLayer) }
-
     override fun getAllWastes(): Flow<List<WasteModel>> =
         wasteResourceDao.getAllWasteResources()
             .onStart { delay(2000) }
             .map { it.map(WasteResourceEntity::asExternalModel) }
 
-    override fun getWasteBoxItemById(id: String): Flow<WasteBoxModel?> =
-        wasteBoxDao.getWasteBoxItemById(id).map { it?.asExternalLayer() }
+    override fun searchWaste(query: String): Flow<List<WasteModel>> =
+        wasteResourceDao.searchWaste("%${query}%")
+            .onStart { delay(1000) }
+            .map { it.map(WasteResourceEntity::asExternalModel) }
+
+    override fun countWasteBoxItems(): Flow<Int> = wasteBoxDao.countWasteBoxItems()
 
     override fun addToWasteBox(waste: WasteBoxModel) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -50,22 +49,23 @@ class WasteBoxRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun searchWaste(query: String): Flow<List<WasteModel>> =
-        wasteResourceDao.searchWaste("%${query}%")
-            .onStart { delay(1000) }
-            .map { it.map(WasteResourceEntity::asExternalModel) }
+    override fun getWasteBoxItems(): Flow<List<WasteBoxModel>> =
+        wasteBoxDao.getUserWastes()
+            .onStart { delay(2000) }
+            .map { it.map(WasteBoxEntity::asExternalLayer) }
 
-    override fun deleteFromWasteBox(waste: WasteBoxModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            wasteBoxDao.deleteUserWaste(waste.asWasteBoxEntity())
-        }
-    }
-
-    override fun countWasteBoxItems(): Flow<Int> = wasteBoxDao.countWasteBoxItems()
+    override fun getWasteBoxItemById(id: String): Flow<WasteBoxModel?> =
+        wasteBoxDao.getWasteBoxItemById(id).map { it?.asExternalLayer() }
 
     override fun updateWasteBoxItem(waste: WasteBoxModel) {
         CoroutineScope(Dispatchers.IO).launch {
             wasteBoxDao.updateUserWaste(waste.asWasteBoxEntity())
+        }
+    }
+
+    override fun deleteFromWasteBox(waste: WasteBoxModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            wasteBoxDao.deleteUserWaste(waste.asWasteBoxEntity())
         }
     }
 
@@ -92,15 +92,15 @@ class WasteBoxRepositoryImpl @Inject constructor(
             .onStart { delay(2000) }
             .map { it.map(MyBucketEntity::asExternalLayer) }
 
-    override fun deleteFromWasteBucket(waste: WasteBoxModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            myBucketDao.deleteWasteBucketItem(waste.asMyBucketEntity())
-        }
-    }
-
     override fun updateWasteBucketItem(waste: WasteBoxModel) {
         CoroutineScope(Dispatchers.IO).launch {
             myBucketDao.updateWasteBucketItem(waste.asMyBucketEntity())
+        }
+    }
+
+    override fun deleteFromWasteBucket(waste: WasteBoxModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            myBucketDao.deleteWasteBucketItem(waste.asMyBucketEntity())
         }
     }
 }

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -28,7 +27,6 @@ import com.google.android.material.badge.BadgeUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class AddWasteActivity : AppCompatActivity() {
@@ -213,9 +211,9 @@ class AddWasteActivity : AppCompatActivity() {
                                 )
                             } else {
 
-                            viewModel.addToWasteBox(
-                                wasteType, edDialogWasteWeight.text.toString().toDouble()
-                            )
+                                viewModel.addToWasteBox(
+                                    wasteType, edDialogWasteWeight.text.toString().toDouble()
+                                )
                             }
                         } else if (btnDialogAdd.text == getString(R.string.remove_from_box)) {
                             if (isFromBucket) {
@@ -224,10 +222,10 @@ class AddWasteActivity : AppCompatActivity() {
                                 )
                             } else {
 
-                            viewModel.deleteFromWasteBox(
-                                wasteType,
-                                edDialogWasteWeight.text.toString().toDouble()
-                            )
+                                viewModel.deleteFromWasteBox(
+                                    wasteType,
+                                    edDialogWasteWeight.text.toString().toDouble()
+                                )
                             }
                         }
                         dialog.dismiss()

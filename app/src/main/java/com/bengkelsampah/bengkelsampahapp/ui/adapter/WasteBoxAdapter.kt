@@ -64,8 +64,20 @@ class WasteBoxAdapter(
                 }
             })
 
-            chipAdd.setOnClickListener { onClickAdd(wasteSold.waste, wasteSold.amount, edWasteWeight) }
-            chipMinus.setOnClickListener { onClickSubtract(wasteSold.waste, wasteSold.amount, edWasteWeight) }
+            chipAdd.setOnClickListener {
+                onClickAdd(
+                    wasteSold.waste,
+                    wasteSold.amount,
+                    edWasteWeight
+                )
+            }
+            chipMinus.setOnClickListener {
+                onClickSubtract(
+                    wasteSold.waste,
+                    wasteSold.amount,
+                    edWasteWeight
+                )
+            }
         }
     }
 

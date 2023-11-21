@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.asResource
-import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.MyBucketEntity
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerById
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
@@ -24,7 +23,6 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import java.util.Date
 import java.util.UUID
 import javax.inject.Inject
 
