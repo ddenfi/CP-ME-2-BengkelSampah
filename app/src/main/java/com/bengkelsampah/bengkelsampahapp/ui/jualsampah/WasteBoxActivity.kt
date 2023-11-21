@@ -18,6 +18,7 @@ import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -66,6 +67,10 @@ class WasteBoxActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnAddFromBucket.setOnClickListener {
+            addItemFromBucket()
         }
 
         binding.btnFinish.setOnClickListener {
@@ -146,6 +151,41 @@ class WasteBoxActivity : AppCompatActivity() {
                     resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
                 )
             )
+        }
+    }
+
+    private fun addItemFromBucket() {
+        lifecycleScope.launch {
+            viewModel.getWasteBucketItems().collect { wasteBoxUiState ->
+                when (wasteBoxUiState) {
+                    is WasteBoxUiState.Success -> {
+                        if (wasteBoxUiState.wasteBoxItems.isNotEmpty()) {
+                            for (waste in wasteBoxUiState.wasteBoxItems) {
+                                viewModel.addToWasteBox(waste.waste, waste.amount)
+                                viewModel.deleteFromWasteBucket(waste.waste, waste.amount)
+                            }
+                            gettingData()
+                        }
+                    }
+
+                    is WasteBoxUiState.Loading -> {
+                        binding.shimmerWasteBoxPage.visibility = View.VISIBLE
+                        binding.wasteBoxPage.visibility = View.GONE
+                        binding.tvWasteBoxEmpty.visibility = View.GONE
+                    }
+
+                    is WasteBoxUiState.Error -> {
+                        SweetAlertDialogUtils.showSweetAlertDialog(
+                            this@WasteBoxActivity,
+                            wasteBoxUiState.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
+                    }
+                }
+
+            }
         }
     }
 
