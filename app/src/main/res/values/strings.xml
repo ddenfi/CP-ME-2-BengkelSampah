@@ -61,6 +61,7 @@
     <string name="cash">Cash</string>
     <string name="request_pick_up_fo">Ajukan Penjumputan</string>
     <string name="address_error">Alamat tidak boleh kosong</string>
+    <string name="request_pick_up_success">Berhasil diajukan penjemputan</string>
 
     <!-- History -->
     <string name="all_status">All Status</string>
