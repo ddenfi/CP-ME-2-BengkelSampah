@@ -4,12 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.asResource
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.repository.HistoryRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.NewsRepository
 import com.bengkelsampah.bengkelsampahapp.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -22,17 +24,20 @@ class MainViewModel @Inject constructor(
     private val historyRepository: HistoryRepository
 ) : ViewModel() {
 
-    val dashboardUiState = userRepository.userData.asResource().map {
-        when (it) {
-            is Resource.Error -> DashboardUiState.Error(it.exception?.message.toString())
-            is Resource.Loading -> DashboardUiState.Loading
-            is Resource.Success -> DashboardUiState.Success(it.data)
-        }
-    }.stateIn(
-        viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = DashboardUiState.Loading
-    )
+    val dashboardUiState =
+        userRepository.userData.combine(historyRepository.getAllOrders()) { userData, orderHistory ->
+            try {
+                DashboardUiState.Success(
+                    userData,
+                    orderHistory.filter { it.status == OrderStatus.PICKING_UP || it.status == OrderStatus.PROCESSED })
+            } catch (e: Exception) {
+                DashboardUiState.Error(e.message.toString())
+            }
+        }.stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = DashboardUiState.Loading
+        )
 
     val newsUiState = newsUiState().stateIn(
         viewModelScope,
