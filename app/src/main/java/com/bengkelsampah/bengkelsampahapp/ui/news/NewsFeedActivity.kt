@@ -29,6 +29,19 @@ class NewsFeedActivity : AppCompatActivity() {
         binding = ActivityNewsFeedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val newsAdapter = NewsAdapter()
+        binding.rvNewsFeed.apply {
+            layoutManager = LinearLayoutManager(this@NewsFeedActivity)
+            adapter = newsAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_24)
+                )
+            )
+        }
+
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.newsResource.collect { newsResource ->
@@ -47,39 +60,24 @@ class NewsFeedActivity : AppCompatActivity() {
                         is Resource.Loading -> showLoading(true)
                         is Resource.Success -> {
                             showLoading(false)
-                            setupView(newsResource.data)
+                            newsAdapter.submitList(newsResource.data)
+
+                            newsAdapter.setOnItemClickCallback(object : NewsAdapter.OnItemClickCallback {
+                                override fun onItemClicked(data: NewsResourceModel) {
+                                    val intent = Intent(this@NewsFeedActivity, NewsFeedDetailActivity::class.java)
+                                    intent.putExtra(NEWS_RESOURCE, data)
+                                    startActivity(intent)
+                                }
+
+                            })
                         }
                     }
                 }
             }
         }
-    }
-
-    private fun setupView(newsResources: List<NewsResourceModel>) {
-        val newsAdapter = NewsAdapter()
-        binding.rvNewsFeed.apply {
-            layoutManager = LinearLayoutManager(this@NewsFeedActivity)
-            adapter = newsAdapter
-            addItemDecoration(
-                MarginItemDecoration(
-                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
-                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_24)
-                )
-            )
-        }
-
-        newsAdapter.submitList(newsResources)
-
-        newsAdapter.setOnItemClickCallback(object : NewsAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: NewsResourceModel) {
-                val intent = Intent(this@NewsFeedActivity, NewsFeedDetailActivity::class.java)
-                intent.putExtra(NEWS_RESOURCE, data)
-                startActivity(intent)
-            }
-
-        })
 
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         if (!isLoading) {

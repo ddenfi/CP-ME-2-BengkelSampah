@@ -23,13 +23,18 @@ class NewsFeedDetailActivity : AppCompatActivity() {
         binding = ActivityNewsFeedDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val getIntentData = intent.getParcelableExtra(NEWS_RESOURCE, NewsResourceModel::class.java)
+        val getIntentData =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) intent.getParcelableExtra(
+                NEWS_RESOURCE,
+                NewsResourceModel::class.java
+            ) else intent.getParcelableExtra(NEWS_RESOURCE)
 
         setupView(getIntentData)
     }
 
     private fun setupView(newsResource: NewsResourceModel?) {
         if (newsResource != null) {
+            Log.d("TAG", "setupView: ${newsResource.url} ")
             binding.tvNewsDetailEmpty.visibility = View.GONE
             binding.wvNewsDetail.visibility = View.VISIBLE
             try {
