@@ -13,12 +13,12 @@ import javax.inject.Inject
 class HistoryDetailViewModel @Inject constructor(
     private val historyRepository: HistoryRepository
 ) : ViewModel() {
-    fun getHistoryDetail(id: Int): Flow<HistoryDetailUiState> =
-        historyRepository.getHistoryById(id).asResource().map { resourceHistoryDetail ->
-            when (resourceHistoryDetail) {
-                is Resource.Success -> HistoryDetailUiState.Success(resourceHistoryDetail.data)
+    fun getHistoryDetail(id: String): Flow<HistoryDetailUiState> =
+        historyRepository.getHistoryById(id).asResource().map { resourceWasteOrder ->
+            when (resourceWasteOrder) {
+                is Resource.Success -> HistoryDetailUiState.Success(resourceWasteOrder.data)
                 is Resource.Loading -> HistoryDetailUiState.Loading
-                is Resource.Error -> HistoryDetailUiState.Error(resourceHistoryDetail.exception?.message)
+                is Resource.Error -> HistoryDetailUiState.Error(resourceWasteOrder.exception?.message)
             }
         }
 }

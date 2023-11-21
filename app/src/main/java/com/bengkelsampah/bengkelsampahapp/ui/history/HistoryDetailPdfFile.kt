@@ -4,6 +4,7 @@ import android.content.Context
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
@@ -20,7 +21,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class HistoryDetailPdfFile {
-    fun generatePdfFile(context: Context, history: HistoryModel) {
+    fun generatePdfFile(context: Context, history: WasteOrderModel) {
         val fileDir = File(context.getExternalFilesDir(null), "Documents")
         if (!fileDir.exists()) fileDir.mkdirs()
 
@@ -35,7 +36,7 @@ class HistoryDetailPdfFile {
         doc.close()
     }
 
-    private fun pdfWasteSold(doc: Document, context: Context, history: HistoryModel) {
+    private fun pdfWasteSold(doc: Document, context: Context, history: WasteOrderModel) {
         doc.add(
             Paragraph(context.getString(R.string.waste_type))
                 .setTextAlignment(TextAlignment.CENTER)
@@ -46,7 +47,7 @@ class HistoryDetailPdfFile {
             .setHorizontalAlignment(HorizontalAlignment.CENTER)
             .setWidth(UnitValue.createPercentValue(50f))
 
-        for (waste in history.waste) {
+        for (waste in history.wasteBox) {
             val wasteName = waste.waste.name
             val wasteAmount = waste.amount
             val wasteUnit = waste.waste.unit
@@ -94,7 +95,7 @@ class HistoryDetailPdfFile {
         doc.add(wasteSoldTable)
     }
 
-    private fun pdfHeader(doc: Document, context: Context, history: HistoryModel) {
+    private fun pdfHeader(doc: Document, context: Context, history: WasteOrderModel) {
         val agentName = Paragraph(history.agent).setBold()
         val agentAddress = Paragraph(history.agentAddress)
         val agentPhone = Paragraph(context.getString(R.string.agent_phone, history.agentPhone))
