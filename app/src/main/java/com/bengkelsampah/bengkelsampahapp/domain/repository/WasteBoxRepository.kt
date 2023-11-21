@@ -1,5 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.domain.repository
 
+import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.MyBucketEntity
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.util.WasteBoxConverter
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
@@ -16,4 +18,8 @@ interface WasteBoxRepository {
     fun updateWasteBoxItem(waste: WasteBoxModel)
     fun insertOrder(order: WasteOrderModel)
     fun clearWasteBox()
+    fun addToWasteBucket(waste: WasteBoxModel)
+    fun getWasteBucketItems(): Flow<List<WasteBoxModel>>
+    fun deleteFromWasteBucket(waste: WasteBoxModel)
+    fun updateWasteBucketItem(waste: WasteBoxModel)
 }

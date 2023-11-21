@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.data.source.asResource
+import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.MyBucketEntity
 import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerById
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
@@ -117,4 +118,23 @@ class WasteBoxViewModel @Inject constructor(
         )
 
     fun clearWasteBox() = wasteBoxRepository.clearWasteBox()
+
+    fun getWasteBucketItems(): Flow<WasteBoxUiState> =
+        wasteBoxRepository.getWasteBucketItems().asResource().map { resourceWasteBox ->
+            when (resourceWasteBox) {
+                is Resource.Success -> WasteBoxUiState.Success(resourceWasteBox.data)
+                is Resource.Loading -> WasteBoxUiState.Loading
+                is Resource.Error -> WasteBoxUiState.Error(resourceWasteBox.exception?.message)
+            }
+
+        }
+
+    fun addToWasteBucket(waste: WasteModel, weight: Double) =
+        wasteBoxRepository.addToWasteBucket(WasteBoxModel(waste, weight))
+
+    fun deleteFromWasteBucket(waste: WasteModel, weight: Double) =
+        wasteBoxRepository.deleteFromWasteBucket(WasteBoxModel(waste, weight))
+
+    fun updateWasteBucketItem(waste: WasteModel, weight: Double) =
+        wasteBoxRepository.updateWasteBucketItem(WasteBoxModel(waste, weight))
 }
