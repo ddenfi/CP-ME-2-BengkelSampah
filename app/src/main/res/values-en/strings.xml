@@ -95,4 +95,6 @@
     <string name="cart">Bucket</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="order_in_progress">Order In-progress</string>
+    <string name="no_order_in_progress">No Order</string>
 </resources>

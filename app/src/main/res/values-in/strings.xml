@@ -95,4 +95,6 @@
     <string name="cart">Keranjang</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
+    <string name="order_in_progress">Dalam Proses</string>
+    <string name="no_order_in_progress">Tidak ada order</string>
 </resources>
