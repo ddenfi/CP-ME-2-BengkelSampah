@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -83,8 +82,6 @@
                     android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"/>
-                    android:layout_marginStart="10dp"
                     android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
