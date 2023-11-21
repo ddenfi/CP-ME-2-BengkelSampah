@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemNewBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.NewsResourceModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bumptech.glide.Glide
 
 class NewsAdapter : ListAdapter<NewsResourceModel, NewsAdapter.NewsViewHolder>(
@@ -26,7 +27,14 @@ class NewsAdapter : ListAdapter<NewsResourceModel, NewsAdapter.NewsViewHolder>(
         }
     }
 ) {
-    inner class NewsViewHolder(private val binding: ItemNewBinding) : ViewHolder(binding.root) {
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    inner class NewsViewHolder(val binding: ItemNewBinding) : ViewHolder(binding.root) {
         fun bind(item: NewsResourceModel) {
             Glide
                 .with(binding.root.context)
@@ -35,6 +43,10 @@ class NewsAdapter : ListAdapter<NewsResourceModel, NewsAdapter.NewsViewHolder>(
             binding.tvNewTitle.text = item.title
             binding.tvNewTimestamp.text = item.publishedAt
             binding.tvNewContent.text = item.content
+
+            binding.root.setOnClickListener {
+                onItemClickCallback.onItemClicked(item)
+            }
         }
     }
 
@@ -45,6 +57,10 @@ class NewsAdapter : ListAdapter<NewsResourceModel, NewsAdapter.NewsViewHolder>(
 
     override fun onBindViewHolder(holder: NewsAdapter.NewsViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: NewsResourceModel)
     }
 
 }

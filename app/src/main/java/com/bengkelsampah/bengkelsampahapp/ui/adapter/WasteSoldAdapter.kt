@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteSoldBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 
-class WasteSoldAdapter : ListAdapter<WasteSoldModel, WasteSoldAdapter.WasteSoldViewHolder>(
-    object : DiffUtil.ItemCallback<WasteSoldModel>() {
-        override fun areItemsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
+class WasteSoldAdapter : ListAdapter<WasteBoxModel, WasteSoldAdapter.WasteSoldViewHolder>(
+    object : DiffUtil.ItemCallback<WasteBoxModel>() {
+        override fun areItemsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
+        override fun areContentsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -28,12 +28,14 @@ class WasteSoldAdapter : ListAdapter<WasteSoldModel, WasteSoldAdapter.WasteSoldV
         private val tvWastePricePerUnit by lazy { binding.tvWastePricePerUnit }
         private val tvWastePrice by lazy { binding.tvWastePrice }
 
-        fun bind(waste: WasteSoldModel) {
+        fun bind(waste: WasteBoxModel) {
             tvWasteName.text = waste.waste.name
             tvWasteAmount.text = waste.amount.toString()
-            tvWasteUnit.text = waste.waste.unit
+            tvWasteUnit.text = waste.waste.unit.name
             tvWastePricePerUnit.text = waste.waste.pricePerUnit.toString()
-            tvWastePrice.text = (waste.amount * waste.waste.pricePerUnit).toString()
+            tvWastePrice.text =
+                WasteBoxModel.countSubtotal(waste.waste.pricePerUnit, waste.amount).toInt()
+                    .toString()
         }
     }
 

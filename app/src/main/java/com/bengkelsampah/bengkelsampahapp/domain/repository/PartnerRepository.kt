@@ -1,11 +1,12 @@
 package com.bengkelsampah.bengkelsampahapp.domain.repository
 
-import com.bengkelsampah.bengkelsampahapp.data.source.remote.network.ApiService
+import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.GetPartner
+import com.bengkelsampah.bengkelsampahapp.data.source.remote.response.partner.PartnerById
+import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 
-class PartnerRepository (
-    private val apiService: ApiService
-) {
-    suspend fun getPartner() = apiService.getPartner()
-    suspend fun getPartnerById(partnerId: UUID) = apiService.getPartnerById(partnerId)
+interface PartnerRepository {
+    fun getPartners(): Flow<GetPartner>
+
+    fun getPartnersById(partnerId: String): Flow<PartnerById>
 }

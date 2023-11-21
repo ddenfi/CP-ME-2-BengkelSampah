@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginVertical="8dp">
 
@@ -23,13 +23,15 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_item_history_moneybag_title"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                style="@style/TextAppearance.Material3.BodyLarge"
                 tools:text="Pulsa/Internet" />
 
             <TextView
+                android:id="@+id/id_item_history_history_moneybag_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Pulsa/Internet" />
@@ -42,6 +44,7 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/tv_item_history_moneybag_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"

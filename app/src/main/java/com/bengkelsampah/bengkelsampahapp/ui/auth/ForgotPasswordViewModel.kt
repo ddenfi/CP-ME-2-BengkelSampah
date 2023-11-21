@@ -11,7 +11,7 @@ class ForgotPasswordViewModel : ViewModel() {
     /**
      * Check forgot password success value
      */
-    fun forgotPassword(email: String) {
+    fun forgotPassword(phoneNumber: String) {
         _forgotPasswordSuccess.value = true
     }
 }

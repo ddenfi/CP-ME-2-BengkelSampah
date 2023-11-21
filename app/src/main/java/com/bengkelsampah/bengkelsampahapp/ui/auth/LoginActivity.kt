@@ -2,23 +2,28 @@ package com.bengkelsampah.bengkelsampahapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
+import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityLoginBinding
+import com.bengkelsampah.bengkelsampahapp.domain.model.UserRole
+import com.bengkelsampah.bengkelsampahapp.ui.driver.DriverMainActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels()
+    private var progressDialog: SweetAlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         setContentView(binding.root)
 
         performLogin()
@@ -28,52 +33,90 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * Called when user click login button
+     * Called when the user clicks the login button
      */
     private fun performLogin() {
         binding.btnLoginLogin.setOnClickListener {
-            val email = binding.tietEmailLogin.text.toString()
+            val phoneNumber = binding.tietPhoneNumberLogin.text.toString()
             val password = binding.tietPasswordLogin.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.login(email, password)
+            if (phoneNumber.isNotEmpty() && password.isNotEmpty()) {
+                viewModel.login(phoneNumber, password)
             } else {
-                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText(getString(R.string.all_login_field_must_be_filled))
-                    .show()
+                showLoginErrorSweetAlert(getString(R.string.all_login_field_must_be_filled))
             }
         }
     }
 
     /**
-     * Observe login result by view model
+     * Observe login result by the view model
      */
     private fun observeLoginResult() {
-        viewModel.loginSuccess.observe(this) { loginSuccess ->
-            if (loginSuccess) {
-                val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                    .setTitleText(getString(R.string.login_successful))
-
-                dialog.setConfirmClickListener {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    dialog.dismiss()
+        viewModel.loginLiveData.observe(this) { loginResource ->
+            when (loginResource) {
+                is Resource.Loading -> {
+                    progressDialog = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                        .setTitleText(getString(R.string.loading))
+                    progressDialog?.show()
                 }
 
-                dialog.setOnDismissListener {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                is Resource.Success -> {
+                    progressDialog?.dismiss()
+                    viewModel.responseMessage.observe(this) { responseMessage ->
+                        showLoginSuccessSweetAlert(responseMessage)
+                    }
                 }
 
-                dialog.show()
-            } else {
-                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText(getString(R.string.login_invalid))
-                    .show()
+                is Resource.Error -> {
+                    progressDialog?.dismiss()
+                    viewModel.responseMessage.observe(this) { responseMessage ->
+                        showLoginErrorSweetAlert(responseMessage)
+                    }
+                }
             }
         }
+    }
+
+    /**
+     * Show a success SweetAlertDialog for login
+     */
+    private fun showLoginSuccessSweetAlert(message: String) {
+        val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+            .setTitleText(getString(R.string.login_successful))
+            .setContentText(message)
+            .hideConfirmButton()
+
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismissWithAnimation()
+            var intent = Intent()
+            viewModel.loginUserRole.observe(this@LoginActivity) {
+                intent = when (it) {
+                    UserRole.DRIVER -> Intent(this@LoginActivity, DriverMainActivity::class.java)
+
+                    UserRole.CONSUMER -> Intent(this, MainActivity::class.java)
+                }
+            }
+            startActivity(intent)
+            finish()
+        }, 1500)
+    }
+
+    /**
+     * Show an error SweetAlertDialog for login
+     */
+    private fun showLoginErrorSweetAlert(message: String) {
+        val dialog = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            .setTitleText(getString(R.string.login_failed))
+            .setContentText(message)
+            .hideConfirmButton()
+
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismissWithAnimation()
+        }, 1500)
     }
 
     /**

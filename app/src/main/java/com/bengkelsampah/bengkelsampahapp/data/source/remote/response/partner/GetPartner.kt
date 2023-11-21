@@ -6,5 +6,5 @@ data class GetPartner(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: ArrayList<GetPartnerItem>
+    val data: List<GetPartnerItem>
 )

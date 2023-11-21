@@ -312,12 +312,6 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="4dp"
-                        android:background="#d9d9d9" />
-
-                    <View
                         android:layout_width="100dp"
                         android:layout_height="16dp"
                         android:layout_gravity="end"
@@ -357,12 +351,6 @@
                         android:layout_height="16dp"
                         android:layout_marginTop="2dp"
                         android:background="@drawable/bg_shimmer_placeholder" />
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="8dp"
-                        android:background="#d9d9d9" />
 
                     <View
                         android:layout_width="160dp"

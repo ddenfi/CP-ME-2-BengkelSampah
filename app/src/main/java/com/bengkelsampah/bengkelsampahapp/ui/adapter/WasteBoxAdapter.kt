@@ -1,5 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,15 +9,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteBoxBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
+import kotlin.math.roundToInt
 
-class WasteBoxAdapter : ListAdapter<WasteSoldModel, WasteBoxAdapter.WasteBoxViewHolder>(
-    object : DiffUtil.ItemCallback<WasteSoldModel>() {
-        override fun areItemsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
+class WasteBoxAdapter(
+    private val onClickAdd: (WasteModel, Double) -> Unit,
+    private val onClickSubtract: (WasteModel, Double) -> Unit
+) : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewHolder>(
+    object : DiffUtil.ItemCallback<WasteBoxModel>() {
+        override fun areItemsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: WasteSoldModel, newItem: WasteSoldModel): Boolean {
+        override fun areContentsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -24,35 +31,40 @@ class WasteBoxAdapter : ListAdapter<WasteSoldModel, WasteBoxAdapter.WasteBoxView
         private val tvWasteName by lazy { binding.tvWasteName }
         private val tvWastePrice by lazy { binding.tvWastePrice }
         private val tvWastePricePerUnit by lazy { binding.tvWastePricePerUnit }
-        private val tvWasteWeight by lazy { binding.tvWasteWeight }
+        private val edWasteWeight by lazy { binding.edWasteWeight }
         private val chipAdd by lazy { binding.chipAdd }
         private val chipMinus by lazy { binding.chipMinus }
 
-        fun bind(wasteSold: WasteSoldModel) {
+        fun bind(wasteSold: WasteBoxModel) {
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                wasteSold.waste.pricePerUnit * wasteSold.amount
+                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
+                    .roundToInt()
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,
-                wasteSold.waste.pricePerUnit,
+                wasteSold.waste.pricePerUnit.toString(),
                 wasteSold.waste.unit
             )
-            tvWasteWeight.text = wasteSold.amount.toString()
+            edWasteWeight.setText(wasteSold.amount.toString())
 
-            chipAdd.setOnClickListener { addWeight() }
-            chipMinus.setOnClickListener { subtractWeight() }
-        }
+            edWasteWeight.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-        private fun addWeight() {
-            val newValue = tvWasteWeight.text.toString().toInt() + 1
-            tvWasteWeight.text = newValue.toString()
-        }
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-        private fun subtractWeight() {
-            val newValue = tvWasteWeight.text.toString().toInt() - 1
-            tvWasteWeight.text = newValue.toString()
+                override fun afterTextChanged(newText: Editable?) {
+                    if (newText.toString().isNotEmpty()) {
+                        edWasteWeight.error = null
+                    } else {
+                        edWasteWeight.error = itemView.context.getString(R.string.weight_error)
+                    }
+                }
+            })
+
+            chipAdd.setOnClickListener { onClickAdd(wasteSold.waste, wasteSold.amount) }
+            chipMinus.setOnClickListener { onClickSubtract(wasteSold.waste, wasteSold.amount) }
         }
     }
 

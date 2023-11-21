@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Bengkel Sampah</string>
-    <string name="profile_name">Generasi Gigih 3.0</string>
-    <string name="profile_email">generasigigih@mail.com</string>
+    <string name="profile_name" translatable="false">Generasi Gigih 3.0</string>
+    <string name="profile_email" translatable="false">generasigigih@mail.com</string>
     <string name="Edit_Account">Edit Akun</string>
     <string name="Log_Out">Keluar</string>
-    <string name="profile_phonenumber">+62 123 456 789</string>
+    <string name="profile_phonenumber" translatable="false">+62 123 456 789</string>
     <string name="privacy_policy">Ketentuan dan Privasi</string>
     <string name="help_center">Pusat Bantuan</string>
     <string name="name_edit">Nama</string>
@@ -19,97 +19,122 @@
 
     <string name="name">Nama</string>
     <string name="name_hint">Masukkan nama lengkap kamu …</string>
-    <string name="email">Email</string>
-    <string name="email_hint">Masukkan email kamu …</string>
+    <string name="phone_number">Nomor Telepon</string>
+    <string name="phone_number_hint">Masukkan nomor telepon kamu …</string>
     <string name="password">Kata Sandi</string>
     <string name="password_hint">Masukkan kata sandi kamu …</string>
+    <string name="loading" translatable="false">Loading</string>
 
     <!-- Login -->
     <string name="description_login">Silahkan masuk untuk melanjutkan</string>
     <string name="login">Masuk</string>
     <string name="forgot_password">Lupa kata sandi</string>
-    <string name="login_successful">Login Berhasil</string>
-    <string name="all_login_field_must_be_filled">Email dan password harus diisi!</string>
-    <string name="login_invalid">Email atau password salah</string>
+    <string name="login_successful">Login Successful</string>
+    <string name="login_failed" translatable="false">Login Failed</string>
+    <string name="all_login_field_must_be_filled" translatable="false">Phone number and password can\'t be empty!</string>
 
     <!-- Register -->
-    <string name="description_register">Silahkan daftar terlebih dahulu jika belum mempunyai akun</string>
-    <string name="register">Daftar</string>
-    <string name="dont_have_account_yet">Belum punya akun?</string>
-    <string name="register_successful">Register Berhasil</string>
-    <string name="all_register_field_must_be_filled">Nama, email, dan password harus diisi!</string>
+    <string name="description_register" translatable="false">Silahkan daftar terlebih dahulu jika belum mempunyai akun</string>
+    <string name="register" translatable="false">Daftar</string>
+    <string name="dont_have_account_yet" translatable="false">Belum punya akun?</string>
+    <string name="register_successful" translatable="false">Register Successful</string>
+    <string name="register_failed" translatable="false">Register Failed</string>
+    <string name="all_register_field_must_be_filled" translatable="false">Name, phone number, and password can\'t be empty!</string>
 
     <!-- Forgot Password -->
-    <string name="description_forgot_password">Silahkan masukkan email kamu untuk mereset kata sandi</string>
-    <string name="reset_password">Kirim link reset password</string>
-    <string name="reset_password_successful">Link reset password telah dikirimkan melalui email</string>
-    <string name="all_forgot_password_field_must_be_filled">Email harus diisi!</string>
+    <string name="description_forgot_password" translatable="false">Silahkan masukkan nomor telepon kamu untuk mereset kata sandi</string>
+    <string name="reset_password" translatable="false">Kirim link reset kata sandi</string>
+    <string name="reset_password_successful" translatable="false">Link reset kata sandi telah dikirimkan melalui sms</string>
+    <string name="all_forgot_password_field_must_be_filled" translatable="false">Nomor telepon harus diisi!</string>
+
+    <!-- Form Order -->
+    <string name="form_order" translatable="false">Form Order</string>
+    <string name="pick_up_address_fo" translatable="false">Alamat Penjemputan</string>
+    <string name="enter_pick_up_address_fo" translatable="false">Masukkan alamat penjemputan</string>
+    <string name="pick_up_address_desc_fo" translatable="false">Deskripsi (Opsional)</string>
+    <string name="change_agent_fo" translatable="false">Ganti Agen</string>
+    <string name="agent_note_fo" translatable="false">Agen bisa menjemput sampah sewaktu waktu, dikarenakan jumlah armada yang kurang!</string>
+    <string name="waste_total_fo" translatable="false">Total Sampah</string>
+    <string name="add_waste_fo" translatable="false">Tambah Sampah</string>
+    <string name="waste_price_unit" translatable="false">Harga Satuan</string>
+    <string name="payment_method_fo" translatable="false">Metode Pembayaran</string>
+    <string name="cash" translatable="false">Cash</string>
+    <string name="request_pick_up_fo" translatable="false">Ajukan Penjumputan</string>
+    <string name="address_error" translatable="false">Alamat tidak boleh kosong</string>
+    <string name="request_pick_up_success" translatable="false">Berhasil diajukan penjemputan</string>
 
     <!-- History -->
-    <string name="all_status">Semua Status</string>
-    <string name="waiting_confirmation_status">Menunggu Dikonfirmasi</string>
-    <string name="in_process_status">Diproses</string>
-    <string name="finished_status">Selesai</string>
-    <string name="canceled_status">Dibatalkan</string>
-    <string name="pick_up_date">Tanggal Penjemputan :</string>
-    <string name="pick_up_address">Alamat Penjemputan :</string>
-    <string name="pick_up_detail">Detail Penjemputan : </string>
-    <string name="cancel_order">Batalkan Pesanan</string>
-    <string name="bengkel_sampah_agent">Agen Bengkel Sampah : </string>
-    <string name="agent_phone">Nomor Agen : %s</string>
-    <string name="waste_type">Jenis Sampah :</string>
-    <string name="total_detail_history">Total : %s</string>
-    <string name="description">Deskripsi :</string>
-    <string name="multiplication">x</string>
-    <string name="download_transaction_file">Unduh File Transaksi</string>
-    <string name="filter">Filter</string>
-    <string name="reset">Reset</string>
-    <string name="total">+ Rp %d</string>
-    <string name="cancel_order_confirmation">Apakah anda yakin untuk membatalkan pesanan ini?</string>
-    <string name="order_cancelled">Pesanan anda telah berhasil dibatalkan</string>
-    <string name="transaction_downloaded">Transaksi berhasil disimpan</string>
-    <string name="transaction_download_failed">Trasanksi gagal disimpan</string>
-    <string name="idr">Rp %d</string>
+    <string name="all_status" translatable="false">All Status</string>
+    <string name="waiting_confirmation_status" translatable="false">Wait Confirmation</string>
+    <string name="in_process_status" translatable="false">Processed</string>
+    <string name="finished_status" translatable="false">Done</string>
+    <string name="canceled_status" translatable="false">Cancelled</string>
+    <string name="pick_up_date" translatable="false">Tanggal Penjemputan :</string>
+    <string name="pick_up_address" translatable="false">Alamat Penjemputan :</string>
+    <string name="pick_up_detail" translatable="false">Detail Penjemputan : </string>
+    <string name="cancel_order" translatable="false">Batalkan Pesanan</string>
+    <string name="bengkel_sampah_agent" translatable="false">Agen Bengkel Sampah : </string>
+    <string name="agent_phone" translatable="false">Nomor Agen : %s</string>
+    <string name="waste_type" translatable="false">Jenis Sampah</string>
+    <string name="total_detail_history" translatable="false">Total : %s</string>
+    <string name="description" translatable="false">Deskripsi :</string>
+    <string name="multiplication" translatable="false">x</string>
+    <string name="download_transaction_file" translatable="false">Unduh File Transaksi</string>
+    <string name="filter" translatable="false">Filter</string>
+    <string name="reset" translatable="false">Reset</string>
+    <string name="total" translatable="false">+ Rp %d</string>
+    <string name="cancel_order_confirmation" translatable="false">Apakah anda yakin untuk membatalkan pesanan ini?</string>
+    <string name="order_cancelled" translatable="false">Pesanan anda telah berhasil dibatalkan</string>
+    <string name="transaction_downloaded" translatable="false">Transaksi berhasil disimpan</string>
+    <string name="transaction_download_failed" translatable="false">Trasanksi gagal disimpan</string>
+    <string name="idr" translatable="false">Rp %d</string>
+    <string name="history_empty" translatable="false">Tidak Ada Riwayat Transaksi</string>
 
-    <string name="date">1 Oktober 2023</string>
-    <string name="agent_name">Nama Agen</string>
-    <string name="agent_address">Alamat Agen</string>
-    <string name="waste_name">Nama Sampah</string>
-    <string name="waste_amount">25</string>
-    <string name="waste_unit">kg</string>
-    <string name="waste_price">1000</string>
+    <string name="date" translatable="false">1 Oktober 2023</string>
+    <string name="agent_name" translatable="false">Nama Agen</string>
+    <string name="agent_address" translatable="false">Alamat Agen</string>
+    <string name="waste_name" translatable="false">Nama Sampah</string>
+    <string name="waste_amount" translatable="false">25</string>
+    <string name="waste_unit" translatable="false">kg</string>
+    <string name="waste_price" translatable="false">1000</string>
 
-    <!-- cart -->
-    <string name="waste_box_page">Keranjang Sampah</string>
-    <string name="add">Tambah</string>
-    <string name="minus">Kurang</string>
-    <string name="add_from_my_box">Dari Kotakku</string>
-    <string name="waste_box_empty">Kotak keranjang kosong.\nIsi kembali untuk dapat melanjutkan</string>
-    <string name="waste_sold_estimation">Estimasi Penjualan</string>
-    <string name="weight">Berat</string>
-    <string name="weight_estimation">Estimasi berat/kg</string>
-    <string name="price">Harga</string>
-    <string name="price_value">Rp %d</string>
-    <string name="price_per_unit_value">\@%s/%s</string>
-    <string name="finish">Selesai</string>
-    <string name="search">Cari Sampah</string>
-    <string name="waste_box">Kotak sampah</string>
+    <!-- waste box -->
+    <string name="add" translatable="false">Tambah</string>
+    <string name="minus" translatable="false">Kurang</string>
+    <string name="add_to_box" translatable="false">Masukkan ke Kotak</string>
+    <string name="remove_from_box" translatable="false">Hapus dari Kotak</string>
+    <string name="add_from_my_box" translatable="false">Dari Kotakku</string>
+    <string name="waste_box_empty" translatable="false">Kotak keranjang kosong.\nIsi kembali untuk dapat melanjutkan</string>
+    <string name="waste_sold_estimation" translatable="false">Estimasi Penjualan</string>
+    <string name="weight" translatable="false">Berat</string>
+    <string name="weight_estimation" translatable="false">Estimasi berat/kg</string>
+    <string name="price" translatable="false">Harga</string>
+    <string name="price_value" translatable="false">Rp %d</string>
+    <string name="price_per_unit_value" translatable="false">\@%s/%s</string>
+    <string name="finish" translatable="false">Selesai</string>
+    <string name="add_waste_page" translatable="false">Tambah Sampah</string>
+    <string name="search" translatable="false">Cari Sampah</string>
+    <string name="waste_box" translatable="false">Kotak sampah</string>
+    <string name="dialog_add_waste_title" translatable="false">Tambahkan Sampah Anda</string>
+    <string name="initial_weight" translatable="false">0.0</string>
+    <string name="waste_weight" translatable="false">%.1f %s</string>
+    <string name="weight_error" translatable="false">Berat tidak boleh kosong</string>
 
-    <string name="home">Home</string>
-    <string name="history">Riwayat</string>
-    <string name="account">Akun</string>
-    <string name="history_detail">Detail Penjemputan</string>
-    <string name="cart">Keranjang</string>
-    <string name="money_bag">Money Bag</string>
-    <string name="profile">Profil</string>
-    <string name="title_activity_bank_sampah">BankSampahActivity</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="history" translatable="false">Riwayat</string>
+    <string name="account" translatable="false">Akun</string>
+    <string name="history_detail" translatable="false">Detail Penjemputan</string>
+    <string name="cart" translatable="false">Keranjang</string>
+    <string name="money_bag" translatable="false">Money Bag</string>
+    <string name="profile" translatable="false">Profil</string>
+    <string name="title_activity_bank_sampah" translatable="false">BankSampahActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
 
-    <string name="lorem_ipsum">
+    <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
@@ -146,8 +171,8 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
 
-    <string name="yes">Ya</string>
-    <string name="no">Tidak</string>
     <string name="title_edit_akun">Edit Akun</string>
     <string name="title_activity_partner">Request Penjemputan</string>
+    <string name="yes" translatable="false">Ya</string>
+    <string name="no" translatable="false">Tidak</string>
 </resources>

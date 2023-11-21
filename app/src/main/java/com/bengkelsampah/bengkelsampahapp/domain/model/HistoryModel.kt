@@ -1,7 +1,5 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryStatus
-
 data class HistoryModel(
     val id: Int,
     val date: String,
@@ -11,7 +9,7 @@ data class HistoryModel(
     val agent: String,
     val agentAddress: String,
     val agentPhone: String,
-    val waste: List<WasteSoldModel>,
+    val waste: List<WasteBoxModel>,
     val total: Int,
     val description: String?
 ) {
@@ -22,66 +20,80 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.MENUNGGU_KONFIRMASI.statusValue,
+                status = OrderStatus.WAIT_CONFIRMATION.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 waste = listOf(
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "botol kecap",
-                            unit = WasteUnit.UNIT.abbreviation,
+                            unit = WasteUnit.UNIT,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "alma lembek (panci)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 10000
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "besi sam-sam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "kara hitam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 5
+                        amount = 5.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "plastik pp (kemasan snack)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 300
                         ),
-                        amount = 1
+                        amount = 1.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "himpek/printer",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 500
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
                             name = "karton",
-                            unit = WasteUnit.KG.abbreviation,
+                            wasteType = "INORGAIC",
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 54
+                        amount = 54.0
                     )
                 ),
                 total = 71460,
@@ -92,66 +104,80 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.DIBATALKAN.statusValue,
+                status = OrderStatus.CANCELLED.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 waste = listOf(
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "botol kecap",
-                            unit = WasteUnit.UNIT.abbreviation,
+                            unit = WasteUnit.UNIT,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "alma lembek (panci)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 10000
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "besi sam-sam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "kara hitam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 5
+                        amount = 5.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "plastik pp (kemasan snack)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 300
                         ),
-                        amount = 1
+                        amount = 1.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "himpek/printer",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 500
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
                             name = "karton",
-                            unit = WasteUnit.KG.abbreviation,
+                            wasteType = "INORGAIC",
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 54
+                        amount = 54.0
                     )
                 ),
                 total = 71460,
@@ -162,66 +188,80 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.SELESAI.statusValue,
+                status = OrderStatus.DONE.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 waste = listOf(
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "botol kecap",
-                            unit = WasteUnit.UNIT.abbreviation,
+                            unit = WasteUnit.UNIT,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "alma lembek (panci)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 10000
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "besi sam-sam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "kara hitam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 5
+                        amount = 5.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "plastik pp (kemasan snack)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 300
                         ),
-                        amount = 1
+                        amount = 1.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "himpek/printer",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 500
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
                             name = "karton",
-                            unit = WasteUnit.KG.abbreviation,
+                            wasteType = "INORGAIC",
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 54
+                        amount = 54.0
                     )
                 ),
                 total = 71460,
@@ -232,59 +272,81 @@ data class HistoryModel(
                 date = "2 Oktober 2023, 12:00",
                 address = "Jl. Kesana Kemari No. 123, Kec. A, Kab. B",
                 pickUpDate = "5 Oktober 2023, 10:00",
-                status = HistoryStatus.DIPROSES.statusValue,
+                status = OrderStatus.PROCESSED.statusName,
                 agent = "BS AGEN PASAR MINGGU",
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 waste = listOf(
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "botol kecap",
-                            unit = WasteUnit.UNIT.abbreviation,
+                            unit = WasteUnit.UNIT,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "alma lembek (panci)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 10000
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "besi sam-sam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 200
                         ),
-                        amount = 25
+                        amount = 25.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "kara hitam",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 1000
                         ),
-                        amount = 6
+                        amount = 5.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "plastik pp (kemasan snack)",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 300
                         ),
-                        amount = 1
+                        amount = 1.0
                     ),
-                    WasteSoldModel(
+                    WasteBoxModel(
                         waste = WasteModel(
+                            wasteId = "WS-1",
+                            wasteType = "INORGAIC",
                             name = "himpek/printer",
-                            unit = WasteUnit.KG.abbreviation,
+                            unit = WasteUnit.KG,
                             pricePerUnit = 500
                         ),
-                        amount = 2
+                        amount = 2.0
                     ),
+                    WasteBoxModel(
+                        waste = WasteModel(
+                            wasteId = "WS-1",
+                            name = "karton",
+                            wasteType = "INORGAIC",
+                            unit = WasteUnit.KG,
+                            pricePerUnit = 1000
+                        ),
+                        amount = 54.0
+                    )
                 ),
                 total = 71460,
                 description = "Mohon telfon dulu sebelum sampai rumah"

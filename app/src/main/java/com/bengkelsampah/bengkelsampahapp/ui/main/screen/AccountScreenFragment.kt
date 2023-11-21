@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentAccountScreenBinding
-import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeScreenBinding
 import com.bengkelsampah.bengkelsampahapp.ui.auth.LoginActivity
-import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.PartnerActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.bengkelsampah.bengkelsampahapp.ui.profile.EditProfileActivity
 
@@ -31,8 +28,17 @@ class AccountScreenFragment : Fragment() {
 
         navigateToEditProfile()
         logout()
+        navigateToLanguageSetting()
 
         return binding.root
+    }
+
+    private fun navigateToLanguageSetting() {
+        binding.tvAccountLanguage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.setClassName("com.android.settings", "com.android.settings.LanguageSettings")
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

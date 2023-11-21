@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteSoldModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,8 +34,8 @@ class HistoryDetailActivity : AppCompatActivity() {
         setSupportActionBar(historyDetailBinding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val historyId = intent.getIntExtra(HISTORY_ID, 0)
-        gettingDetailData(historyId)
+        val historyId = intent.getStringExtra(HISTORY_ID)
+        gettingDetailData(historyId.toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -42,7 +45,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun gettingDetailData(historyId: Int) {
+    private fun gettingDetailData(historyId: String) {
         lifecycleScope.launch {
             viewModel.getHistoryDetail(historyId).collect { historyDetailUiState ->
                 when (historyDetailUiState) {
@@ -58,20 +61,22 @@ class HistoryDetailActivity : AppCompatActivity() {
                     }
 
                     is HistoryDetailUiState.Error -> {
-                        Toast.makeText(
+                        SweetAlertDialogUtils.showSweetAlertDialog(
                             this@HistoryDetailActivity,
-                            historyDetailUiState.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            historyDetailUiState.message.toString(),
+                            SweetAlertDialog.ERROR_TYPE,
+                            hasConfirmationButton = false,
+                            willFinishActivity = true
+                        )
                     }
                 }
             }
         }
     }
 
-    private fun setUpDetailPage(history: HistoryModel) {
+    private fun setUpDetailPage(history: WasteOrderModel) {
         historyDetailBinding.apply {
-            tvStatus.text = history.status
+            tvStatus.text = history.status.statusName
             tvAgentName.text = history.agent
             tvAgentAddress.text = history.agentAddress
             tvAgentPhone.text =
@@ -84,7 +89,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             tvPickUpAddress.text = history.address
             tvPickUpDescription.text = history.description
 
-            setUpWasteSold(history.waste)
+            setUpWasteSold(history.wasteBox)
             setHistoryStatusColor(history.status)
             setCancelButtonVisibility(history.status)
             setDownloadFileVisibility(history.status)
@@ -104,41 +109,49 @@ class HistoryDetailActivity : AppCompatActivity() {
 
             btnDownloadTransaction.setOnClickListener {
                 try {
-
                     HistoryDetailPdfFile().generatePdfFile(this@HistoryDetailActivity, history)
-                    Toast.makeText(
+                    SweetAlertDialogUtils.showSweetAlertDialog(
                         this@HistoryDetailActivity,
                         getString(R.string.transaction_downloaded),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        SweetAlertDialog.SUCCESS_TYPE,
+                        hasConfirmationButton = false,
+                        willFinishActivity = false
+                    )
                 } catch (e: Exception) {
-                    Toast.makeText(
+                    SweetAlertDialogUtils.showSweetAlertDialog(
                         this@HistoryDetailActivity,
                         getString(R.string.transaction_download_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        SweetAlertDialog.ERROR_TYPE,
+                        hasConfirmationButton = false,
+                        willFinishActivity = false
+                    )
                 }
             }
         }
     }
 
     private fun cancelOrder() {
-        Toast.makeText(this, getString(R.string.order_cancelled), Toast.LENGTH_LONG).show()
-        this.finish()
+        SweetAlertDialogUtils.showSweetAlertDialog(
+            this,
+            getString(R.string.order_cancelled),
+            SweetAlertDialog.SUCCESS_TYPE,
+            hasConfirmationButton = true,
+            willFinishActivity = true
+        )
     }
 
-    private fun setDownloadFileVisibility(historyStatus: String) {
-        if (historyStatus == HistoryStatus.SELESAI.statusValue) {
+    private fun setDownloadFileVisibility(historyStatus: OrderStatus) {
+        if (historyStatus == OrderStatus.DONE) {
             historyDetailBinding.btnDownloadTransaction.visibility = View.VISIBLE
         } else {
             historyDetailBinding.btnDownloadTransaction.visibility = View.GONE
         }
     }
 
-    private fun setCancelButtonVisibility(historyStatus: String) {
+    private fun setCancelButtonVisibility(historyStatus: OrderStatus) {
         historyDetailBinding.apply {
             when (historyStatus) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> btnCancelOrder.visibility =
+                OrderStatus.WAIT_CONFIRMATION -> btnCancelOrder.visibility =
                     View.VISIBLE
 
                 else -> btnCancelOrder.visibility = View.GONE
@@ -146,29 +159,33 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setHistoryStatusColor(historyStatus: String) {
+    private fun setHistoryStatusColor(historyStatus: OrderStatus) {
         historyDetailBinding.apply {
             when (historyStatus) {
-                HistoryStatus.MENUNGGU_KONFIRMASI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.MENUNGGU_KONFIRMASI.color)
+                OrderStatus.WAIT_CONFIRMATION -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
                 )
 
-                HistoryStatus.SELESAI.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.SELESAI.color)
+                OrderStatus.DONE -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.DONE.color)
                 )
 
-                HistoryStatus.DIPROSES.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIPROSES.color)
+                OrderStatus.PROCESSED -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.PROCESSED.color)
                 )
 
-                HistoryStatus.DIBATALKAN.statusValue -> cardStatus.setCardBackgroundColor(
-                    Color.parseColor(HistoryStatus.DIBATALKAN.color)
+                OrderStatus.CANCELLED -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.CANCELLED.color)
+                )
+
+                OrderStatus.PICKING_UP -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.PICKING_UP.color)
                 )
             }
         }
     }
 
-    private fun setUpWasteSold(waste: List<WasteSoldModel>) {
+    private fun setUpWasteSold(waste: List<WasteBoxModel>) {
         val wasteSoldAdapter = WasteSoldAdapter()
 
         historyDetailBinding.rvWasteSold.apply {
