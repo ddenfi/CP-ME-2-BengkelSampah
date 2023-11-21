@@ -2,7 +2,6 @@ package com.bengkelsampah.bengkelsampahapp.ui.history
 
 import android.content.Context
 import com.bengkelsampah.bengkelsampahapp.R
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.itextpdf.kernel.geom.PageSize

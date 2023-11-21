@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
-import java.math.BigDecimal
 
 @Entity(tableName = "WasteBox")
 data class WasteBoxEntity(

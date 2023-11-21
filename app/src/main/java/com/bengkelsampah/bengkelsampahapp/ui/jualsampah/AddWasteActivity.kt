@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -29,12 +28,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class AddWasteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddWasteBinding
     private val viewModel: WasteBoxViewModel by viewModels()
     private val wasteTypeAdapter = WasteTypeAdapter { wasteType -> adapterOnClick(wasteType) }
+    private var isFromBucket = false
 
     @com.google.android.material.badge.ExperimentalBadgeUtils
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +44,7 @@ class AddWasteActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        isFromBucket = intent.getBooleanExtra(IS_FROM_BUCKET, false)
         getWasteType()
 
         lifecycleScope.launch {
@@ -56,6 +56,8 @@ class AddWasteActivity : AppCompatActivity() {
                 }
             }
         }
+
+        if (isFromBucket) binding.fabWasteBox.visibility = View.GONE
 
         binding.fabWasteBox.setOnClickListener {
             val wasteBoxIntent = Intent(this@AddWasteActivity, WasteBoxActivity::class.java)
@@ -203,14 +205,28 @@ class AddWasteActivity : AppCompatActivity() {
                     btnDialogAdd.isEnabled = false
                     btnDialogAdd.setOnClickListener {
                         if (btnDialogAdd.text == getString(R.string.add_to_box)) {
-                            viewModel.addToWasteBox(
-                                wasteType, edDialogWasteWeight.text.toString().toDouble()
-                            )
+                            if (isFromBucket) {
+                                viewModel.addToWasteBucket(
+                                    wasteType, edDialogWasteWeight.text.toString().toDouble()
+                                )
+                            } else {
+
+                                viewModel.addToWasteBox(
+                                    wasteType, edDialogWasteWeight.text.toString().toDouble()
+                                )
+                            }
                         } else if (btnDialogAdd.text == getString(R.string.remove_from_box)) {
-                            viewModel.deleteFromWasteBox(
-                                wasteType,
-                                edDialogWasteWeight.text.toString().toDouble()
-                            )
+                            if (isFromBucket) {
+                                viewModel.deleteFromWasteBucket(
+                                    wasteType, edDialogWasteWeight.text.toString().toDouble()
+                                )
+                            } else {
+
+                                viewModel.deleteFromWasteBox(
+                                    wasteType,
+                                    edDialogWasteWeight.text.toString().toDouble()
+                                )
+                            }
                         }
                         dialog.dismiss()
                     }
@@ -254,5 +270,6 @@ class AddWasteActivity : AppCompatActivity() {
 
     companion object {
         const val PARTNER_ID = "partner_id"
+        const val IS_FROM_BUCKET = "is_from_bucket"
     }
 }

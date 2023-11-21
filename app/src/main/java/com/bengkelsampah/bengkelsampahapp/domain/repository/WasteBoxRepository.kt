@@ -2,6 +2,7 @@ package com.bengkelsampah.bengkelsampahapp.domain.repository
 
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import kotlinx.coroutines.flow.Flow
 
 interface WasteBoxRepository {
@@ -13,4 +14,10 @@ interface WasteBoxRepository {
     fun deleteFromWasteBox(waste: WasteBoxModel)
     fun countWasteBoxItems(): Flow<Int>
     fun updateWasteBoxItem(waste: WasteBoxModel)
+    fun insertOrder(order: WasteOrderModel)
+    fun clearWasteBox()
+    fun addToWasteBucket(waste: WasteBoxModel)
+    fun getWasteBucketItems(): Flow<List<WasteBoxModel>>
+    fun deleteFromWasteBucket(waste: WasteBoxModel)
+    fun updateWasteBucketItem(waste: WasteBoxModel)
 }

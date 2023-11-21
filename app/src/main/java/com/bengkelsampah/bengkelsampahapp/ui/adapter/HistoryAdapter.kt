@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 
@@ -51,7 +50,7 @@ class HistoryAdapter(private val onClick: (WasteOrderModel) -> Unit) :
                     Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
                 )
 
-                OrderStatus.DONE-> cardStatus.setCardBackgroundColor(
+                OrderStatus.DONE -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(OrderStatus.DONE.color)
                 )
 
