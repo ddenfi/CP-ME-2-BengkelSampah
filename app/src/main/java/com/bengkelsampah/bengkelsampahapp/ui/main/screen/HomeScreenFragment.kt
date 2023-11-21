@@ -28,10 +28,12 @@ import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity.Companion.NEW
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedDetailActivity
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@com.google.android.material.badge.ExperimentalBadgeUtils
 @AndroidEntryPoint
 class HomeScreenFragment : Fragment() {
     private var _binding: FragmentHomeScreenBinding? = null
@@ -44,6 +46,7 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
+
         val newsAdapter = NewsAdapter()
         binding.rvHomeNews.apply {
             layoutManager = LinearLayoutManager(context)
@@ -64,6 +67,12 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun setUpView(newsAdapter: NewsAdapter) {
+        lateinit var badgeDrawable: BadgeDrawable
+        context?.let {
+            badgeDrawable = BadgeDrawable.create(it)
+            badgeDrawable.number = 0
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -73,17 +82,59 @@ class HomeScreenFragment : Fragment() {
                                 binding.tvHomeName.text = dashboardData.user.name
                                 binding.tvHomeBalance.text =
                                     getString(R.string.idr, dashboardData.user.balance)
+                                val activeOrder = dashboardData.activeOrder
+                                if (activeOrder.isNotEmpty()) {
+                                    binding.tvHomeActiveTransaction.text =
+                                        getString(R.string.order_in_progress)
+                                    try {
+                                        BadgeUtils.attachBadgeDrawable(
+                                            badgeDrawable,
+                                            binding.ctnHomeActiveOrder,
+                                            null
+                                        )
+                                        badgeDrawable.number = activeOrder.size
+                                    } catch (e: UninitializedPropertyAccessException) {
+                                        print(e.stackTrace)
+                                    }
+                                } else {
+                                    binding.tvHomeActiveTransaction.text =
+                                        getString(R.string.no_order_in_progress)
+                                    try {
+                                        BadgeUtils.attachBadgeDrawable(
+                                            badgeDrawable,
+                                            binding.ctnHomeActiveOrder,
+                                            null
+                                        )
+                                        badgeDrawable.number = activeOrder.size
+                                    } catch (e: UninitializedPropertyAccessException) {
+                                        print(e.stackTrace)
+                                    }
+                                }
+
+                                try {
+                                    BadgeUtils.attachBadgeDrawable(
+                                        badgeDrawable,
+                                        binding.ctnHomeActiveOrder,
+                                        null
+                                    )
+                                    badgeDrawable.number = activeOrder.size
+                                } catch (e: UninitializedPropertyAccessException) {
+                                    print(e.stackTrace)
+                                }
+
                                 binding.apply {
                                     homeDashboard.visibility = View.VISIBLE
                                     homeMenuShimmer.stopShimmer()
                                     homeNewsShimmer.visibility = View.GONE
                                     homeNameShimmer.visibility = View.GONE
-                                    homeDashboardShimmer.visibility = View.GONE
+                                    homeDashboardShimmer.visibility = View.INVISIBLE
                                 }
                             }
 
                             is DashboardUiState.Loading -> {
                                 binding.apply {
+                                    homeDashboard.visibility = View.INVISIBLE
+                                    homeDashboardShimmer.visibility = View.VISIBLE
                                     homeNameShimmer.visibility = View.VISIBLE
                                     homeMenuShimmer.startShimmer()
                                 }
@@ -112,10 +163,12 @@ class HomeScreenFragment : Fragment() {
                                 binding.homeNewsShimmer.visibility = View.GONE
                                 binding.rvHomeNews.visibility = View.VISIBLE
                                 newsAdapter.submitList(newsUiState.news)
-                                newsAdapter.setOnItemClickCallback(object :NewsAdapter.OnItemClickCallback{
+                                newsAdapter.setOnItemClickCallback(object :
+                                    NewsAdapter.OnItemClickCallback {
                                     override fun onItemClicked(data: NewsResourceModel) {
-                                        val intent = Intent(activity,NewsFeedDetailActivity::class.java)
-                                        intent.putExtra(NEWS_RESOURCE,data)
+                                        val intent =
+                                            Intent(activity, NewsFeedDetailActivity::class.java)
+                                        intent.putExtra(NEWS_RESOURCE, data)
                                         startActivity(intent)
                                     }
 
