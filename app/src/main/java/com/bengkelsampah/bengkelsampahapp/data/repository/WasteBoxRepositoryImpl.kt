@@ -5,10 +5,13 @@ import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteResource
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.asExternalLayer
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.asExternalModel
 import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteBoxDao
+import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteOrderDao
 import com.bengkelsampah.bengkelsampahapp.data.source.local.room.WasteResourceDao
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.asWasteBoxEntity
+import com.bengkelsampah.bengkelsampahapp.domain.model.asWasteOrderEntity
 import com.bengkelsampah.bengkelsampahapp.domain.repository.WasteBoxRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +24,8 @@ import javax.inject.Inject
 
 class WasteBoxRepositoryImpl @Inject constructor(
     private val wasteResourceDao: WasteResourceDao,
-    private val wasteBoxDao: WasteBoxDao
+    private val wasteBoxDao: WasteBoxDao,
+    private val wasteOrderDao: WasteOrderDao
 ) : WasteBoxRepository {
     override fun getWasteBoxItems(): Flow<List<WasteBoxModel>> =
         wasteBoxDao.getUserWastes()
@@ -67,6 +71,18 @@ class WasteBoxRepositoryImpl @Inject constructor(
     override fun updateWasteBoxItem(waste: WasteBoxModel) {
         CoroutineScope(Dispatchers.IO).launch {
             wasteBoxDao.updateUserWaste(waste.asWasteBoxEntity())
+        }
+    }
+
+    override fun insertOrder(order: WasteOrderModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            wasteOrderDao.insertOrder(order.asWasteOrderEntity())
+        }
+    }
+
+    override fun clearWasteBox() {
+        CoroutineScope(Dispatchers.IO).launch {
+            wasteBoxDao.clearWasteBox()
         }
     }
 }

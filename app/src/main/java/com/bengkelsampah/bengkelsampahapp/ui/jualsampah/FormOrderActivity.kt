@@ -22,11 +22,15 @@ import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Date
 
 @AndroidEntryPoint
 class FormOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFormOrderBinding
     private val viewModel: WasteBoxViewModel by viewModels()
+    private var wasteData: List<WasteBoxModel> = listOf()
+    private var partnerData: PartnerById? = null
+    private var total: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,14 +62,22 @@ class FormOrderActivity : AppCompatActivity() {
                     willFinishActivity = false
                 )
 
+                viewModel.insertOrder(
+                    wasteData,
+                    partnerData,
+                    binding.tietPickUpAddressFormOrder.text.toString(),
+                    binding.tietAddressDescFormOrder.text.toString(),
+                    total
+                )
+
+                viewModel.clearWasteBox()
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     val intent = Intent(this, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-                    this.finish()
-                },1500)
-                // TODO add order to database
+                }, 1500)
             }
         }
     }
@@ -89,6 +101,7 @@ class FormOrderActivity : AppCompatActivity() {
 
                         setUpWasteSold(wasteBoxUiState.wasteBoxItems)
                         countTotalWeightAndPrice(wasteBoxUiState.wasteBoxItems)
+                        wasteData = wasteBoxUiState.wasteBoxItems
                     }
 
                     is WasteBoxUiState.Loading -> {
@@ -109,7 +122,9 @@ class FormOrderActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
 
+        lifecycleScope.launch {
             viewModel.getPartnerById(intent.getStringExtra(PARTNER_ID).toString())
                 .collect { formOrderUiState ->
                     when (formOrderUiState) {
@@ -120,6 +135,7 @@ class FormOrderActivity : AppCompatActivity() {
                             binding.formOrderBottomActionMenu.visibility = View.VISIBLE
 
                             setUpAgentData(formOrderUiState.partnerById)
+                            partnerData = formOrderUiState.partnerById
                         }
 
                         is FormOrderUIState.Loading -> {
@@ -159,6 +175,7 @@ class FormOrderActivity : AppCompatActivity() {
             totalPrice += waste.waste.pricePerUnit * waste.amount
         }
 
+        total = totalPrice.toInt()
         binding.tvTotalWeight.text =
             getString(R.string.waste_weight, totalWeight, WasteUnit.KG.abbreviation)
         binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.toInt())

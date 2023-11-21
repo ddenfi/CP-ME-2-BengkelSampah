@@ -19,6 +19,9 @@ interface WasteOrderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE, entity = WasteOrderEntity::class)
     fun insertOrders(userWasteOrder:List<WasteOrderEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE, entity = WasteOrderEntity::class)
+    fun insertOrder(order: WasteOrderEntity)
+
     @Upsert
     suspend fun upsertOrder(userWasteOrder: WasteOrderEntity)
 }
