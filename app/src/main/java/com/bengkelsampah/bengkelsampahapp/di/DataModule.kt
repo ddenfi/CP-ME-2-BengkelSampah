@@ -38,7 +38,7 @@ interface DataModule {
 
     @Binds
     fun bindsHistoryRepository(
-        historyRepositoryImpl: HistoryRepositoryImpl = HistoryRepositoryImpl()
+        historyRepositoryImpl: HistoryRepositoryImpl
     ): HistoryRepository
 
     @Binds
