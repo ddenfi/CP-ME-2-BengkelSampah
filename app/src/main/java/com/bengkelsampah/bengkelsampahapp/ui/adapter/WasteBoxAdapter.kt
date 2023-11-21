@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -14,8 +15,8 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import kotlin.math.roundToInt
 
 class WasteBoxAdapter(
-    private val onClickAdd: (WasteModel, Double) -> Unit,
-    private val onClickSubtract: (WasteModel, Double) -> Unit
+    private val onClickAdd: (WasteModel, Double, EditText) -> Unit,
+    private val onClickSubtract: (WasteModel, Double, EditText) -> Unit
 ) : ListAdapter<WasteBoxModel, WasteBoxAdapter.WasteBoxViewHolder>(
     object : DiffUtil.ItemCallback<WasteBoxModel>() {
         override fun areItemsTheSame(oldItem: WasteBoxModel, newItem: WasteBoxModel): Boolean {
@@ -63,8 +64,8 @@ class WasteBoxAdapter(
                 }
             })
 
-            chipAdd.setOnClickListener { onClickAdd(wasteSold.waste, wasteSold.amount) }
-            chipMinus.setOnClickListener { onClickSubtract(wasteSold.waste, wasteSold.amount) }
+            chipAdd.setOnClickListener { onClickAdd(wasteSold.waste, wasteSold.amount, edWasteWeight) }
+            chipMinus.setOnClickListener { onClickSubtract(wasteSold.waste, wasteSold.amount, edWasteWeight) }
         }
     }
 

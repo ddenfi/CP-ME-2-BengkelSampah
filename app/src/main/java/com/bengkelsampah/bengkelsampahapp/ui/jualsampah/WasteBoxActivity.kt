@@ -25,11 +25,9 @@ class WasteBoxActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWasteBoxBinding
     private val viewModel: WasteBoxViewModel by viewModels()
     private val wasteBoxAdapter = WasteBoxAdapter(
-        onClickAdd = { wasteModel, weight ->
+        onClickAdd = { wasteModel, weight, edWasteWeight ->
             binding.apply {
                 lifecycleScope.launch {
-                    val edWasteWeight =
-                        binding.rvWasteBox.findViewById<EditText>(R.id.ed_waste_weight)
                     if (edWasteWeight.text.isNotEmpty()) {
                         val newWeight = weight + 1
                         edWasteWeight.setText(newWeight.toString())
@@ -38,11 +36,9 @@ class WasteBoxActivity : AppCompatActivity() {
                 }
             }
         },
-        onClickSubtract = { wasteModel, weight ->
+        onClickSubtract = { wasteModel, weight, edWasteWeight ->
             binding.apply {
                 lifecycleScope.launch {
-                    val edWasteWeight =
-                        binding.rvWasteBox.findViewById<EditText>(R.id.ed_waste_weight)
                     if (edWasteWeight.text.isNotEmpty()) {
                         val newWeight = weight - 1
                         edWasteWeight.setText(newWeight.toString())
