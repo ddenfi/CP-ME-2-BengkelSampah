@@ -136,19 +136,37 @@
             android:drawablePadding="10dp"
             android:fontFamily="@font/inter_medium"
             android:text="@string/privacy_policy"
+            android:clickable="true"
             android:textColor="@color/md_theme_light_onSecondaryContainer"
-            app:drawableStartCompat="@drawable/privacy_policy" />
+            app:drawableStartCompat="@drawable/privacy_policy"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/tv_account_helpCenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:focusable="true"
             android:drawablePadding="10dp"
             android:fontFamily="@font/inter_medium"
             android:text="@string/help_center"
             android:textColor="@color/md_theme_light_onSecondaryContainer"
             app:drawableStartCompat="@drawable/help_center" />
+
+        <TextView
+            android:id="@+id/tv_account_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="Ubah Bahasa"
+            android:textColor="@color/md_theme_light_onSecondaryContainer"
+            app:drawableStartCompat="@drawable/ic_langugange"
+            app:drawableTint="?attr/colorOutline" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

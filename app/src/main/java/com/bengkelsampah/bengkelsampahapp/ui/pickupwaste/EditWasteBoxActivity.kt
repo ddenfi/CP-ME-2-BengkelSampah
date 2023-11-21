@@ -74,16 +74,17 @@ class EditWasteBoxActivity : AppCompatActivity() {
         )
 
         val orderId = intent.getStringExtra(ORDER_ID) ?: ""
-        val getWasteBox = intent.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
 
         val getAddWasteResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == ADD_WASTE_RESULT_CODE) {
                     val wasteBox =
-                        it.data?.getParcelableArrayListExtra(WASTE_BOX, WasteBoxModel::class.java)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) it.data?.getParcelableArrayListExtra(
+                            WASTE_BOX,
+                            WasteBoxModel::class.java
+                        ) else it.data?.getParcelableArrayListExtra(WASTE_BOX)
                     mWasteBox = wasteBox ?: listOf()
                     wasteBoxAdapter.submitList(mWasteBox)
-                    Log.d("TAG", "onCreate: ${mWasteBox.size}")
                 }
             }
 

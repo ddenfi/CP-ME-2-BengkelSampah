@@ -160,6 +160,7 @@
                                     android:src="@drawable/ic_delivery" />
 
                                 <TextView
+                                    android:id="@+id/tv_home_active_transaction"
                                     style="@style/TextAppearance.Material3.LabelSmall"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

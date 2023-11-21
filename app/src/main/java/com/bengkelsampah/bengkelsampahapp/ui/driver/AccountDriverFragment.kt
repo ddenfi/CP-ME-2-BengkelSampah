@@ -26,9 +26,19 @@ class AccountDriverFragment : Fragment() {
     ): View {
         _binding = FragmentAccountDriverBinding.inflate(layoutInflater)
 
+        navigateToLanguageSetting()
         navigateToEditProfile()
         logout()
+
         return binding.root
+    }
+
+    private fun navigateToLanguageSetting() {
+        binding.tvDriverAccountLanguage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.setClassName("com.android.settings", "com.android.settings.LanguageSettings")
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

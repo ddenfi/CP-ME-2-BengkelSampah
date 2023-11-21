@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bengkel Sampah</string>
+    <string name="Edit_Account">Edit Account</string>
+    <string name="Log_Out">Log Out</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="help_center">Help Center</string>
+    <string name="name_edit">Name</string>
+    <string name="phonenumber_edit">Phone Number</string>
+    <string name="title_name_edit">Name*</string>
+    <string name="title_email_edit">Email*</string>
+    <string name="title_phonenumber_edit">Phone Number*</string>
+    <string name="title_helpcenter">Help Center</string>
+    <string name="body_helpcenter">We would like to inform you that we currently prefer to receive and handle questions and requests through our WhatsApp service. We believe that this will help us provide more efficient and responsive customer support.</string>
+    <string name="whatsapp_button">Contact Us in Whatsapp</string>
+    <string name="save_edited_button_profile">Save</string>
+    <string name="name">Name</string>
+    <string name="name_hint">Your Full Name ...</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_hint">Your Phone Number ...</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Inpur Your Pasword</string>
+    <string name="description_login">Login to continue</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forget Password</string>
+    <string name="login_successful">Login Successful</string>
+</resources>
