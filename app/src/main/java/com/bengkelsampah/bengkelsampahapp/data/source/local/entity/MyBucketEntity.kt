@@ -3,16 +3,38 @@ package com.bengkelsampah.bengkelsampahapp.data.source.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 
 @Entity(tableName = "MyBucket")
 data class MyBucketEntity(
     @PrimaryKey
     @ColumnInfo("wasteId")
-    val wasteId: Int,
+    val wasteId: String,
 
     @ColumnInfo("name")
     val name: String,
 
     @ColumnInfo("amount")
     val amount: Double,
+
+    @ColumnInfo("unit")
+    val unit: String,
+
+    @ColumnInfo("price")
+    val pricePerUnit: Int,
+
+    @ColumnInfo("waste_type")
+    val wasteType: String
+)
+
+fun MyBucketEntity.asExternalLayer() = WasteBoxModel(
+    waste = WasteModel(
+        wasteId = wasteId,
+        name = name,
+        unit = WasteUnit.valueOf(unit),
+        pricePerUnit = pricePerUnit,
+        wasteType = wasteType
+    ), amount = amount
 )

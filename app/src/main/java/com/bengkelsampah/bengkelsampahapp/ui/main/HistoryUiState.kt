@@ -1,6 +1,5 @@
 package com.bengkelsampah.bengkelsampahapp.ui.main
 
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 
 sealed interface HistoryUiState {

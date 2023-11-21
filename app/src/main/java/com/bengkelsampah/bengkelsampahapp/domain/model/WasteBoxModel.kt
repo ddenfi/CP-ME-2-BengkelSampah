@@ -1,6 +1,7 @@
 package com.bengkelsampah.bengkelsampahapp.domain.model
 
 import android.os.Parcelable
+import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.MyBucketEntity
 import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteBoxEntity
 import kotlinx.parcelize.Parcelize
 
@@ -60,6 +61,16 @@ data class WasteBoxModel(
 
 fun WasteBoxModel.asWasteBoxEntity() =
     WasteBoxEntity(
+        wasteId = waste.wasteId,
+        name = waste.name,
+        amount = amount,
+        unit = waste.unit.name,
+        pricePerUnit = waste.pricePerUnit,
+        wasteType = waste.wasteType
+    )
+
+fun WasteBoxModel.asMyBucketEntity() =
+    MyBucketEntity(
         wasteId = waste.wasteId,
         name = waste.name,
         amount = amount,

@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
-import com.bengkelsampah.bengkelsampahapp.databinding.ActivityWasteBoxBinding
+import com.bengkelsampah.bengkelsampahapp.databinding.ActivityWasteBucketBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
@@ -20,8 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WasteBoxActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityWasteBoxBinding
+class WasteBucketActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityWasteBucketBinding
     private val viewModel: WasteBoxViewModel by viewModels()
     private val wasteBoxAdapter = WasteBoxAdapter(
         onClickAdd = { wasteModel, weight, edWasteWeight ->
@@ -30,7 +30,7 @@ class WasteBoxActivity : AppCompatActivity() {
                     if (edWasteWeight.text.isNotEmpty()) {
                         val newWeight = weight + 1
                         edWasteWeight.setText(newWeight.toString())
-                        viewModel.updateWasteBoxItem(wasteModel, newWeight)
+                        viewModel.updateWasteBucketItem(wasteModel, newWeight)
                     }
                 }
             }
@@ -42,9 +42,9 @@ class WasteBoxActivity : AppCompatActivity() {
                         val newWeight = weight - 1
                         edWasteWeight.setText(newWeight.toString())
                         if (newWeight == 0.0) {
-                            viewModel.deleteFromWasteBox(wasteModel, weight)
+                            viewModel.deleteFromWasteBucket(wasteModel, weight)
                         } else {
-                            viewModel.updateWasteBoxItem(wasteModel, newWeight)
+                            viewModel.updateWasteBucketItem(wasteModel, newWeight)
                         }
                     }
                 }
@@ -54,7 +54,7 @@ class WasteBoxActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWasteBoxBinding.inflate(layoutInflater)
+        binding = ActivityWasteBucketBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.topAppBar)
@@ -64,17 +64,9 @@ class WasteBoxActivity : AppCompatActivity() {
         setUpWasteSold()
 
         binding.btnAdd.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-
-        binding.btnAddFromBucket.setOnClickListener {
-            addItemFromBucket()
-        }
-
-        binding.btnFinish.setOnClickListener {
-            val formIntent = Intent(this, FormOrderActivity::class.java)
-            formIntent.putExtra(FormOrderActivity.PARTNER_ID, intent.getStringExtra(PARTNER_ID))
-            startActivity(formIntent)
+            val intent = Intent(this, AddWasteActivity::class.java)
+            intent.putExtra(AddWasteActivity.IS_FROM_BUCKET, true)
+            startActivity(intent)
         }
     }
 
@@ -87,18 +79,16 @@ class WasteBoxActivity : AppCompatActivity() {
 
     private fun gettingData() {
         lifecycleScope.launch {
-            viewModel.getWasteBoxItem().collect { wasteBoxUiState ->
+            viewModel.getWasteBucketItems().collect { wasteBoxUiState ->
                 when (wasteBoxUiState) {
                     is WasteBoxUiState.Success -> {
                         binding.shimmerWasteBoxPage.visibility = View.GONE
                         binding.wasteBoxPage.visibility = View.VISIBLE
 
                         if (wasteBoxUiState.wasteBoxItems.isEmpty()) {
-                            binding.btnFinish.isEnabled = false
                             binding.tvWasteBoxEmpty.visibility = View.VISIBLE
                             binding.rvWasteBox.visibility = View.GONE
                         } else {
-                            binding.btnFinish.isEnabled = true
                             binding.tvWasteBoxEmpty.visibility = View.GONE
                             binding.rvWasteBox.visibility = View.VISIBLE
                             wasteBoxAdapter.submitList(wasteBoxUiState.wasteBoxItems)
@@ -114,7 +104,7 @@ class WasteBoxActivity : AppCompatActivity() {
 
                     is WasteBoxUiState.Error -> {
                         SweetAlertDialogUtils.showSweetAlertDialog(
-                            this@WasteBoxActivity,
+                            this@WasteBucketActivity,
                             wasteBoxUiState.message.toString(),
                             SweetAlertDialog.ERROR_TYPE,
                             hasConfirmationButton = false,
@@ -150,44 +140,5 @@ class WasteBoxActivity : AppCompatActivity() {
                 )
             )
         }
-    }
-
-    private fun addItemFromBucket() {
-        lifecycleScope.launch {
-            viewModel.getWasteBucketItems().collect { wasteBoxUiState ->
-                when (wasteBoxUiState) {
-                    is WasteBoxUiState.Success -> {
-                        if (wasteBoxUiState.wasteBoxItems.isNotEmpty()) {
-                            for (waste in wasteBoxUiState.wasteBoxItems) {
-                                viewModel.addToWasteBox(waste.waste, waste.amount)
-                                viewModel.deleteFromWasteBucket(waste.waste, waste.amount)
-                            }
-                            gettingData()
-                        }
-                    }
-
-                    is WasteBoxUiState.Loading -> {
-                        binding.shimmerWasteBoxPage.visibility = View.VISIBLE
-                        binding.wasteBoxPage.visibility = View.GONE
-                        binding.tvWasteBoxEmpty.visibility = View.GONE
-                    }
-
-                    is WasteBoxUiState.Error -> {
-                        SweetAlertDialogUtils.showSweetAlertDialog(
-                            this@WasteBoxActivity,
-                            wasteBoxUiState.message.toString(),
-                            SweetAlertDialog.ERROR_TYPE,
-                            hasConfirmationButton = false,
-                            willFinishActivity = true
-                        )
-                    }
-                }
-
-            }
-        }
-    }
-
-    companion object {
-        const val PARTNER_ID = "partner_id"
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.jualsampah.WasteBoxActivity">
+    tools:context=".ui.jualsampah.WasteBucketActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:background="@color/md_theme_light_primary"
             android:minHeight="?attr/actionBarSize"
             app:navigationIconTint="@android:color/white"
-            app:title="@string/waste_box"
+            app:title="@string/cart"
             app:titleCentered="true"
             app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,20 +43,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_add_from_bucket"
-                    style="@style/Widget.Material3.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/add_from_my_box"
-                    app:icon="@drawable/ic_add"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_add"
@@ -185,16 +171,6 @@
                             tools:text="@string/price_value" />
                     </LinearLayout>
                 </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_finish"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/inter_semi_bold"
-                    android:text="@string/finish"
-                    android:textColor="@color/white"
-                    app:cornerRadius="12dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

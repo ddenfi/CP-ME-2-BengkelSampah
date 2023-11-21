@@ -28,4 +28,7 @@ interface WasteBoxDao {
 
     @Update(entity = WasteBoxEntity::class)
     fun updateUserWaste(userWaste: WasteBoxEntity)
+
+    @Query("DELETE FROM WasteBox")
+    fun clearWasteBox()
 }

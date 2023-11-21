@@ -3,7 +3,6 @@ package com.bengkelsampah.bengkelsampahapp.data.source.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 
 @Entity(tableName = "OfflineWasteOrder")

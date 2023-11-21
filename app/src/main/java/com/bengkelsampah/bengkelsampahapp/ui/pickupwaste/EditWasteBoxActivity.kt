@@ -49,9 +49,8 @@ class EditWasteBoxActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val edWasteWeight = binding.rvWasteBox.findViewById<EditText>(R.id.ed_waste_weight)
         wasteBoxAdapter = WasteBoxAdapter(
-            onClickAdd = { wasteModel, weight ->
+            onClickAdd = { wasteModel, weight, edWasteWeight ->
                 binding.apply {
                     lifecycleScope.launch {
                         if (edWasteWeight.text.isNotEmpty()) {
@@ -61,7 +60,7 @@ class EditWasteBoxActivity : AppCompatActivity() {
                     }
                 }
             },
-            onClickSubtract = { wasteModel, weight ->
+            onClickSubtract = { wasteModel, weight, edWasteWeight ->
                 binding.apply {
                     lifecycleScope.launch {
                         if (edWasteWeight.text.isNotEmpty()) {

@@ -76,6 +76,7 @@ class PartnerActivity : AppCompatActivity() {
         val partnerAdapter = PartnerAdapter { uuid ->
             val addWasteIntent = Intent(this, AddWasteActivity::class.java)
             addWasteIntent.putExtra(AddWasteActivity.PARTNER_ID, uuid.toString())
+            addWasteIntent.putExtra(AddWasteActivity.IS_FROM_BUCKET, false)
             startActivity(addWasteIntent)
         }
 

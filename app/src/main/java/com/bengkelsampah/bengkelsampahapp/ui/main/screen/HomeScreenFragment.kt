@@ -19,6 +19,7 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.NewsResourceModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.NewsAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.banksampah.BankSampahActivity
 import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.PartnerActivity
+import com.bengkelsampah.bengkelsampahapp.ui.jualsampah.WasteBucketActivity
 import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.MainViewModel
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
@@ -213,7 +214,8 @@ class HomeScreenFragment : Fragment() {
         }
 
         binding.btnHomeKeranjangKu.setOnClickListener {
-            //TODO : Nav to keranjangku
+            val intent = Intent(activity, WasteBucketActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnHomeMoneyBag.setOnClickListener {
