@@ -35,7 +35,7 @@ data class WasteOrderModel(
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 wasteBox = WasteBoxModel.dummyData,
-                total = 6,
+                total = 17400,
                 driverName = null,
                 distance = 3.0,
                 description = null
@@ -51,7 +51,7 @@ data class WasteOrderModel(
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 wasteBox = WasteBoxModel.dummyData,
-                total = 6,
+                total = 17400,
                 driverName = "Wahyu",
                 distance = 3.0,
                 description = null
@@ -67,7 +67,7 @@ data class WasteOrderModel(
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 wasteBox = WasteBoxModel.dummyData,
-                total = 6,
+                total = 17400,
                 distance = 3.0,
                 driverName = "Wahyu",
                 description = null
@@ -83,7 +83,7 @@ data class WasteOrderModel(
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 wasteBox = WasteBoxModel.dummyData,
-                total = 6,
+                total = 17400,
                 distance = 3.0,
                 driverName = null,
                 description = null
@@ -99,7 +99,7 @@ data class WasteOrderModel(
                 agentAddress = "Jl. TB Simatupang No.Kav38, RW.8, Jati Padang, Kec. Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540",
                 agentPhone = "089675234567",
                 wasteBox = WasteBoxModel.dummyData,
-                total = 6,
+                total = 17400,
                 distance = 3.0,
                 driverName = null,
                 description = null

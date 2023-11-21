@@ -14,6 +14,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDetailBindi
 import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -33,8 +34,8 @@ class HistoryDetailActivity : AppCompatActivity() {
         setSupportActionBar(historyDetailBinding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val historyId = intent.getIntExtra(HISTORY_ID, 0)
-        gettingDetailData(historyId)
+        val historyId = intent.getStringExtra(HISTORY_ID)
+        gettingDetailData(historyId.toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -44,7 +45,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun gettingDetailData(historyId: Int) {
+    private fun gettingDetailData(historyId: String) {
         lifecycleScope.launch {
             viewModel.getHistoryDetail(historyId).collect { historyDetailUiState ->
                 when (historyDetailUiState) {
@@ -73,9 +74,9 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpDetailPage(history: HistoryModel) {
+    private fun setUpDetailPage(history: WasteOrderModel) {
         historyDetailBinding.apply {
-            tvStatus.text = history.status
+            tvStatus.text = history.status.statusName
             tvAgentName.text = history.agent
             tvAgentAddress.text = history.agentAddress
             tvAgentPhone.text =
@@ -88,7 +89,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             tvPickUpAddress.text = history.address
             tvPickUpDescription.text = history.description
 
-            setUpWasteSold(history.waste)
+            setUpWasteSold(history.wasteBox)
             setHistoryStatusColor(history.status)
             setCancelButtonVisibility(history.status)
             setDownloadFileVisibility(history.status)
@@ -139,18 +140,18 @@ class HistoryDetailActivity : AppCompatActivity() {
         )
     }
 
-    private fun setDownloadFileVisibility(historyStatus: String) {
-        if (historyStatus == OrderStatus.DONE.statusName) {
+    private fun setDownloadFileVisibility(historyStatus: OrderStatus) {
+        if (historyStatus == OrderStatus.DONE) {
             historyDetailBinding.btnDownloadTransaction.visibility = View.VISIBLE
         } else {
             historyDetailBinding.btnDownloadTransaction.visibility = View.GONE
         }
     }
 
-    private fun setCancelButtonVisibility(historyStatus: String) {
+    private fun setCancelButtonVisibility(historyStatus: OrderStatus) {
         historyDetailBinding.apply {
             when (historyStatus) {
-                OrderStatus.WAIT_CONFIRMATION.statusName -> btnCancelOrder.visibility =
+                OrderStatus.WAIT_CONFIRMATION -> btnCancelOrder.visibility =
                     View.VISIBLE
 
                 else -> btnCancelOrder.visibility = View.GONE
@@ -158,23 +159,27 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setHistoryStatusColor(historyStatus: String) {
+    private fun setHistoryStatusColor(historyStatus: OrderStatus) {
         historyDetailBinding.apply {
             when (historyStatus) {
-                OrderStatus.WAIT_CONFIRMATION.statusName -> cardStatus.setCardBackgroundColor(
+                OrderStatus.WAIT_CONFIRMATION -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(OrderStatus.WAIT_CONFIRMATION.color)
                 )
 
-                OrderStatus.DONE.statusName -> cardStatus.setCardBackgroundColor(
+                OrderStatus.DONE -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(OrderStatus.DONE.color)
                 )
 
-                OrderStatus.PROCESSED.statusName -> cardStatus.setCardBackgroundColor(
+                OrderStatus.PROCESSED -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(OrderStatus.PROCESSED.color)
                 )
 
-                OrderStatus.CANCELLED.statusName -> cardStatus.setCardBackgroundColor(
+                OrderStatus.CANCELLED -> cardStatus.setCardBackgroundColor(
                     Color.parseColor(OrderStatus.CANCELLED.color)
+                )
+
+                OrderStatus.PICKING_UP -> cardStatus.setCardBackgroundColor(
+                    Color.parseColor(OrderStatus.PICKING_UP.color)
                 )
             }
         }

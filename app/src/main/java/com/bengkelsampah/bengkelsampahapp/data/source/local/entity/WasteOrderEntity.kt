@@ -37,9 +37,9 @@ fun WasteOrderEntity.asExternalModel(): WasteOrderModel {
         agentAddress = agentAddress,
         agentPhone = agentPhone,
         wasteBox = wasteBox?.map { it.asExternalLayer() } ?: listOf(),
-        total = 0,
-        description = null,
-        driverName = null,
-        distance = 0.0
+        total = total,
+        description = description,
+        driverName = driverName,
+        distance = distance
     )
 }

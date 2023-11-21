@@ -61,11 +61,11 @@ class MainViewModel @Inject constructor(
 
 
     private fun historyUiState(): Flow<HistoryUiState> =
-        historyRepository.getActiveTransaction().asResource().map { resourceHistory ->
-            when (resourceHistory) {
-                is Resource.Success -> HistoryUiState.Success(resourceHistory.data)
+        historyRepository.getAllOrders().asResource().map { resourceWasteOrder ->
+            when (resourceWasteOrder) {
+                is Resource.Success -> HistoryUiState.Success(resourceWasteOrder.data)
                 is Resource.Loading -> HistoryUiState.Loading
-                is Resource.Error -> HistoryUiState.Error(resourceHistory.exception?.message)
+                is Resource.Error -> HistoryUiState.Error(resourceWasteOrder.exception?.message)
             }
         }
 

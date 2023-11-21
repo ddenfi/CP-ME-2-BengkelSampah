@@ -1,9 +1,9 @@
 package com.bengkelsampah.bengkelsampahapp.ui.history
 
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 
 sealed interface HistoryDetailUiState {
-    data class Success(val history: HistoryModel) : HistoryDetailUiState
+    data class Success(val history: WasteOrderModel) : HistoryDetailUiState
 
     data class Error(val message: String? = null) : HistoryDetailUiState
 
