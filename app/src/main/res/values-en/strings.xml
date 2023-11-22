@@ -99,4 +99,5 @@
     <string name="no_order_in_progress">No Order</string>
     <string name="title_edit_akun">Edit Account</string>
     <string name="title_activity_partner">Request pickup</string>
+    <string name="open_with">Open With</string>
 </resources>

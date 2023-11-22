@@ -1,11 +1,13 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,12 +19,15 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityDetailPickupBindin
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteListAdapter
+import com.bengkelsampah.bengkelsampahapp.ui.driver.DriverMainActivity
+import com.bengkelsampah.bengkelsampahapp.ui.main.MainActivity
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.EditWasteBoxActivity.Companion.WASTE_BOX
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class DetailPickupActivity : AppCompatActivity() {
@@ -99,6 +104,10 @@ class DetailPickupActivity : AppCompatActivity() {
         finishOrder(wasteOrder)
         editOrder(wasteOrder)
 
+        binding.btnPickupDetailOpenWith.setOnClickListener {
+            openWithMap()
+        }
+
     }
 
     private fun editOrder(wasteOrder: WasteOrderModel) {
@@ -111,7 +120,7 @@ class DetailPickupActivity : AppCompatActivity() {
     }
 
     private fun finishOrder(wasteOrder: WasteOrderModel) {
-        val updatedData = wasteOrder.copy()
+        val updatedData = wasteOrder.copy(status = OrderStatus.DONE)
 
         binding.btnDetailPickupFinishedOrder.setOnClickListener {
             lifecycleScope.launch {
@@ -148,6 +157,12 @@ class DetailPickupActivity : AppCompatActivity() {
                             progressDialog?.show()
                             delay(1000)
                             progressDialog?.dismissWithAnimation()
+
+                            val intent =
+                                Intent(this@DetailPickupActivity, DriverMainActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
                         }
                     }
                 }
@@ -197,6 +212,17 @@ class DetailPickupActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun openWithMap() {
+        val gmmIntentUri = Uri.parse("geo:-6.167765,106.833220?q=-6.167765,106.833220")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        try {
+            startActivity(mapIntent)
+        } catch (ex: ActivityNotFoundException) {
+            Toast.makeText(this, "Google map not installed", Toast.LENGTH_SHORT).show()
         }
     }
 
