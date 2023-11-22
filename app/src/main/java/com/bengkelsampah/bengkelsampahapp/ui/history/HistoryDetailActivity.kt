@@ -15,6 +15,7 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,7 +84,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             tvTotalAll.text =
                 getString(
                     R.string.total_detail_history,
-                    history.total.toString()
+                    CurrencyNumberFormat.convertToCurrencyFormat(history.total)
                 )
             tvPickUpAddress.text = history.address
             tvPickUpDescription.text = history.description
