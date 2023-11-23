@@ -20,6 +20,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.DialogAddWasteBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteTypeAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.badge.BadgeDrawable
@@ -235,7 +236,7 @@ class AddWasteActivity : AppCompatActivity() {
 
             tvDialogPricePerUnit.text = getString(
                 R.string.price_per_unit_value,
-                wasteType.pricePerUnit.toString(),
+                CurrencyNumberFormat.convertToCurrencyFormat(wasteType.pricePerUnit),
                 wasteType.unit
             )
 

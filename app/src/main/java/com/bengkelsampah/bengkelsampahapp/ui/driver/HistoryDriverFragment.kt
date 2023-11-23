@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,27 +19,20 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHistoryDriverBinding
-import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeDriverBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
-import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.HistoryDriverAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.driverhistory.HistoryDriverDetailActivity
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
-import com.bengkelsampah.bengkelsampahapp.ui.main.HistoryUiState
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HistoryDriverFragment : Fragment() {
-
     private var _binding: FragmentHistoryDriverBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: DriverMainViewModel by activityViewModels()
+    private val historyAdapter = HistoryDriverAdapter { history -> adapterOnClick(history) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +43,16 @@ class HistoryDriverFragment : Fragment() {
         binding.chipStatusFilter.text = getString(R.string.all_status)
         setUpFilterBottomSheet()
         setUpHistoryList()
-
+        binding.rvHistory.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = historyAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
+                )
+            )
+        }
         return binding.root
     }
 
@@ -59,7 +60,6 @@ class HistoryDriverFragment : Fragment() {
         _binding = null
         super.onDestroy()
     }
-
 
     @SuppressLint("InflateParams")
     private fun setUpFilterBottomSheet() {
@@ -89,8 +89,6 @@ class HistoryDriverFragment : Fragment() {
     }
 
     private fun setUpHistoryList() {
-        val historyAdapter = HistoryDriverAdapter { history -> adapterOnClick(history) }
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.orderHistory.collect { orderHistory ->
@@ -106,6 +104,7 @@ class HistoryDriverFragment : Fragment() {
                                 1500
                             )
                         }
+
                         is Resource.Loading -> {
                             binding.tvHistoryEmpty.visibility = View.GONE
                             binding.rvHistory.visibility = View.GONE
@@ -120,17 +119,8 @@ class HistoryDriverFragment : Fragment() {
                             } else {
                                 binding.tvHistoryEmpty.visibility = View.GONE
                                 binding.rvHistory.visibility = View.VISIBLE
-                                binding.rvHistory.apply {
-                                    layoutManager = LinearLayoutManager(context)
-                                    adapter = historyAdapter
-                                    addItemDecoration(
-                                        MarginItemDecoration(
-                                            resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
-                                            resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
-                                        )
-                                    )
-                                }
-                                historyAdapter.submitList(orderHistory.data)
+
+                                historyAdapter.submitList(orderHistory.data.reversed())
                             }
                         }
                     }
@@ -141,8 +131,7 @@ class HistoryDriverFragment : Fragment() {
 
     private fun adapterOnClick(history: WasteOrderModel) {
         val intent = Intent(this.requireContext(), HistoryDriverDetailActivity::class.java)
-        intent.putExtra(HistoryDetailActivity.HISTORY_ID, history.id)
+        intent.putExtra(HistoryDriverDetailActivity.HISTORY_ID, history.id)
         startActivity(intent)
     }
-
 }

@@ -76,7 +76,7 @@
     <string name="minus">Kurang</string>
     <string name="add_to_box">Masukkan ke Kotak</string>
     <string name="remove_from_box">Hapus dari Kotak</string>
-    <string name="add_from_my_box">Dari Kotakku</string>
+    <string name="add_from_my_bucket">Dari Keranjangku</string>
     <string name="waste_box_empty">Kotak keranjang kosong. Isi kembali untuk dapat melanjutkan</string>
     <string name="waste_sold_estimation">Estimasi Penjualan</string>
     <string name="weight">Berat</string>

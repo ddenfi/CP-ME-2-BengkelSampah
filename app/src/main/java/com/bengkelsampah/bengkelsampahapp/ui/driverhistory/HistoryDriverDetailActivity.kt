@@ -17,26 +17,21 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityHistoryDriverDetailBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus.*
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteSoldAdapter
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailActivity
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailPdfFile
-import com.bengkelsampah.bengkelsampahapp.ui.history.HistoryDetailViewModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HistoryDriverDetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityHistoryDriverDetailBinding
-
     private val viewModel: DriverHistoryDetailViewModel by viewModels()
+    private val wasteSoldAdapter = WasteSoldAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDriverDetailBinding.inflate(layoutInflater)
@@ -45,11 +40,13 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.topAppBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val historyId = intent.getStringExtra(HistoryDetailActivity.HISTORY_ID)
+        val historyId = intent.getStringExtra(HISTORY_ID)
 
         historyId?.let {
             gettingDetailData(historyId)
         }
+
+        setUpWasteSold()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -105,12 +102,12 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
             tvTotalAll.text =
                 getString(
                     R.string.total_detail_history,
-                    history.total.toString()
+                    CurrencyNumberFormat.convertToCurrencyFormat(history.total)
                 )
             tvPickUpAddress.text = history.address
             tvPickUpDescription.text = history.description
 
-            setUpWasteSold(history.wasteBox)
+            wasteSoldAdapter.submitList(history.wasteBox)
             setHistoryStatusColor(history.status)
             setCancelButtonVisibility(history.status)
             setDownloadFileVisibility(history.status)
@@ -204,15 +201,11 @@ class HistoryDriverDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpWasteSold(waste: List<WasteBoxModel>) {
-        val wasteSoldAdapter = WasteSoldAdapter()
-
+    private fun setUpWasteSold() {
         binding.rvWasteSold.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = wasteSoldAdapter
         }
-
-        wasteSoldAdapter.submitList(waste)
     }
 
     companion object {

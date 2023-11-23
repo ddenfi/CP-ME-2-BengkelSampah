@@ -12,6 +12,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityMoneyBagBinding
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.MoneybagHistoryAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -45,7 +46,7 @@ class MoneyBagActivity : AppCompatActivity() {
                             is Resource.Success -> {
                                 moneybagLoading(false)
                                 binding.tvMoneybagBalancePoint.text =
-                                    userMoneybag.data.balance.toString()
+                                    CurrencyNumberFormat.convertToCurrencyFormat(userMoneybag.data.balance)
                             }
                         }
                     }

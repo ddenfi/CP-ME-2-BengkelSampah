@@ -82,12 +82,12 @@
     <string name="download_transaction_file">Unduh File Transaksi</string>
     <string name="filter" translatable="false">Filter</string>
     <string name="reset" translatable="false">Reset</string>
-    <string name="total" translatable="false">+ Rp %d</string>
+    <string name="total" translatable="false">+ Rp %s</string>
     <string name="cancel_order_confirmation">Apakah anda yakin untuk membatalkan pesanan ini?</string>
     <string name="order_cancelled">Pesanan anda telah berhasil dibatalkan</string>
     <string name="transaction_downloaded">Transaksi berhasil disimpan</string>
     <string name="transaction_download_failed">Trasanksi gagal disimpan</string>
-    <string name="idr" translatable="false">Rp %d</string>
+    <string name="idr" translatable="false">Rp %s</string>
     <string name="history_empty">Tidak Ada Riwayat Transaksi</string>
 
     <string name="date" translatable="false">1 Oktober 2023</string>
@@ -103,13 +103,13 @@
     <string name="minus">Kurang</string>
     <string name="add_to_box">Masukkan ke Kotak</string>
     <string name="remove_from_box">Hapus dari Kotak</string>
-    <string name="add_from_my_box">Dari Kotakku</string>
+    <string name="add_from_my_bucket">Dari Keranjangku</string>
     <string name="waste_box_empty">Kotak keranjang kosong.\nIsi kembali untuk dapat melanjutkan</string>
     <string name="waste_sold_estimation">Estimasi Penjualan</string>
     <string name="weight">Berat</string>
     <string name="weight_estimation">Estimasi berat/kg</string>
     <string name="price">Harga</string>
-    <string name="price_value" translatable="false">Rp %d</string>
+    <string name="price_value" translatable="false">Rp %s</string>
     <string name="price_per_unit_value" translatable="false">\@%s/%s</string>
     <string name="finish">Selesai</string>
     <string name="add_waste_page">Tambah Sampah</string>

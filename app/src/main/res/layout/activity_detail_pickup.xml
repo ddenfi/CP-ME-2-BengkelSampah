@@ -261,8 +261,7 @@
                     android:drawablePadding="8dp"
                     android:gravity="center"
                     android:text="@string/open_with"
-                    app:drawableEndCompat="@drawable/ic_map"
-                    app:drawableTint="?attr/colorPrimary" />
+                    app:drawableEndCompat="@drawable/ic_gmap" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

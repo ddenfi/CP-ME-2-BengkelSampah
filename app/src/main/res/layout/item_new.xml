@@ -49,7 +49,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
-                android:justificationMode="inter_word"
                 android:maxLines="4"
                 tools:text="Indonesia masih punya PR soal tata kelola sampah. Daerah yang baru-baru ini menjadi perbincangan publik adalah Yogyakarta dan Bandung." />
         </LinearLayout>

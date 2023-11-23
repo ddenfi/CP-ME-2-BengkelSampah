@@ -14,6 +14,7 @@ import com.bengkelsampah.bengkelsampahapp.databinding.ActivityWasteBucketBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteUnit
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteBoxAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -126,7 +127,10 @@ class WasteBucketActivity : AppCompatActivity() {
 
         binding.tvTotalWeight.text =
             getString(R.string.waste_weight, totalWeight, WasteUnit.KG.abbreviation)
-        binding.tvEstimationPrice.text = getString(R.string.price_value, totalPrice.toInt())
+        binding.tvEstimationPrice.text = getString(
+            R.string.price_value,
+            CurrencyNumberFormat.convertToCurrencyFormat(totalPrice.toInt())
+        )
     }
 
     private fun setUpWasteSold() {

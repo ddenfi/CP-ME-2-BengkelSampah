@@ -22,7 +22,11 @@ class PickupOrderPeekAdapter(private val wasteBox: List<WasteBoxModel>) :
         fun bind(item: WasteBoxModel) {
             binding.apply {
                 tvPeekOrderName.text = item.waste.name
-                tvPeekOrderWeight.text = item.amount.toString()
+                tvPeekOrderWeight.text = binding.root.context.getString(
+                    R.string.waste_weight,
+                    item.amount,
+                    item.waste.unit
+                )
             }
         }
     }

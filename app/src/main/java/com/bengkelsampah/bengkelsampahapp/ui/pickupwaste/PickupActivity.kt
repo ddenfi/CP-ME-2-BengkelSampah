@@ -1,10 +1,9 @@
 package com.bengkelsampah.bengkelsampahapp.ui.pickupwaste
 
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -14,15 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
-import com.bengkelsampah.bengkelsampahapp.databinding.ActivityOnboadingBinding
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityPickupBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.PickupOrderAdapter
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -34,8 +30,16 @@ class PickupActivity : AppCompatActivity() {
         binding = ActivityPickupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupView()
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressedDispatcher.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupView() {
@@ -65,6 +69,7 @@ class PickupActivity : AppCompatActivity() {
                                 willFinishActivity = false
                             )
                         }
+
                         is Resource.Loading -> {
                             showLoading(true)
                         }
@@ -81,7 +86,7 @@ class PickupActivity : AppCompatActivity() {
         pickupAdapter.setOnItemClickCallback(object : PickupOrderAdapter.OnItemClickCallback {
             override fun onItemClicked(data: WasteOrderModel) {
                 val intent = Intent(this@PickupActivity, DetailPickupActivity::class.java)
-                intent.putExtra(ORDER_ID,data.id)
+                intent.putExtra(ORDER_ID, data.id)
                 startActivity(intent)
             }
 
@@ -99,7 +104,7 @@ class PickupActivity : AppCompatActivity() {
 
     }
 
-    companion object{
+    companion object {
         const val ORDER_ID = "ORDER ID"
     }
 }

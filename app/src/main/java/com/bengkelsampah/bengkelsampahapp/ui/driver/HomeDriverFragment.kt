@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,13 +19,13 @@ import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeDriverBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.NewsResourceModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.NewsAdapter
-import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
 import com.bengkelsampah.bengkelsampahapp.ui.moneybag.MoneyBagActivity
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity.Companion.NEWS_RESOURCE
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.badge.BadgeDrawable
@@ -111,7 +110,10 @@ class HomeDriverFragment : Fragment() {
 
                                 binding.tvDriverHomeName.text = uiState.user.name
                                 binding.tvDriverHomeBalance.text =
-                                    getString(R.string.idr, uiState.user.balance)
+                                    getString(
+                                        R.string.idr,
+                                        CurrencyNumberFormat.convertToCurrencyFormat(uiState.user.balance)
+                                    )
 
                                 val activePickup =
                                     uiState.activeOrder.filter { it.status == OrderStatus.PROCESSED }

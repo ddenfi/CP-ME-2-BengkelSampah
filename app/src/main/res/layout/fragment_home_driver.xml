@@ -8,7 +8,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants">
 
         <ImageView
             android:layout_width="match_parent"
@@ -71,12 +72,6 @@
                         </com.facebook.shimmer.ShimmerFrameLayout>
                     </FrameLayout>
                 </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_notification" />
-
             </LinearLayout>
 
             <Space

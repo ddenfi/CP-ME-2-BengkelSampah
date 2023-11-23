@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemNewBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.NewsResourceModel
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bumptech.glide.Glide
 
 class NewsAdapter : ListAdapter<NewsResourceModel, NewsAdapter.NewsViewHolder>(

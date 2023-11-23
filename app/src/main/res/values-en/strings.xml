@@ -76,7 +76,7 @@
     <string name="minus">Minus</string>
     <string name="add_to_box">Add to Box</string>
     <string name="remove_from_box">Remove from Box</string>
-    <string name="add_from_my_box">Form MyBox</string>
+    <string name="add_from_my_bucket">From My Bucket</string>
     <string name="waste_box_empty">Basket box is empty. Refill to be able to continue</string>
     <string name="waste_sold_estimation">Sales Estimates</string>
     <string name="weight">Weight</string>
