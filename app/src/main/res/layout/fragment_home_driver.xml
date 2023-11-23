@@ -139,10 +139,11 @@
                             android:padding="4dp">
 
                             <LinearLayout
-                                android:id="@+id/linearLayout"
+                                android:id="@+id/ctn_driver_home_pickupBage"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/bg_dashboard_order"
+                                android:clipToPadding="false"
                                 android:gravity="center"
                                 android:orientation="vertical"
                                 tools:layout_editor_absoluteX="4dp"
@@ -154,31 +155,13 @@
                                     android:src="@drawable/ic_delivery" />
 
                                 <TextView
+                                    android:id="@+id/tv_driver_home_activePickup"
                                     style="@style/TextAppearance.Material3.LabelSmall"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Menunggu Penjemputan"
                                     android:textAlignment="center"
                                     android:textColor="?attr/colorSurface" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
-                                android:layout_gravity="top|end"
-                                android:background="@drawable/bg_notif"
-                                android:gravity="center"
-                                android:translationX="4dp"
-                                android:translationY="-4dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/linearLayout">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="?attr/colorSurface"
-                                    android:textSize="8sp"
-                                    tools:text="1" />
                             </LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>

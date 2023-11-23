@@ -130,7 +130,7 @@
         android:layout_marginTop="15dp"
         android:drawablePadding="10dp"
         android:fontFamily="@font/inter_medium"
-        android:text="Ubah Bahasa"
+        android:text="@string/cahnge_language"
         android:textColor="@color/md_theme_light_onSecondaryContainer"
         app:drawableStartCompat="@drawable/ic_langugange"
         android:gravity="center"

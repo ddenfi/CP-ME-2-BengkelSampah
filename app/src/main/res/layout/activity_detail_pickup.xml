@@ -244,8 +244,10 @@
             android:id="@+id/btn_pickup_detail_openWith"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -256,11 +258,10 @@
                     style="@style/TextAppearance.Material3.LabelMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_map"
                     android:drawablePadding="8dp"
-                    android:drawableTint="?attr/colorPrimary"
                     android:gravity="center"
-                    android:text="Open With" />
+                    android:text="@string/open_with"
+                    app:drawableEndCompat="@drawable/ic_gmap" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -304,6 +305,7 @@
                     tools:text="Lesti Kejora" />
 
                 <TextView
+                    android:id="@+id/tv_pickup_detail_adress"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -353,6 +355,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_detailPickup_editOrder"
+                    android:background="@drawable/bg_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Edit"
@@ -520,6 +523,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="12dp"
+                    android:background="@drawable/bg_button"
                     android:backgroundTint="?attr/colorPrimary"
                     android:text="Pick Up" />
 
@@ -528,6 +532,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="12dp"
+                    android:background="@drawable/bg_button"
                     android:backgroundTint="?attr/colorPrimary"
                     android:text="Finsih Order"
                     android:visibility="gone"/>

@@ -46,7 +46,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
+                    <TextView
+                        android:id="@+id/tv_pickup_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.Material3.LabelMedium"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        tools:text="3 Km"
+                        app:drawableStartCompat="@drawable/ic_distance" />
                     <TextView
                         android:id="@+id/tv_pickup_customerName"
                         style="@style/TextAppearance.Material3.HeadlineMedium"
@@ -56,14 +65,13 @@
                         tools:text="Lesti Kejora" />
 
                     <TextView
-                        android:id="@+id/tv_pickup_distance"
+                        android:id="@+id/tv_pickup_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_distance"
+                        style="@style/TextAppearance.Material3.LabelMedium"
                         android:drawablePadding="8dp"
                         android:gravity="center"
-                        android:textStyle="bold"
-                        tools:text="3 Km" />
+                        tools:text="23 November 2023 14.20" />
                 </LinearLayout>
             </LinearLayout>
 

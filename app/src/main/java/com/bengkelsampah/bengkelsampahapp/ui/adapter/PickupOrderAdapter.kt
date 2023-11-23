@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemPickupBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
+import com.bengkelsampah.bengkelsampahapp.utils.DateHelper
 
 class PickupOrderAdapter(
     private var listPickupOrder: List<WasteOrderModel> = listOf()
@@ -34,7 +35,9 @@ class PickupOrderAdapter(
                 tvPickupDistance.text = "3Km"
                 tvPickupWeight.text = "3 Kg"
                 tvPickupVehicle.text = "Pick-up"
+                tvPickupDate.text = DateHelper.get3DaysLaterDate()
             }
+
 
             val peekOrderAdapter = PickupOrderPeekAdapter(item.wasteBox.subList(0, 3))
             binding.rvItemPickupPeekOrder.layoutManager = LinearLayoutManager(binding.root.context)

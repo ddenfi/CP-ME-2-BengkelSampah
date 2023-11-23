@@ -39,7 +39,9 @@ class DriverMainViewModel @Inject constructor(
         NewsUiState.Loading
     )
 
-    val orderHistory = driverHistoryRepository.getOrdersHistory().asResource().stateIn(
+    val orderHistory = driverHistoryRepository.getOrdersHistory().map {
+        it.reversed()
+    }.asResource().stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000), Resource.Loading()
     )

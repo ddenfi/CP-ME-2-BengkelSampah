@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteListBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
@@ -32,7 +33,11 @@ class WasteListAdapter : ListAdapter<WasteBoxModel, WasteListAdapter.OrderWasteV
         fun bind(item: WasteBoxModel) {
             with(binding) {
                 itemListWasteName.text = item.waste.name
-                itemListWasteAmount.text = item.amount.toString()
+                itemListWasteAmount.text = binding.root.context.getString(
+                    R.string.waste_weight,
+                    item.amount,
+                    item.waste.unit
+                )
                 itemListWasteSum.text = CurrencyNumberFormat.convertToCurrencyFormat(
                     WasteBoxModel.countSubtotal(item.waste.pricePerUnit, item.amount).roundToInt()
                 )
