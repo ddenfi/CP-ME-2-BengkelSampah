@@ -132,32 +132,39 @@
                             android:layout_height="1dp"
                             android:layout_weight="1" />
 
-                        <LinearLayout
-                            android:id="@+id/ctn_home_active_order"
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="90dp"
                             android:layout_height="70dp"
-                            android:background="@drawable/bg_dashboard_order"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:clipChildren="false"
-                            android:clipToPadding="false">
+                            android:clipToPadding="false"
+                            android:padding="4dp">
 
-                            <ImageView
-                                android:id="@+id/iv_home_order_active"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_delivery" />
-
-                            <TextView
-                                android:id="@+id/tv_home_active_transaction"
-                                style="@style/TextAppearance.Material3.LabelSmall"
+                            <LinearLayout
+                                android:id="@+id/ctn_home_activeOrder"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:textColor="?attr/colorSurface"
-                                tools:text="Proses Penjemputan" />
-                        </LinearLayout>
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_dashboard_order"
+                                android:clipToPadding="false"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                tools:layout_editor_absoluteX="4dp"
+                                tools:layout_editor_absoluteY="4dp">
 
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_delivery" />
+
+                                <TextView
+                                    android:id="@+id/tv_home_activeTransaction"
+                                    style="@style/TextAppearance.Material3.LabelSmall"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Menunggu Penjemputan"
+                                    android:textAlignment="center"
+                                    android:textColor="?attr/colorSurface" />
+                            </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
 
                     <!-- shimmer -->
@@ -165,9 +172,9 @@
                         android:id="@+id/home_dashboard_shimmer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="visible"
                         app:shimmer_base_alpha="1"
-                        app:shimmer_highlight_alpha="0.5"
-                        android:visibility="visible">
+                        app:shimmer_highlight_alpha="0.5">
 
                         <LinearLayout
                             android:layout_width="match_parent"
