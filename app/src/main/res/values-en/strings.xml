@@ -100,4 +100,5 @@
     <string name="title_edit_akun">Edit Account</string>
     <string name="title_activity_partner">Request pickup</string>
     <string name="open_with">Open With</string>
+    <string name="cahnge_language">Change Language</string>
 </resources>

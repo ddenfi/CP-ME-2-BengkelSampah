@@ -306,6 +306,7 @@
                     tools:text="Lesti Kejora" />
 
                 <TextView
+                    android:id="@+id/tv_pickup_detail_adress"
                     style="@style/TextAppearance.Material3.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

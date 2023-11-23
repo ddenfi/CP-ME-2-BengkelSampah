@@ -18,6 +18,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.FragmentHomeDriverBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.NewsResourceModel
+import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.NewsAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.main.DashboardUiState
 import com.bengkelsampah.bengkelsampahapp.ui.main.NewsUiState
@@ -28,10 +29,12 @@ import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedDetailActivity
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.badge.BadgeUtils
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
+@androidx.annotation.OptIn(com.google.android.material.badge.ExperimentalBadgeUtils::class)
 class HomeDriverFragment : Fragment() {
     private var _binding: FragmentHomeDriverBinding? = null
     private val binding get() = _binding!!
@@ -64,6 +67,12 @@ class HomeDriverFragment : Fragment() {
     }
 
     private fun setupView(newsAdapter: NewsAdapter) {
+        lateinit var badgeDrawable: BadgeDrawable
+        context?.let {
+            badgeDrawable = BadgeDrawable.create(it)
+            badgeDrawable.number = 0
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -80,6 +89,7 @@ class HomeDriverFragment : Fragment() {
                                     1500
                                 )
                             }
+
                             is DriverDashboardUiState.Loading -> {
                                 showLoading(
                                     true,
@@ -95,12 +105,41 @@ class HomeDriverFragment : Fragment() {
                                     binding.driverHomeShimmer,
                                     binding.driverHomeNameShimmer
                                 )
+
                                 binding.homeDashboard.visibility = View.VISIBLE
                                 binding.driverHomeMenuShimmer.stopShimmer()
 
                                 binding.tvDriverHomeName.text = uiState.user.name
                                 binding.tvDriverHomeBalance.text =
                                     getString(R.string.idr, uiState.user.balance)
+
+                                val activePickup =
+                                    uiState.activeOrder.filter { it.status == OrderStatus.PROCESSED }
+                                if (activePickup.isNotEmpty()) {
+                                    try {
+                                        BadgeUtils.attachBadgeDrawable(
+                                            badgeDrawable,
+                                            binding.ctnDriverHomePickupBage,
+                                            null
+                                        )
+                                        badgeDrawable.number = activePickup.size
+                                    } catch (e: UninitializedPropertyAccessException) {
+                                        print(e.stackTrace)
+                                    }
+                                    binding.tvDriverHomeActivePickup.text = "Menunggu Dijemput"
+                                    badgeDrawable.number = activePickup.size
+                                } else {
+                                    binding.tvDriverHomeActivePickup.text = "Tidak ada penjemputan"
+                                    try {
+                                        BadgeUtils.detachBadgeDrawable(
+                                            badgeDrawable,
+                                            binding.ctnDriverHomePickupBage
+                                        )
+                                        badgeDrawable.number = activePickup.size
+                                    } catch (e: UninitializedPropertyAccessException) {
+                                        print(e.stackTrace)
+                                    }
+                                }
                             }
                         }
                     }

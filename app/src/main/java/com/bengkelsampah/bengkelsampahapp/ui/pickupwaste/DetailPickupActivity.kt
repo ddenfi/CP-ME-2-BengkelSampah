@@ -82,10 +82,10 @@ class DetailPickupActivity : AppCompatActivity() {
             tvPickupDetailDistance.text = wasteOrder.distance.toString()
             tvPickupDetailCustomerName.text = wasteOrder.consumerName
             tvPickupDetailPaymentMethod.text = "Cash"
-            tvPickupDetailWeight.text = "30Kg"
-            tvPickupDetailPaymentMethod.text = "Cash"
+            tvPickupDetailWeight.text = "3Kg"
             tvPickupDetailSum.text = getString(R.string.idr, 2000)
             tvPickupDetailPhoneNumber.text = wasteOrder.agentPhone
+            tvPickupDetailAdress.text = wasteOrder.address
 
             if (wasteOrder.status == OrderStatus.PICKING_UP) {
                 ctnPickupDetailStatus.visibility = View.VISIBLE

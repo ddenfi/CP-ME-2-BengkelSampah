@@ -101,26 +101,14 @@ class HomeScreenFragment : Fragment() {
                                     binding.tvHomeActiveTransaction.text =
                                         getString(R.string.no_order_in_progress)
                                     try {
-                                        BadgeUtils.attachBadgeDrawable(
+                                        BadgeUtils.detachBadgeDrawable(
                                             badgeDrawable,
-                                            binding.ctnHomeActiveOrder,
-                                            null
+                                            binding.ctnHomeActiveOrder
                                         )
                                         badgeDrawable.number = activeOrder.size
                                     } catch (e: UninitializedPropertyAccessException) {
                                         print(e.stackTrace)
                                     }
-                                }
-
-                                try {
-                                    BadgeUtils.attachBadgeDrawable(
-                                        badgeDrawable,
-                                        binding.ctnHomeActiveOrder,
-                                        null
-                                    )
-                                    badgeDrawable.number = activeOrder.size
-                                } catch (e: UninitializedPropertyAccessException) {
-                                    print(e.stackTrace)
                                 }
 
                                 binding.apply {

@@ -36,6 +36,7 @@ class PickupOrderAdapter(
                 tvPickupVehicle.text = "Pick-up"
             }
 
+
             val peekOrderAdapter = PickupOrderPeekAdapter(item.wasteBox.subList(0, 3))
             binding.rvItemPickupPeekOrder.layoutManager = LinearLayoutManager(binding.root.context)
             binding.rvItemPickupPeekOrder.adapter = peekOrderAdapter
