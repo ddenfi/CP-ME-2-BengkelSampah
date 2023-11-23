@@ -27,6 +27,7 @@ import com.bengkelsampah.bengkelsampahapp.ui.moneybag.MoneyBagActivity
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedActivity.Companion.NEWS_RESOURCE
 import com.bengkelsampah.bengkelsampahapp.ui.news.NewsFeedDetailActivity
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.MarginItemDecoration
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import com.google.android.material.badge.BadgeDrawable
@@ -82,7 +83,10 @@ class HomeScreenFragment : Fragment() {
                             is DashboardUiState.Success -> {
                                 binding.tvHomeName.text = dashboardData.user.name
                                 binding.tvHomeBalance.text =
-                                    getString(R.string.idr, dashboardData.user.balance)
+                                    getString(
+                                        R.string.idr,
+                                        CurrencyNumberFormat.convertToCurrencyFormat(dashboardData.user.balance)
+                                    )
                                 val activeOrder = dashboardData.activeOrder
                                 if (activeOrder.isNotEmpty()) {
                                     binding.tvHomeActiveTransaction.text =

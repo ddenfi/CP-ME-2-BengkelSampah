@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryDriverBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
-import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus.*
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 
 class HistoryDriverAdapter(private val onClick: (WasteOrderModel) -> Unit) :
     ListAdapter<WasteOrderModel, HistoryDriverAdapter.HistoryViewHolder>(
@@ -69,7 +68,10 @@ class HistoryDriverAdapter(private val onClick: (WasteOrderModel) -> Unit) :
                 )
             }
 
-            tvTotal.text = itemView.context.getString(R.string.total, history.total)
+            tvTotal.text = itemView.context.getString(
+                R.string.total,
+                CurrencyNumberFormat.convertToCurrencyFormat(history.total)
+            )
 
             itemView.setOnClickListener {
                 onClick(history)

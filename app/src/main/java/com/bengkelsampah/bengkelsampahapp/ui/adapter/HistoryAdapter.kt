@@ -10,6 +10,7 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemHistoryBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.OrderStatus
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 
 class HistoryAdapter(private val onClick: (WasteOrderModel) -> Unit) :
     ListAdapter<WasteOrderModel, HistoryAdapter.HistoryViewHolder>(
@@ -67,7 +68,10 @@ class HistoryAdapter(private val onClick: (WasteOrderModel) -> Unit) :
                 )
             }
 
-            tvTotal.text = itemView.context.getString(R.string.total, history.total)
+            tvTotal.text = itemView.context.getString(
+                R.string.total,
+                CurrencyNumberFormat.convertToCurrencyFormat(history.total)
+            )
 
             itemView.setOnClickListener {
                 onClick(history)

@@ -4,6 +4,7 @@ import android.content.Context
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
@@ -18,6 +19,7 @@ import com.itextpdf.layout.property.UnitValue
 import com.itextpdf.layout.property.VerticalAlignment
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.math.roundToInt
 
 class HistoryDetailPdfFile {
     fun generatePdfFile(context: Context, history: WasteOrderModel) {
@@ -56,15 +58,25 @@ class HistoryDetailPdfFile {
                 .addCell(
                     Cell()
                         .add(Paragraph(wasteName).setBold())
-                        .add(Paragraph("$wasteAmount $wasteUnit x $wastePricePerUnit"))
+                        .add(
+                            Paragraph(
+                                "$wasteAmount $wasteUnit x ${
+                                    CurrencyNumberFormat.convertToCurrencyFormat(
+                                        wastePricePerUnit
+                                    )
+                                }"
+                            )
+                        )
                         .setBorder(Border.NO_BORDER)
                 )
                 .addCell(
                     Cell()
                         .add(
                             Paragraph(
-                                WasteBoxModel.countSubtotal(wastePricePerUnit, wasteAmount)
-                                    .toString()
+                                CurrencyNumberFormat.convertToCurrencyFormat(
+                                    WasteBoxModel.countSubtotal(wastePricePerUnit, wasteAmount)
+                                        .roundToInt()
+                                )
                             )
                         )
                         .setTextAlignment(TextAlignment.RIGHT)
@@ -80,7 +92,7 @@ class HistoryDetailPdfFile {
                         Paragraph(
                             context.getString(
                                 R.string.total_detail_history,
-                                history.total.toString()
+                                CurrencyNumberFormat.convertToCurrencyFormat(history.total)
                             )
                         )
                             .setBold()

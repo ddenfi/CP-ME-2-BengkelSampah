@@ -3,6 +3,7 @@ package com.bengkelsampah.bengkelsampahapp.ui.news
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -28,6 +29,9 @@ class NewsFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsFeedBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val newsAdapter = NewsAdapter()
         binding.rvNewsFeed.apply {
@@ -78,6 +82,12 @@ class NewsFeedActivity : AppCompatActivity() {
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressedDispatcher.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun showLoading(isLoading: Boolean) {
         if (!isLoading) {

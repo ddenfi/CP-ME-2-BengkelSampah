@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemMoneybagHistoryBinding
-import com.bengkelsampah.bengkelsampahapp.domain.model.HistoryModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.MoneybagHistoryModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 
 class MoneybagHistoryAdapter :
     ListAdapter<MoneybagHistoryModel, MoneybagHistoryAdapter.MoneybagHistoryViewHolder>(
@@ -34,7 +34,10 @@ class MoneybagHistoryAdapter :
         fun bind(item: MoneybagHistoryModel) {
             binding.tvItemHistoryMoneybagTitle.text = item.title
             binding.tvItemHistoryMoneybagPrice.text =
-                binding.root.context.getString(R.string.idr, item.price)
+                binding.root.context.getString(
+                    R.string.idr,
+                    CurrencyNumberFormat.convertToCurrencyFormat(item.price)
+                )
             binding.idItemHistoryHistoryMoneybagDate.text = item.date
         }
     }

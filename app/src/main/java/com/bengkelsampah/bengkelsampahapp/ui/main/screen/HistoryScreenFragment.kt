@@ -31,6 +31,7 @@ class HistoryScreenFragment : Fragment() {
     private var _binding: FragmentHistoryScreenBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
+    private val historyAdapter = HistoryAdapter { history -> adapterOnClick(history) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,8 @@ class HistoryScreenFragment : Fragment() {
 
         binding.chipStatusFilter.text = getString(R.string.all_status)
         setUpFilterBottomSheet()
-        setUpHistoryList()
+        setUpHistory()
+        gettingData()
 
         return binding.root
     }
@@ -48,6 +50,19 @@ class HistoryScreenFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setUpHistory() {
+        binding.rvHistory.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = historyAdapter
+            addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
+                    resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
+                )
+            )
+        }
     }
 
     @SuppressLint("InflateParams")
@@ -77,8 +92,7 @@ class HistoryScreenFragment : Fragment() {
         }
     }
 
-    private fun setUpHistoryList() {
-        val historyAdapter = HistoryAdapter { history -> adapterOnClick(history) }
+    private fun gettingData() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.historyUiState.collect { historyUiState ->
@@ -91,17 +105,7 @@ class HistoryScreenFragment : Fragment() {
                         } else {
                             binding.tvHistoryEmpty.visibility = View.GONE
                             binding.rvHistory.visibility = View.VISIBLE
-                            binding.rvHistory.apply {
-                                layoutManager = LinearLayoutManager(context)
-                                adapter = historyAdapter
-                                addItemDecoration(
-                                    MarginItemDecoration(
-                                        resources.getDimensionPixelSize(R.dimen.rv_margin_vertical_8),
-                                        resources.getDimensionPixelSize(R.dimen.rv_margin_horizontal_16)
-                                    )
-                                )
-                            }
-                            historyAdapter.submitList(historyUiState.history)
+                            historyAdapter.submitList(historyUiState.history.reversed())
                         }
                     }
 

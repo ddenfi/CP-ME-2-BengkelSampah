@@ -12,9 +12,9 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.data.source.Resource
 import com.bengkelsampah.bengkelsampahapp.databinding.ActivityBankSampahBinding
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.MoneybagHistoryAdapter
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -44,7 +44,12 @@ class BankSampahActivity : AppCompatActivity() {
                                     tvBsName.text = userBankSampahData.data.name
                                     tvBsBankSampah.text = userBankSampahData.data.bankSampahName
                                     tvBsBalance.text =
-                                        getString(R.string.idr, userBankSampahData.data.balance)
+                                        getString(
+                                            R.string.idr,
+                                            CurrencyNumberFormat.convertToCurrencyFormat(
+                                                userBankSampahData.data.balance
+                                            )
+                                        )
                                     tvBsCustomerId.text = userBankSampahData.data.customerId
                                 }
 

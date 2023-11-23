@@ -19,6 +19,7 @@ import com.bengkelsampah.bengkelsampahapp.domain.model.WasteOrderModel
 import com.bengkelsampah.bengkelsampahapp.ui.adapter.WasteListAdapter
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.EditWasteBoxActivity.Companion.WASTE_BOX
 import com.bengkelsampah.bengkelsampahapp.ui.pickupwaste.PickupActivity.Companion.ORDER_ID
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import com.bengkelsampah.bengkelsampahapp.utils.SweetAlertDialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -77,9 +78,12 @@ class DetailPickupActivity : AppCompatActivity() {
             tvPickupDetailDistance.text = wasteOrder.distance.toString()
             tvPickupDetailCustomerName.text = wasteOrder.consumerName
             tvPickupDetailPaymentMethod.text = "Cash"
-            tvPickupDetailWeight.text = "30Kg"
+            tvPickupDetailWeight.text = "8.0 Kg"
             tvPickupDetailPaymentMethod.text = "Cash"
-            tvPickupDetailSum.text = getString(R.string.idr, 2000)
+            tvPickupDetailSum.text = getString(
+                R.string.idr,
+                CurrencyNumberFormat.convertToCurrencyFormat(wasteOrder.total)
+            )
             tvPickupDetailPhoneNumber.text = wasteOrder.agentPhone
 
             if (wasteOrder.status == OrderStatus.PICKING_UP) {

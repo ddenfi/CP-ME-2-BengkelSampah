@@ -12,6 +12,7 @@ import com.bengkelsampah.bengkelsampahapp.R
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteBoxBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
 import kotlin.math.roundToInt
 
 class WasteBoxAdapter(
@@ -40,12 +41,14 @@ class WasteBoxAdapter(
             tvWasteName.text = wasteSold.waste.name
             tvWastePrice.text = itemView.context.getString(
                 R.string.price_value,
-                WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
-                    .roundToInt()
+                CurrencyNumberFormat.convertToCurrencyFormat(
+                    WasteBoxModel.countSubtotal(wasteSold.waste.pricePerUnit, wasteSold.amount)
+                        .roundToInt()
+                )
             )
             tvWastePricePerUnit.text = itemView.context.getString(
                 R.string.price_per_unit_value,
-                wasteSold.waste.pricePerUnit.toString(),
+                CurrencyNumberFormat.convertToCurrencyFormat(wasteSold.waste.pricePerUnit),
                 wasteSold.waste.unit
             )
             edWasteWeight.setText(wasteSold.amount.toString())

@@ -1,15 +1,14 @@
 package com.bengkelsampah.bengkelsampahapp.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bengkelsampah.bengkelsampahapp.data.source.local.entity.WasteBoxEntity
 import com.bengkelsampah.bengkelsampahapp.databinding.ItemWasteListBinding
 import com.bengkelsampah.bengkelsampahapp.domain.model.WasteBoxModel
-import com.bengkelsampah.bengkelsampahapp.domain.model.WasteModel
+import com.bengkelsampah.bengkelsampahapp.utils.CurrencyNumberFormat
+import kotlin.math.roundToInt
 
 class WasteListAdapter : ListAdapter<WasteBoxModel, WasteListAdapter.OrderWasteViewHolder>(
     object : DiffUtil.ItemCallback<WasteBoxModel>() {
@@ -34,8 +33,11 @@ class WasteListAdapter : ListAdapter<WasteBoxModel, WasteListAdapter.OrderWasteV
             with(binding) {
                 itemListWasteName.text = item.waste.name
                 itemListWasteAmount.text = item.amount.toString()
-                itemListWasteSum.text = "2000"
-                itemListWastePricePerUnit.text = item.waste.pricePerUnit.toString()
+                itemListWasteSum.text = CurrencyNumberFormat.convertToCurrencyFormat(
+                    WasteBoxModel.countSubtotal(item.waste.pricePerUnit, item.amount).roundToInt()
+                )
+                itemListWastePricePerUnit.text =
+                    CurrencyNumberFormat.convertToCurrencyFormat(item.waste.pricePerUnit)
             }
         }
     }
